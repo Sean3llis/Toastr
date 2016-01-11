@@ -46,18 +46,25 @@
 
 	"use strict";
 
-	var react = __webpack_require__(1);
+	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(158);
+	var StatPanel = __webpack_require__(159);
+	var toast = __webpack_require__(160);
+	var Toastr = __webpack_require__(161);
+	var App = React.createClass({
+		displayName: 'App',
 
-	(function (w) {
-		var Toastr = w.Toastr = Toastr || {};
-		Toastr.SVG = {};
-		Toastr.init = function () {
-			console.log(document.getElementById('ToastRight'));
-			Velocity(document.getElementById('ToastRight'), {
-				transformX: "-100px"
-			});
-		};
-	})(window);
+		render: function () {
+			return React.createElement(
+				'div',
+				null,
+				React.createElement(Toastr, null),
+				React.createElement(StatPanel, { data: this.state })
+			);
+		}
+	});
+
+	ReactDOM.render(React.createElement(App, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -19644,6 +19651,293 @@
 
 	module.exports = deprecated;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(3);
+
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+
+	var statPanel = React.createClass({
+		displayName: 'statPanel',
+
+		render: function () {
+			return React.createElement('div', null);
+		}
+
+	});
+
+	module.exports = statPanel;
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(158);
+
+	var toast = React.createClass({
+		displayName: 'toast',
+
+		componentDidUpdate: function () {
+			var node = ReactDOM.findDOMNode(this);
+			switch (this.props.status) {
+				case 'ready':
+					this.toastReady(node);break;
+				case 'toasting':
+					this.toastToasting(node);break;
+				case 'toasted':
+					this.toastToasted(node);break;
+			}
+		},
+
+		toastReady: function (ele) {
+			Velocity(ele, {
+				translateY: "80px"
+			}, {
+				easing: 'easeOut'
+			});
+		},
+
+		toastToasting: function (ele) {
+			Velocity(ele, {
+				translateY: "180px"
+			}, {
+				easing: [200, 20]
+			});
+		},
+
+		toastToasted: function (ele) {
+			Velocity(ele, {
+				translateY: "-40px"
+			});
+		},
+
+		handleClick: function (e) {
+			this.props.handleClick(this.props.side, e);
+		},
+
+		render: function () {
+			var leftToast = React.createElement(
+				'g',
+				{ onClick: this.handleClick, id: 'ToastLeft', className: 'toast' },
+				React.createElement('path', { fill: '#5B4736', d: 'M479.03,286.988c0,0-1.667-92.793-12.461-92.45c11.357-6.923,12.564-36.247-1.426-49.189 c-15.854-14.668-42.515-10.593-73.839-0.447l-19.115,0.608c-31.905-8.135-57.787-8.9-73.742,5.141 c-14.233,12.524-10.083,43.955,1.691,50.141c-10.795,0.343-3.62,101.584-3.62,101.584c0.233,2.461,10.018,7.762,20.507,6.18 C363.53,314.921,479.124,304.039,479.03,286.988z' }),
+				React.createElement('path', { fill: '#EFEDD8', d: 'M496.902,295.573c0,0,0.751-102.024-10.045-101.681c11.357-6.922,12.564-36.246-1.426-49.189 c-15.854-14.668-42.515-10.593-73.838-0.447l-19.115,0.608c-31.905-8.135-57.787-8.899-73.742,5.141 c-14.233,12.524-10.083,43.955,1.691,50.141c-10.795,0.343-3.4,108.495-3.4,108.495 C321.517,312.854,497.021,316.904,496.902,295.573z' })
+			);
+
+			var rightToast = React.createElement(
+				'g',
+				{ onClick: this.handleClick, id: 'ToastRight', className: 'toast' },
+				React.createElement('path', { fill: '#5B4736', d: 'M600.828,314.276c0,0,5.021-92.672-5.771-93.107c11.827-6.087,15.143-35.247,2.12-49.165 c-14.758-15.772-41.643-13.627-73.615-5.763l-19.109-0.771c-31.236-10.412-56.996-13.038-73.921-0.183 c-15.098,11.467-13.222,43.114-1.923,50.132c-10.793-0.435-10.926,101.061-10.926,101.061c0.055,2.472,9.432,8.463,20.008,7.64 C483.617,333.819,599.695,331.289,600.828,314.276z' }),
+				React.createElement('path', { fill: '#EFEDD8', d: 'M618.036,324.126c0,0,8.098-101.705-2.695-102.14c11.827-6.086,15.142-35.247,2.121-49.164 c-14.757-15.771-41.643-13.627-73.616-5.763l-19.108-0.771c-31.237-10.412-56.997-13.039-73.921-0.184 c-15.098,11.467-13.222,43.115-1.924,50.132c-10.792-0.436-11.205,107.968-11.205,107.968 C441.862,328.732,616.619,345.411,618.036,324.126z' })
+			);
+			return this.props.side === "left" ? leftToast : rightToast;
+		}
+
+	});
+
+	module.exports = toast;
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+	var Toast = __webpack_require__(160);
+	var Handle = __webpack_require__(162);
+
+	var toastr = React.createClass({
+		displayName: 'toastr',
+
+		getDefaultProps: function () {
+			var ratio = 600;
+			return {
+				height: ratio,
+				width: ratio,
+				viewBox: [0, 0, 1000, 1000].join(' '),
+				toastTime: 5000
+			};
+		},
+
+		getInitialState: function () {
+			return {
+				toastLeft: 'bread',
+				toastRight: 'bread',
+				leftHandleDown: false,
+				rightHandleDown: false
+			};
+		},
+
+		onHandleClick: function (side, data) {
+			if (side === 'left' && this.state.toastLeft === 'ready') {
+				this.setState({
+					leftHandleDown: true,
+					toastLeft: 'toasting'
+				}, function () {
+					setTimeout(this.leftToasted, this.props.toastTime);
+				});
+			} else if (side === 'right' && this.state.toastRight === 'ready') {
+				this.setState({
+					rightHandleDown: true,
+					toastRight: 'toasting'
+				}, function () {
+					setTimeout(this.rightToasted, this.props.toastTime);
+				});
+			}
+		},
+
+		leftToasted: function (side) {
+			this.setState({
+				toastLeft: 'toasted',
+				leftHandleDown: false
+			});
+		},
+
+		rightToasted: function () {
+			this.setState({
+				toastRight: 'toasted',
+				rightHandleDown: false
+			});
+		},
+
+		onToastClick: function (side, data) {
+			if (side === 'left') {
+				this.setState({ toastLeft: 'ready' });
+			} else {
+				this.setState({ toastRight: 'ready' });
+			}
+		},
+
+		render: function () {
+			return React.createElement(
+				'div',
+				null,
+				React.createElement(
+					'svg',
+					{ width: this.props.width + 'px', height: this.props.height + 'px', viewBox: this.props.viewBox },
+					React.createElement(Toast, { side: 'left', status: this.state.toastLeft, handleClick: this.onToastClick }),
+					React.createElement(Toast, { side: 'right', status: this.state.toastRight, handleClick: this.onToastClick }),
+					React.createElement('path', { fill: '#686868', d: 'M184 805.238V805h.407H184v.238l-11.014-.03s2.126 6.598 3.315 12.874c1.173 6.195 4.797 6.113 8.07 6.11 3.276.003 6.894.057 8.065-6.137 1.188-6.277 2.997-12.846 2.997-12.846l-11.432.028z' }),
+					React.createElement('path', { fill: '#333', d: 'M173.125 805.133s1.326 6.637 2.514 12.912c.697 3.69 2.36 5.16 3.36 5.743v-9.09c0-6.787 9.444-9.25 15.84-9.25l.792-2.896-22.507 2.58z' }),
+					React.createElement('path', { fill: '#686868', d: 'M277 805.238V805h.385H277v.238l-11.025-.03s2.12 6.598 3.31 12.874c1.172 6.195 4.793 6.113 8.068 6.11 3.275.003 6.89.057 8.062-6.137 1.188-6.277 3.007-12.846 3.007-12.846l-11.422.028z' }),
+					React.createElement('path', { fill: '#333', d: 'M266.102 805.133s1.337 6.637 2.525 12.912c.697 3.69 2.373 5.16 3.373 5.743v-9.09c0-6.787 9.433-9.25 15.83-9.25l.785-2.896-22.513 2.58z' }),
+					React.createElement('path', { fill: '#686868', d: 'M690 805.238V805h.448H690v.238l-10.993-.03s2.138 6.598 3.325 12.874c1.174 6.195 4.8 6.113 8.075 6.11 3.275.003 6.896.057 8.067-6.137 1.188-6.277 2.978-12.846 2.978-12.846l-11.452.028z' }),
+					React.createElement('path', { fill: '#333', d: 'M679.166 805.133s1.805 6.637 2.992 12.912c.698 3.69 1.842 5.16 3.842 5.743v-9.09c0-6.787 8.966-9.25 15.36-9.25l.552-2.896-22.746 2.58z' }),
+					React.createElement('path', { fill: '#686868', d: 'M783 805.238V805h.426H783v.238l-11.004-.03s2.13 6.598 3.318 12.874c1.174 6.195 4.8 6.113 8.073 6.11 3.274.003 6.894.057 8.065-6.137 1.188-6.277 2.988-12.846 2.988-12.846l-11.44.028z' }),
+					React.createElement('path', { fill: '#333', d: 'M772.143 805.133s1.816 6.637 3.004 12.912c.7 3.69 1.854 5.16 3.854 5.743v-9.09c0-6.787 8.956-9.25 15.35-9.25l.547-2.896-22.754 2.58z' }),
+					React.createElement('path', { fill: '#C6C6C6', d: 'M181 514.587C181 398.887 204.636 360 335.832 360h195.075C616.412 360 686 429.08 686 514.587V729H181V514.587z' }),
+					React.createElement(
+						'g',
+						null,
+						React.createElement('path', { fill: '#E0E0E0', d: 'M300 514.587C300 388.727 324.268 360 409.773 360H649.05C734.556 360 804 429.08 804 514.587V729H300V514.587z' })
+					),
+					React.createElement(
+						'g',
+						null,
+						React.createElement('path', { fill: '#686868', d: 'M804.926 729c13.718 0 21.074 7.248 21.074 19.44V806H300v-77h504.926z' })
+					),
+					React.createElement(
+						'g',
+						null,
+						React.createElement('path', { fill: '#333', d: 'M164 806v-57.56c0-12.192 7.61-19.44 21.33-19.44h-.255H300v77H164z' })
+					),
+					React.createElement(
+						'g',
+						null,
+						React.createElement('path', { fill: '#686868', d: 'M598.246 524H516.22c-2.438 0-4.2 1.945-4.2 4.386v13.304c0 2.44 1.762 4.31 4.2 4.31H538.352c2.438 0 3.624 2.122 3.624 4.56v53.22c0 2.438 2.807 4.222 5.246 4.222H567.163c2.44 0 3.797-1.783 3.797-4.223v-53.22c0-2.438 2.633-4.56 5.072-4.56H598.168c2.44 0 4.754-1.87 4.754-4.31v-13.305c.076-2.44-2.237-4.385-4.678-4.385z' }),
+						React.createElement('path', { fill: '#F2F2F2', d: 'M603 528.386c0-2.44-2.313-4.386-4.754-4.386h-75.393c-2.44 0-4.854 1.945-4.854 4.386v13.304c0 2.44 2.413 4.31 4.853 4.31h22.175c2.438 0 4.972 2.122 4.972 4.56v53.22c0 2.438 1.46 4.222 3.898 4.222h13.304c2.44 0 3.798-1.783 3.798-4.223v-53.22c0-2.438 2.633-4.56 5.072-4.56h22.174c2.44 0 4.754-1.87 4.754-4.31v-13.304z' })
+					),
+					React.createElement(Handle, { side: 'left', isDown: this.state.leftHandleDown, handleClick: this.onHandleClick }),
+					React.createElement(Handle, { side: 'right', isDown: this.state.rightHandleDown, handleClick: this.onHandleClick })
+				)
+			);
+		}
+	});
+
+	module.exports = toastr;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(158);
+
+	var handle = React.createClass({
+		displayName: 'handle',
+
+		handleClick: function (e) {
+			this.props.handleClick(this.props.side, e);
+		},
+
+		componentDidUpdate: function () {
+			var handle = document.getElementById('handle-' + this.props.side);
+			if (this.props.isDown) {
+				Velocity(handle, {
+					translateY: "100px"
+				}, {
+					easing: [250, 15]
+				});
+			} else {
+				Velocity(handle, {
+					translateY: "0px"
+				}, {
+					easing: [250, 15]
+				});
+			}
+		},
+
+		render: function () {
+			var leftHandle = React.createElement(
+				'g',
+				null,
+				React.createElement('path', { fill: '#333', d: 'M223 662.323c-1.263 0-2-1.024-2-2.286v-144.8c0-1.265.737-2.288 2-2.288s2 1.022 2 2.286v144.8c0 1.263-.737 2.287-2 2.287zM220.52 677.818l3.552.017 2.053 6.274-6.594-4.327z' }),
+				React.createElement('path', { fill: '#333', d: 'M223.963 713.687c3.525-.07 6.382-8.082 6.382-17.932 0-9.893-2.925-17.937-6.504-17.937-.573 0-1.13.21-1.66.597-.53-.388-1.086-.597-1.66-.597-3.58 0-6.48 8.02-6.48 17.913 0 9.78 2.796 17.772 6.317 17.952l3.606.005z' }),
+				React.createElement('path', { fill: '#686868', d: 'M226.484 695.73c0-8.443-2.484-15.3-5.484-15.478v-.016l-.205.013c-.032-.002-.153-.014-.185-.014-.792 0-1.59.458-2.27 1.276l-9.16 4.977.355 18.484 8.708 4.9c.697.863 1.466 1.353 2.28 1.353.03 0 .24-.012.273-.013l.202.013v-.017c3.002-.177 5.486-7.033 5.486-15.48z' }),
+				React.createElement('ellipse', { fill: '#E0E0E0', cx: '209.186', cy: '695.731', rx: '2.595', ry: '9.243' }),
+				React.createElement(
+					'g',
+					{ onClick: this.handleClick, id: 'handle-left', className: 'handle' },
+					React.createElement('path', { fill: '#333', d: 'M235.883 544h-16.495l-32.28-4.475 32.77-2.59z' }),
+					React.createElement('path', { fill: '#686868', d: 'M202.35 540H187v-13h35.165z' }),
+					React.createElement('path', { fill: '#E0E0E0', d: 'M237 544.196l-35-4.573V527h35z' })
+				)
+			);
+			var rightHandle = React.createElement(
+				'g',
+				null,
+				React.createElement('path', { fill: '#333', d: 'M262.5 662.323c-1.263 0-2.5-1.024-2.5-2.286v-144.8c0-1.265 1.237-2.288 2.5-2.288s2.5 1.022 2.5 2.286v144.8c0 1.263-1.237 2.287-2.5 2.287zM263.2 677.818l3.55.017 2.053 6.274-6.594-4.327z' }),
+				React.createElement('path', { fill: '#333', d: 'M266.642 713.687c3.525-.07 6.382-8.082 6.382-17.932 0-9.893-2.925-17.937-6.504-17.937-.574 0-1.13.21-1.66.597-.53-.388-1.087-.597-1.66-.597-3.58 0-6.48 8.02-6.48 17.913 0 9.78 2.795 17.772 6.316 17.952l3.606.005z' }),
+				React.createElement('path', { fill: '#686868', d: 'M268.484 695.73c0-8.443-2.484-15.3-5.484-15.478v-.016l.135.013c-.032-.002.017-.014-.016-.014-.793 0-1.506.458-2.188 1.276l-9.118 4.977.378 18.484 8.72 4.9c.696.863 1.47 1.353 2.283 1.353.032 0-.094-.012-.062-.013l-.133.014v-.017c3-.177 5.484-7.033 5.484-15.48z' }),
+				React.createElement('ellipse', { fill: '#E0E0E0', cx: '251.864', cy: '695.731', rx: '2.595', ry: '9.243' }),
+				React.createElement(
+					'g',
+					{ onClick: this.handleClick, id: 'handle-right', className: 'handle' },
+					React.createElement('path', { fill: '#333', d: 'M275.512 544h-16.494l-32.28-4.486 32.77-2.582z' }),
+					React.createElement('path', { fill: '#686868', d: 'M241.98 540H227v-13h34.794z' }),
+					React.createElement('path', { fill: '#E0E0E0', d: 'M277 544.174l-35-4.573V527h35z' })
+				)
+			);
+			return this.props.side === "left" ? leftHandle : rightHandle;
+		}
+	});
+
+	module.exports = handle;
 
 /***/ }
 /******/ ]);
