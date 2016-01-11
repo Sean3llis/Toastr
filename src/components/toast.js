@@ -4,6 +4,15 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var toast = React.createClass({
+	componentDidMount: function(){
+		Velocity.RegisterEffect('toast:popup', {
+			defaultDuration: 600,
+			calls: [
+				[ { translateY: "-100px" }, 0.5, { easing: 'easeOut'}],
+				[ { translateY: '80px' }, 0.5, { easing: 'swing' }]
+			]
+		});
+	},
 
 	componentDidUpdate: function(){
 		var node = ReactDOM.findDOMNode(this);
@@ -13,6 +22,7 @@ var toast = React.createClass({
 			case 'toasted': this.toastToasted(node); break;
 		}
 	},
+
 
 	toastReady: function(ele){
 		Velocity(ele, {
@@ -31,13 +41,8 @@ var toast = React.createClass({
 	},
 
 	toastToasted: function(ele){
-		Velocity(ele, {
-			translateY: "-40px"
-		}, {
-			easing: [200,20],
-		})
+		Velocity(ele, 'toast:popup')
 	},
-
 
 	handleClick: function(e){
 		this.props.handleClick(this.props.side, e)

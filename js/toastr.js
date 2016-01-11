@@ -48,9 +48,8 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	var StatPanel = __webpack_require__(159);
-	var toast = __webpack_require__(160);
-	var Toastr = __webpack_require__(161);
+	var toast = __webpack_require__(159);
+	var Toastr = __webpack_require__(160);
 	var App = React.createClass({
 		displayName: 'App',
 
@@ -58,8 +57,7 @@
 			return React.createElement(
 				'div',
 				null,
-				React.createElement(Toastr, null),
-				React.createElement(StatPanel, { data: this.state })
+				React.createElement(Toastr, null)
 			);
 		}
 	});
@@ -19665,23 +19663,6 @@
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1);
-
-	var statPanel = React.createClass({
-		displayName: 'statPanel',
-
-		render: function () {
-			return React.createElement('div', null);
-		}
-
-	});
-
-	module.exports = statPanel;
-
-/***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
 	"use strict";
 
 	var React = __webpack_require__(1);
@@ -19689,6 +19670,13 @@
 
 	var toast = React.createClass({
 		displayName: 'toast',
+
+		componentDidMount: function () {
+			Velocity.RegisterEffect('toast:popup', {
+				defaultDuration: 600,
+				calls: [[{ translateY: "-100px" }, 0.5, { easing: 'easeOut' }], [{ translateY: '80px' }, 0.5, { easing: 'swing' }]]
+			});
+		},
 
 		componentDidUpdate: function () {
 			var node = ReactDOM.findDOMNode(this);
@@ -19719,11 +19707,7 @@
 		},
 
 		toastToasted: function (ele) {
-			Velocity(ele, {
-				translateY: "-40px"
-			}, {
-				easing: [200, 20]
-			});
+			Velocity(ele, 'toast:popup');
 		},
 
 		handleClick: function (e) {
@@ -19752,14 +19736,15 @@
 	module.exports = toast;
 
 /***/ },
-/* 161 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var React = __webpack_require__(1);
-	var Toast = __webpack_require__(160);
-	var Handle = __webpack_require__(162);
+	var Toast = __webpack_require__(159);
+	var Handle = __webpack_require__(161);
+	var StatPanel = __webpack_require__(162);
 
 	var toastr = React.createClass({
 		displayName: 'toastr',
@@ -19864,7 +19849,8 @@
 					),
 					React.createElement(Handle, { side: 'left', isDown: this.state.leftHandleDown, handleClick: this.onHandleClick }),
 					React.createElement(Handle, { side: 'right', isDown: this.state.rightHandleDown, handleClick: this.onHandleClick })
-				)
+				),
+				React.createElement(StatPanel, { stats: this.state })
 			);
 		}
 	});
@@ -19872,7 +19858,7 @@
 	module.exports = toastr;
 
 /***/ },
-/* 162 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -19940,6 +19926,92 @@
 	});
 
 	module.exports = handle;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+
+	var statPanel = React.createClass({
+		displayName: 'statPanel',
+
+		render: function () {
+			var data = this.props.stats;
+			console.log(data);
+			return React.createElement(
+				'div',
+				null,
+				React.createElement('hr', null),
+				React.createElement(
+					'h1',
+					null,
+					'Stat Panel '
+				),
+				React.createElement(
+					'table',
+					{ style: { width: '100%' } },
+					React.createElement(
+						'thead',
+						null,
+						React.createElement(
+							'tr',
+							null,
+							React.createElement(
+								'td',
+								null,
+								'Left Toast'
+							),
+							React.createElement(
+								'td',
+								null,
+								'Right Toast'
+							)
+						)
+					),
+					React.createElement(
+						'tbody',
+						null,
+						React.createElement(
+							'tr',
+							null,
+							React.createElement(
+								'td',
+								null,
+								'Status: ',
+								data.toastLeft
+							),
+							React.createElement(
+								'td',
+								null,
+								'Status: ',
+								data.toastRight
+							)
+						),
+						React.createElement(
+							'tr',
+							null,
+							React.createElement(
+								'td',
+								null,
+								'Lever is Down: ',
+								data.leftHandleDown + '!'
+							),
+							React.createElement(
+								'td',
+								null,
+								'Lever is Down: ',
+								data.rightHandleDown + '!'
+							)
+						)
+					)
+				)
+			);
+		}
+
+	});
+
+	module.exports = statPanel;
 
 /***/ }
 /******/ ]);

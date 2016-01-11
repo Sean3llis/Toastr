@@ -3,6 +3,7 @@
 var React = require('react');
 var Toast = require('./toast.js');
 var Handle = require('./handle.js');
+var StatPanel = require('./statPanel.js');
 
 var toastr = React.createClass({
 	getDefaultProps: function(){
@@ -96,6 +97,8 @@ var toastr = React.createClass({
 					<Handle side="left" isDown={this.state.leftHandleDown} handleClick={this.onHandleClick} />
 					<Handle side="right" isDown={this.state.rightHandleDown} handleClick={this.onHandleClick}  />
 				</svg>
+				<StatPanel stats={this.state} />
+
 			</div>
 		);
 	}
