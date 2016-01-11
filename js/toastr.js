@@ -19721,6 +19721,8 @@
 		toastToasted: function (ele) {
 			Velocity(ele, {
 				translateY: "-40px"
+			}, {
+				easing: [200, 20]
 			});
 		},
 

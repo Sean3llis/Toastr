@@ -33,8 +33,11 @@ var toast = React.createClass({
 	toastToasted: function(ele){
 		Velocity(ele, {
 			translateY: "-40px"
+		}, {
+			easing: [200,20],
 		})
 	},
+
 
 	handleClick: function(e){
 		this.props.handleClick(this.props.side, e)
