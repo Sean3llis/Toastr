@@ -19671,10 +19671,20 @@
 	var toast = React.createClass({
 		displayName: 'toast',
 
+		getInitialState: function () {
+			return {
+				popped: false
+			};
+		},
+
 		componentDidMount: function () {
-			Velocity.RegisterEffect('toast:popup', {
-				defaultDuration: 600,
-				calls: [[{ translateY: "-100px" }, 0.5, { easing: 'easeOut' }], [{ translateY: '80px' }, 0.5, { easing: 'swing' }]]
+			Velocity.RegisterEffect('toast:popup:left', {
+				defaultDuration: 500,
+				calls: [[{ translateY: "-120px", rotateZ: '+=8deg' }, 0.5, { easing: 'easeOutCirc' }], [{ translateY: '80px', rotateZ: '-=8deg' }, 0.5, { easing: 'easeInCirc' }]]
+			});
+			Velocity.RegisterEffect('toast:popup:right', {
+				defaultDuration: 500,
+				calls: [[{ translateY: "-120px" }, 0.5, { easing: 'easeOutCirc' }], [{ translateY: '80px' }, 0.5, { easing: 'easeInCirc' }]]
 			});
 		},
 
@@ -19686,7 +19696,7 @@
 				case 'toasting':
 					this.toastToasting(node);break;
 				case 'toasted':
-					this.toastToasted(node);break;
+					if (!this.state.popped) this.toastToasted(node);break;
 			}
 		},
 
@@ -19707,7 +19717,7 @@
 		},
 
 		toastToasted: function (ele) {
-			Velocity(ele, 'toast:popup');
+			Velocity(ele, 'toast:popup:' + this.props.side);this.setState({ popped: true });
 		},
 
 		handleClick: function (e) {
@@ -19755,7 +19765,7 @@
 				height: ratio,
 				width: ratio,
 				viewBox: [0, 0, 1000, 1000].join(' '),
-				toastTime: 5000
+				toastTime: 2000
 			};
 		},
 
@@ -19786,7 +19796,7 @@
 			}
 		},
 
-		leftToasted: function (side) {
+		leftToasted: function () {
 			this.setState({
 				toastLeft: 'toasted',
 				leftHandleDown: false
@@ -19800,10 +19810,10 @@
 			});
 		},
 
-		onToastClick: function (side, data) {
-			if (side === 'left') {
+		onToastClick: function (side) {
+			if (side === 'left' && this.state.toastLeft === 'bread') {
 				this.setState({ toastLeft: 'ready' });
-			} else {
+			} else if (side === 'right' && this.state.toastRight === 'bread') {
 				this.setState({ toastRight: 'ready' });
 			}
 		},
@@ -19938,7 +19948,6 @@
 
 		render: function () {
 			var data = this.props.stats;
-			console.log(data);
 			return React.createElement(
 				'div',
 				null,

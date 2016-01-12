@@ -4,7 +4,6 @@ var statPanel = React.createClass({
 
 	render: function() {
 		var data = this.props.stats;
-		console.log(data);
 		return (
 			<div>
 				<hr />
@@ -30,7 +29,7 @@ var statPanel = React.createClass({
 				</table>
 			</div>
 		);
-	}
+	} 
 
 });
 

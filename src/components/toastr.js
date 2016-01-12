@@ -12,7 +12,7 @@ var toastr = React.createClass({
 	        height: ratio,
 	        width: ratio,
 	        viewBox: [0, 0, 1000, 1000].join(' '),
-	        toastTime: 5000
+	        toastTime: 2000
 	    }
 	},
 
@@ -43,13 +43,12 @@ var toastr = React.createClass({
 		}
 	},
 
-	leftToasted: function(side){
+	leftToasted: function(){
 		this.setState({
 			toastLeft: 'toasted',
 			leftHandleDown: false
 		});
 	},
-
 
 	rightToasted: function(){
  		this.setState({
@@ -58,10 +57,10 @@ var toastr = React.createClass({
  		});
 	},
 
-	onToastClick: function(side, data){
-		if(side === 'left'){
+	onToastClick: function(side){
+		if(side === 'left' && this.state.toastLeft === 'bread'){
 			this.setState({toastLeft: 'ready'});
-		} else {
+		} else if(side === 'right' && this.state.toastRight === 'bread') {
 			this.setState({toastRight: 'ready'});
 		}
 	},

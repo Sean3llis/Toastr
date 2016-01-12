@@ -4,12 +4,25 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var toast = React.createClass({
+	getInitialState: function(){
+		return {
+			popped: false
+		}
+	},
+
 	componentDidMount: function(){
-		Velocity.RegisterEffect('toast:popup', {
-			defaultDuration: 600,
+		Velocity.RegisterEffect('toast:popup:left', {
+			defaultDuration: 500,
 			calls: [
-				[ { translateY: "-100px" }, 0.5, { easing: 'easeOut'}],
-				[ { translateY: '80px' }, 0.5, { easing: 'swing' }]
+				[ { translateY: "-120px", rotateZ: '+=8deg' }, 0.5, { easing: 'easeOutCirc'}],
+				[ { translateY: '80px', rotateZ: '-=8deg' }, 0.5, { easing: 'easeInCirc' }]
+			]
+		});
+		Velocity.RegisterEffect('toast:popup:right', {
+			defaultDuration: 500,
+			calls: [
+				[ { translateY: "-120px" }, 0.5, { easing: 'easeOutCirc'}],
+				[ { translateY: '80px' }, 0.5, { easing: 'easeInCirc' }]
 			]
 		});
 	},
@@ -19,10 +32,9 @@ var toast = React.createClass({
 		switch (this.props.status){
 			case 'ready': this.toastReady(node); break;
 			case 'toasting': this.toastToasting(node); break;
-			case 'toasted': this.toastToasted(node); break;
+			case 'toasted': if(!this.state.popped) this.toastToasted(node); break;
 		}
 	},
-
 
 	toastReady: function(ele){
 		Velocity(ele, {
@@ -41,7 +53,7 @@ var toast = React.createClass({
 	},
 
 	toastToasted: function(ele){
-		Velocity(ele, 'toast:popup')
+		Velocity(ele, 'toast:popup:' + this.props.side); this.setState({popped: true});
 	},
 
 	handleClick: function(e){
