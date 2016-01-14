@@ -11,14 +11,7 @@ var toast = React.createClass({
 	},
 
 	componentDidMount: function(){
-		Velocity.RegisterEffect('toast:popup:left', {
-			defaultDuration: 500,
-			calls: [
-				[ { translateY: "-120px", rotateZ: '+=8deg' }, 0.5, { easing: 'easeOutCirc'}],
-				[ { translateY: '80px', rotateZ: '-=8deg' }, 0.5, { easing: 'easeInCirc' }]
-			]
-		});
-		Velocity.RegisterEffect('toast:popup:right', {
+		Velocity.RegisterEffect('toast:popup', {
 			defaultDuration: 500,
 			calls: [
 				[ { translateY: "-120px" }, 0.5, { easing: 'easeOutCirc'}],
@@ -26,6 +19,7 @@ var toast = React.createClass({
 			]
 		});
 	},
+
 
 	componentDidUpdate: function(){
 		var node = ReactDOM.findDOMNode(this);
@@ -52,8 +46,9 @@ var toast = React.createClass({
 		});
 	},
 
+
 	toastToasted: function(ele){
-		Velocity(ele, 'toast:popup:' + this.props.side); this.setState({popped: true});
+		Velocity(ele, 'toast:popup'); this.setState({popped: true});
 	},
 
 	handleClick: function(e){

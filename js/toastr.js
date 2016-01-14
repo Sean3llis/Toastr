@@ -19678,11 +19678,7 @@
 		},
 
 		componentDidMount: function () {
-			Velocity.RegisterEffect('toast:popup:left', {
-				defaultDuration: 500,
-				calls: [[{ translateY: "-120px", rotateZ: '+=8deg' }, 0.5, { easing: 'easeOutCirc' }], [{ translateY: '80px', rotateZ: '-=8deg' }, 0.5, { easing: 'easeInCirc' }]]
-			});
-			Velocity.RegisterEffect('toast:popup:right', {
+			Velocity.RegisterEffect('toast:popup', {
 				defaultDuration: 500,
 				calls: [[{ translateY: "-120px" }, 0.5, { easing: 'easeOutCirc' }], [{ translateY: '80px' }, 0.5, { easing: 'easeInCirc' }]]
 			});
@@ -19717,7 +19713,7 @@
 		},
 
 		toastToasted: function (ele) {
-			Velocity(ele, 'toast:popup:' + this.props.side);this.setState({ popped: true });
+			Velocity(ele, 'toast:popup');this.setState({ popped: true });
 		},
 
 		handleClick: function (e) {
