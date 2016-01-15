@@ -12,7 +12,7 @@ var toastr = React.createClass({
 	        height: ratio,
 	        width: ratio,
 	        viewBox: [0, 0, 1000, 1000].join(' '),
-	        toastTime: 2000
+	        toastTime: 8000
 	    }
 	},
 
@@ -69,8 +69,16 @@ var toastr = React.createClass({
 		return (
 			<div>
 				<svg width={this.props.width + 'px'} height={this.props.height + 'px'} viewBox={this.props.viewBox} >
-					<Toast side="left" status={this.state.toastLeft} handleClick={this.onToastClick} />
-					<Toast side="right" status={this.state.toastRight} handleClick={this.onToastClick} />
+					<Toast
+						side="left"
+						status={this.state.toastLeft}
+						toastTime={this.props.toastTime}
+						handleClick={this.onToastClick} />
+					<Toast
+						side="right"
+						status={this.state.toastRight}
+						toastTime={this.props.toastTime}
+						handleClick={this.onToastClick} />
 					<path fill="#686868" d="M184 805.238V805h.407H184v.238l-11.014-.03s2.126 6.598 3.315 12.874c1.173 6.195 4.797 6.113 8.07 6.11 3.276.003 6.894.057 8.065-6.137 1.188-6.277 2.997-12.846 2.997-12.846l-11.432.028z"/>
 					<path fill="#333" d="M173.125 805.133s1.326 6.637 2.514 12.912c.697 3.69 2.36 5.16 3.36 5.743v-9.09c0-6.787 9.444-9.25 15.84-9.25l.792-2.896-22.507 2.58z"/>
 					<path fill="#686868" d="M277 805.238V805h.385H277v.238l-11.025-.03s2.12 6.598 3.31 12.874c1.172 6.195 4.793 6.113 8.068 6.11 3.275.003 6.89.057 8.062-6.137 1.188-6.277 3.007-12.846 3.007-12.846l-11.422.028z"/>

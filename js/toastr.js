@@ -19705,10 +19705,18 @@
 		},
 
 		toastToasting: function (ele) {
+			var toastFront = ele.childNodes[1];
+			console.log(this.props.toastTime);
 			Velocity(ele, {
 				translateY: "180px"
 			}, {
 				easing: [200, 20]
+			});
+			Velocity(toastFront, {
+				fill: '#D1AF8C'
+			}, {
+				easing: 'linear',
+				duration: this.props.toastTime
 			});
 		},
 
@@ -19725,14 +19733,14 @@
 				'g',
 				{ onClick: this.handleClick, id: 'ToastLeft', className: 'toast' },
 				React.createElement('path', { fill: '#5B4736', d: 'M479.03,286.988c0,0-1.667-92.793-12.461-92.45c11.357-6.923,12.564-36.247-1.426-49.189 c-15.854-14.668-42.515-10.593-73.839-0.447l-19.115,0.608c-31.905-8.135-57.787-8.9-73.742,5.141 c-14.233,12.524-10.083,43.955,1.691,50.141c-10.795,0.343-3.62,101.584-3.62,101.584c0.233,2.461,10.018,7.762,20.507,6.18 C363.53,314.921,479.124,304.039,479.03,286.988z' }),
-				React.createElement('path', { fill: '#EFEDD8', d: 'M496.902,295.573c0,0,0.751-102.024-10.045-101.681c11.357-6.922,12.564-36.246-1.426-49.189 c-15.854-14.668-42.515-10.593-73.838-0.447l-19.115,0.608c-31.905-8.135-57.787-8.899-73.742,5.141 c-14.233,12.524-10.083,43.955,1.691,50.141c-10.795,0.343-3.4,108.495-3.4,108.495 C321.517,312.854,497.021,316.904,496.902,295.573z' })
+				React.createElement('path', { className: 'toast-front', fill: '#EFEDD8', d: 'M496.902,295.573c0,0,0.751-102.024-10.045-101.681c11.357-6.922,12.564-36.246-1.426-49.189 c-15.854-14.668-42.515-10.593-73.838-0.447l-19.115,0.608c-31.905-8.135-57.787-8.899-73.742,5.141 c-14.233,12.524-10.083,43.955,1.691,50.141c-10.795,0.343-3.4,108.495-3.4,108.495 C321.517,312.854,497.021,316.904,496.902,295.573z' })
 			);
 
 			var rightToast = React.createElement(
 				'g',
 				{ onClick: this.handleClick, id: 'ToastRight', className: 'toast' },
 				React.createElement('path', { fill: '#5B4736', d: 'M600.828,314.276c0,0,5.021-92.672-5.771-93.107c11.827-6.087,15.143-35.247,2.12-49.165 c-14.758-15.772-41.643-13.627-73.615-5.763l-19.109-0.771c-31.236-10.412-56.996-13.038-73.921-0.183 c-15.098,11.467-13.222,43.114-1.923,50.132c-10.793-0.435-10.926,101.061-10.926,101.061c0.055,2.472,9.432,8.463,20.008,7.64 C483.617,333.819,599.695,331.289,600.828,314.276z' }),
-				React.createElement('path', { fill: '#EFEDD8', d: 'M618.036,324.126c0,0,8.098-101.705-2.695-102.14c11.827-6.086,15.142-35.247,2.121-49.164 c-14.757-15.771-41.643-13.627-73.616-5.763l-19.108-0.771c-31.237-10.412-56.997-13.039-73.921-0.184 c-15.098,11.467-13.222,43.115-1.924,50.132c-10.792-0.436-11.205,107.968-11.205,107.968 C441.862,328.732,616.619,345.411,618.036,324.126z' })
+				React.createElement('path', { className: 'toast-front', fill: '#EFEDD8', d: 'M618.036,324.126c0,0,8.098-101.705-2.695-102.14c11.827-6.086,15.142-35.247,2.121-49.164 c-14.757-15.771-41.643-13.627-73.616-5.763l-19.108-0.771c-31.237-10.412-56.997-13.039-73.921-0.184 c-15.098,11.467-13.222,43.115-1.924,50.132c-10.792-0.436-11.205,107.968-11.205,107.968 C441.862,328.732,616.619,345.411,618.036,324.126z' })
 			);
 			return this.props.side === "left" ? leftToast : rightToast;
 		}
@@ -19761,7 +19769,7 @@
 				height: ratio,
 				width: ratio,
 				viewBox: [0, 0, 1000, 1000].join(' '),
-				toastTime: 2000
+				toastTime: 8000
 			};
 		},
 
@@ -19821,8 +19829,16 @@
 				React.createElement(
 					'svg',
 					{ width: this.props.width + 'px', height: this.props.height + 'px', viewBox: this.props.viewBox },
-					React.createElement(Toast, { side: 'left', status: this.state.toastLeft, handleClick: this.onToastClick }),
-					React.createElement(Toast, { side: 'right', status: this.state.toastRight, handleClick: this.onToastClick }),
+					React.createElement(Toast, {
+						side: 'left',
+						status: this.state.toastLeft,
+						toastTime: this.props.toastTime,
+						handleClick: this.onToastClick }),
+					React.createElement(Toast, {
+						side: 'right',
+						status: this.state.toastRight,
+						toastTime: this.props.toastTime,
+						handleClick: this.onToastClick }),
 					React.createElement('path', { fill: '#686868', d: 'M184 805.238V805h.407H184v.238l-11.014-.03s2.126 6.598 3.315 12.874c1.173 6.195 4.797 6.113 8.07 6.11 3.276.003 6.894.057 8.065-6.137 1.188-6.277 2.997-12.846 2.997-12.846l-11.432.028z' }),
 					React.createElement('path', { fill: '#333', d: 'M173.125 805.133s1.326 6.637 2.514 12.912c.697 3.69 2.36 5.16 3.36 5.743v-9.09c0-6.787 9.444-9.25 15.84-9.25l.792-2.896-22.507 2.58z' }),
 					React.createElement('path', { fill: '#686868', d: 'M277 805.238V805h.385H277v.238l-11.025-.03s2.12 6.598 3.31 12.874c1.172 6.195 4.793 6.113 8.068 6.11 3.275.003 6.89.057 8.062-6.137 1.188-6.277 3.007-12.846 3.007-12.846l-11.422.028z' }),
