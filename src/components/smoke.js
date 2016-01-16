@@ -6,8 +6,15 @@ var ReactDOM = require('react-dom');
 var smoke = React.createClass({
   getDefaultProps: function(){
     return {
-      dashArray: "200",
-      dashOffset: "200.5"
+      dashArray: "220",
+      dashOffset: "200.5",
+      smokeDelay: 300
+    }
+  },
+
+  getInitialState: function(){
+    return {
+      smoking: false
     }
   },
 
@@ -15,24 +22,31 @@ var smoke = React.createClass({
     Velocity.RegisterEffect('smoke:float', {
 			defaultDuration: 2200,
 			calls: [
-				[ { strokeDashoffset: "-=200.5", opacity: 1 }, 1, { stagger: 200, easing: 'swing'}],
-				[ { opacity: 0 }, 0.2, { stagger: 200, easing: 'swing'}],
-			]
+				[ { strokeDashoffset: "0", opacity: 1 }, 0.5],
+				[ { strokeDashoffset: "-201" }, 0.5],
+			],
+      reset: {
+        strokeDasharray: this.props.dashArray,
+        strokeDashoffset: this.props.dashOffset,
+        opacity: 0
+      }
 		});
   },
 
   componentDidUpdate: function(){
     var smoke = ReactDOM.findDOMNode(this);
     var wisps = smoke.childNodes;
-    console.log(this.props.status);
-    if(this.props.status === 'toasting'){
-      Velocity(wisps, 'smoke:float');
+    if(this.props.isToasting && !this.state.smoking){
+      Velocity(wisps, 'smoke:float', {
+        duration: this.props.toastTime - this.props.smokeDelay
+      });
     } else {
       Velocity(wisps, {opacity: 0});
     }
   },
 
   render: function(){
+    console.log("toasting: ", this.props.isToasting);
     return (
       <g id="Smoke">
           <path className="smoke-wisp" fill="none" strokeDasharray={this.props.dashArray} style={{strokeDashoffset: this.props.dashOffset, opacity: 0}} stroke="#F5F5F5" strokeWidth="8" strokeLinecap="round" stroke-linejoin="round" d="

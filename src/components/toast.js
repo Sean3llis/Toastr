@@ -39,7 +39,6 @@ var toast = React.createClass({
 
 	toastToasting: function(ele){
 		var toastFront = ele.childNodes[1];
-		console.log(this.props.toastTime);
 		Velocity(ele, {
 			translateY: "180px",
 		}, {

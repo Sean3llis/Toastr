@@ -13,7 +13,7 @@ var toastr = React.createClass({
 	        height: ratio,
 	        width: ratio,
 	        viewBox: [0, 0, 1000, 1000].join(' '),
-	        toastTime: 8000
+	        toastTime: 5000
 	    }
 	},
 
@@ -66,6 +66,10 @@ var toastr = React.createClass({
 		}
 	},
 
+	isToasting: function(){
+		return (this.state.toastLeft === 'toasting' || this.state.toastRight === 'toasting');
+	},
+
 	render: function() {
 		return (
 			<div>
@@ -102,7 +106,7 @@ var toastr = React.createClass({
 						<path fill="#686868" d="M598.246 524H516.22c-2.438 0-4.2 1.945-4.2 4.386v13.304c0 2.44 1.762 4.31 4.2 4.31H538.352c2.438 0 3.624 2.122 3.624 4.56v53.22c0 2.438 2.807 4.222 5.246 4.222H567.163c2.44 0 3.797-1.783 3.797-4.223v-53.22c0-2.438 2.633-4.56 5.072-4.56H598.168c2.44 0 4.754-1.87 4.754-4.31v-13.305c.076-2.44-2.237-4.385-4.678-4.385z"/>
 						<path fill="#F2F2F2" d="M603 528.386c0-2.44-2.313-4.386-4.754-4.386h-75.393c-2.44 0-4.854 1.945-4.854 4.386v13.304c0 2.44 2.413 4.31 4.853 4.31h22.175c2.438 0 4.972 2.122 4.972 4.56v53.22c0 2.438 1.46 4.222 3.898 4.222h13.304c2.44 0 3.798-1.783 3.798-4.223v-53.22c0-2.438 2.633-4.56 5.072-4.56h22.174c2.44 0 4.754-1.87 4.754-4.31v-13.304z"/>
 					</g>
-					<g id="Toast_Outlines">
+					<g id="toast-outlines">
 						<path className="toast-outline" id="outline-right" fill="none" stroke="#F2F2F2" strokeWidth="4"  d="M427.512,161.306
 							c-9.803,8.255-13.288,22.23-12.773,33.195c0.407,8.685,2.827,16.096,6.685,20.995c-1.864,3.506-3.077,8.653-4.128,14.881
 							c-1.444,8.554-2.608,20.417-3.539,35.26c-1.574,25.107-1.756,50.542-1.756,50.795v0.159c0,6.48,10.806,12.644,22.025,12.644
@@ -116,7 +120,9 @@ var toastr = React.createClass({
 							c-0.017-0.229-1.632-23.213-2.172-47.065c-0.798-35.227,1.121-48.485,3.615-54.262c-4.208-4.608-7.152-11.835-8.185-20.478
 							c-1.302-10.899,0.274-26.115,10.355-34.028c21.524-16.896,65.291-24.856,96.574-7.376c43.383-18.146,92.95-4.52,105.136,12.846"/>
 					</g>
-					<Smoke status={this.state.toastRight} />
+					<Smoke
+						toastTime={this.props.toastTime}
+						isToasting={this.isToasting()} />
 					<Handle side="left" isDown={this.state.leftHandleDown} handleClick={this.onHandleClick} />
 					<Handle side="right" isDown={this.state.rightHandleDown} handleClick={this.onHandleClick}  />
 				</svg>
