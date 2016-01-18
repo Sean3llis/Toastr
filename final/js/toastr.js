@@ -49,17 +49,35 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
 	var Toastr = __webpack_require__(159);
-	var Header = __webpack_require__(164);
+	var Header = __webpack_require__(163);
+	var StatPanel = __webpack_require__(166);
 	
 	var App = React.createClass({
 		displayName: 'App',
 	
+		extractStats: function (stats) {
+			console.log(stats);
+		},
+	
 		render: function () {
 			return React.createElement(
 				'div',
-				null,
+				{ id: 'app-wrapper' },
 				React.createElement(Header, null),
-				React.createElement(Toastr, null)
+				React.createElement(
+					'div',
+					{ className: 'row' },
+					React.createElement(
+						'div',
+						{ className: 'col-sm-6' },
+						React.createElement(Toastr, { extractStats: this.extractStats })
+					),
+					React.createElement(
+						'div',
+						{ className: 'col-sm-6' },
+						React.createElement(StatPanel, null)
+					)
+				)
 			);
 		}
 	});
@@ -19671,7 +19689,6 @@
 	var Toast = __webpack_require__(160);
 	var Handle = __webpack_require__(161);
 	var Smoke = __webpack_require__(162);
-	var StatPanel = __webpack_require__(163);
 	
 	var toastr = React.createClass({
 		displayName: 'toastr',
@@ -19693,6 +19710,21 @@
 				leftHandleDown: false,
 				rightHandleDown: false
 			};
+		},
+	
+		componentDidMount: function () {
+			// console.log("mounted");
+			this.flashOutlines();
+		},
+	
+		componentDidUpdate: function () {
+			this.props.extractStats(this.state);
+		},
+	
+		flashOutlines: function () {
+			var outlines = document.getElementById('toast-outlines');
+			Velocity(outlines, 'callout.flash', { delay: 1500 });
+			Velocity(outlines, { opacity: 0 });
 		},
 	
 		onHandleClick: function (side, data) {
@@ -19789,12 +19821,9 @@
 					React.createElement(
 						'g',
 						{ id: 'toast-outlines' },
-						React.createElement('path', { className: 'toast-outline', id: 'outline-right', fill: 'none', stroke: '#F2F2F2', strokeWidth: '4', d: 'M427.512,161.306 c-9.803,8.255-13.288,22.23-12.773,33.195c0.407,8.685,2.827,16.096,6.685,20.995c-1.864,3.506-3.077,8.653-4.128,14.881 c-1.444,8.554-2.608,20.417-3.539,35.26c-1.574,25.107-1.756,50.542-1.756,50.795v0.159c0,6.48,10.806,12.644,22.025,12.644 c0.323,0,0.567,0.033,0.892,0.023c3.962,1.477,14.348,3.589,44.558,6.391c28.786,2.669,58.575,4.352,81.73,4.352 c0.005,0,0.007,0,0.012,0c42.501,0,60.179-4.551,60.961-15.333c0.103-1.188,2.054-23.956,2.989-47.412 c1.486-37.29-0.581-49.704-2.622-54.622c3.666-3.949,6.326-9.831,7.56-16.946c2.37-13.668-0.78-28.28-8.991-36.281 c-24.554-23.928-79.446-17.072-96.751-8.502C505.334,151.333,451.691,140.945,427.512,161.306z' }),
-						React.createElement('path', { className: 'toast-outline', id: 'outline-left', fill: 'none', stroke: '#F2F2F2', strokeWidth: '4', d: 'M412,316.599 c-10.69,0.307-20.728,0.401-29.063,0.401c-0.006,0-0.011,0-0.016,0c-16.471,0-32.631-0.372-45.504-1.052 c-13.329-0.703-18.762-1.456-21.309-2.247c-0.991,0.094-1.995,0.142-3.002,0.142c-9.689,0-20.97-4.703-21.566-10.998l-0.01-0.117 c-0.017-0.229-1.632-23.213-2.172-47.065c-0.798-35.227,1.121-48.485,3.615-54.262c-4.208-4.608-7.152-11.835-8.185-20.478 c-1.302-10.899,0.274-26.115,10.355-34.028c21.524-16.896,65.291-24.856,96.574-7.376c43.383-18.146,92.95-4.52,105.136,12.846' })
+						React.createElement('path', { strokeDasharray: '10', className: 'toast-outline', id: 'outline-right', fill: 'none', stroke: '#F2F2F2', strokeLinecap: 'round', strokeWidth: '4', d: 'M427.512,161.306 c-9.803,8.255-13.288,22.23-12.773,33.195c0.407,8.685,2.827,16.096,6.685,20.995c-1.864,3.506-3.077,8.653-4.128,14.881 c-1.444,8.554-2.608,20.417-3.539,35.26c-1.574,25.107-1.756,50.542-1.756,50.795v0.159c0,6.48,10.806,12.644,22.025,12.644 c0.323,0,0.567,0.033,0.892,0.023c3.962,1.477,14.348,3.589,44.558,6.391c28.786,2.669,58.575,4.352,81.73,4.352 c0.005,0,0.007,0,0.012,0c42.501,0,60.179-4.551,60.961-15.333c0.103-1.188,2.054-23.956,2.989-47.412 c1.486-37.29-0.581-49.704-2.622-54.622c3.666-3.949,6.326-9.831,7.56-16.946c2.37-13.668-0.78-28.28-8.991-36.281 c-24.554-23.928-79.446-17.072-96.751-8.502C505.334,151.333,451.691,140.945,427.512,161.306z' }),
+						React.createElement('path', { strokeDasharray: '10', className: 'toast-outline', id: 'outline-left', fill: 'none', stroke: '#F2F2F2', strokeLinecap: 'round', strokeWidth: '4', d: 'M412,316.599 c-10.69,0.307-20.728,0.401-29.063,0.401c-0.006,0-0.011,0-0.016,0c-16.471,0-32.631-0.372-45.504-1.052 c-13.329-0.703-18.762-1.456-21.309-2.247c-0.991,0.094-1.995,0.142-3.002,0.142c-9.689,0-20.97-4.703-21.566-10.998l-0.01-0.117 c-0.017-0.229-1.632-23.213-2.172-47.065c-0.798-35.227,1.121-48.485,3.615-54.262c-4.208-4.608-7.152-11.835-8.185-20.478 c-1.302-10.899,0.274-26.115,10.355-34.028c21.524-16.896,65.291-24.856,96.574-7.376c43.383-18.146,92.95-4.52,105.136,12.846' })
 					),
-					React.createElement(Smoke, {
-						toastTime: this.props.toastTime,
-						isToasting: this.isToasting() }),
 					React.createElement(Handle, { side: 'left', isDown: this.state.leftHandleDown, handleClick: this.onHandleClick }),
 					React.createElement(Handle, { side: 'right', isDown: this.state.rightHandleDown, handleClick: this.onHandleClick })
 				),
@@ -19978,9 +20007,8 @@
 	
 	  getDefaultProps: function () {
 	    return {
-	      dashArray: "220",
-	      dashOffset: "200.5",
-	      smokeDelay: 300
+	      dashArray: 220,
+	      dashOffset: 199
 	    };
 	  },
 	
@@ -19993,7 +20021,7 @@
 	  componentWillMount: function () {
 	    Velocity.RegisterEffect('smoke:float', {
 	      defaultDuration: 2200,
-	      calls: [[{ strokeDashoffset: "0", opacity: 1 }, 0.5], [{ strokeDashoffset: "-201" }, 0.5]],
+	      calls: [[{ strokeDashoffset: "0", opacity: 1 }, 0.5, { easing: 'swing' }], [{ strokeDashoffset: "-199", opacity: 0 }, 0.5, { easing: 'swing' }]],
 	      reset: {
 	        strokeDasharray: this.props.dashArray,
 	        strokeDashoffset: this.props.dashOffset,
@@ -20007,15 +20035,22 @@
 	    var wisps = smoke.childNodes;
 	    if (this.props.isToasting && !this.state.smoking) {
 	      Velocity(wisps, 'smoke:float', {
-	        duration: this.props.toastTime - this.props.smokeDelay
+	        duration: this.props.toastTime - 500,
+	        complete: function () {
+	          smoke.setState({ smoking: false });
+	        }
 	      });
+	      this.setState({ smoking: true });
 	    } else {
-	      Velocity(wisps, { opacity: 0 });
+	      Velocity(wisps, 'stop', true);
+	      for (var i = 0; i < wisps.length; i++) {
+	        wisps[i].style.strokeDashoffset = this.props.dashArray;
+	        wisps[i].style.opacity = 0;
+	      }
 	    }
 	  },
 	
 	  render: function () {
-	    console.log("toasting: ", this.props.isToasting);
 	    return React.createElement(
 	      'g',
 	      { id: 'Smoke' },
@@ -20030,6 +20065,125 @@
 
 /***/ },
 /* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(1);
+	var ReactLogo = __webpack_require__(164);
+	var PenLogo = __webpack_require__(165);
+	
+	var header = React.createClass({
+		displayName: 'header',
+	
+		render: function () {
+			return React.createElement(
+				'div',
+				{ id: 'table-wrapper' },
+				React.createElement(
+					'table',
+					{ id: 'ingredients' },
+					React.createElement(
+						'tbody',
+						null,
+						React.createElement(
+							'tr',
+							null,
+							React.createElement(
+								'td',
+								{ className: 'ingredient react-logo' },
+								React.createElement(ReactLogo, { size: '80px' })
+							),
+							React.createElement(
+								'td',
+								{ className: 'ingredient velocity-logo' },
+								'Velocity',
+								React.createElement(
+									'span',
+									{ className: 'period' },
+									'.'
+								),
+								'js'
+							),
+							React.createElement(
+								'td',
+								{ className: 'ingredient illustrator-logo' },
+								React.createElement(PenLogo, { size: '60px' })
+							)
+						)
+					)
+				)
+			);
+		}
+	});
+	
+	module.exports = header;
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(1);
+	
+	var ReactLogo = React.createClass({
+	  displayName: 'ReactLogo',
+	
+	  getDefaultProps: function () {
+	    return {
+	      size: '100px'
+	    };
+	  },
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { id: 'react-logo' },
+	      React.createElement(
+	        'svg',
+	        { version: '1.1', id: 'Layer_2', x: '0px', y: '0px',
+	          width: this.props.size, height: this.props.size, viewBox: '0 0 600 600', 'enable-background': 'new 0 0 600 600' },
+	        React.createElement('circle', { className: 'bg-fill', cx: '299.529', cy: '299.628', r: '50.167' }),
+	        React.createElement('path', { className: 'bg-stroke', fill: 'none', stroke: '#F2F2F2', strokeWidth: '24', d: 'M299.529,197.628 c67.356,0,129.928,9.665,177.107,25.907c56.844,19.569,91.794,49.233,91.794,76.093c0,27.991-37.041,59.503-98.083,79.728 c-46.151,15.291-106.879,23.272-170.818,23.272c-65.554,0-127.63-7.492-174.29-23.441c-59.046-20.182-94.611-52.103-94.611-79.559 c0-26.642,33.37-56.076,89.415-75.616C167.398,207.503,231.515,197.628,299.529,197.628z' }),
+	        React.createElement('path', { className: 'bg-stroke', fill: 'none', stroke: '#F2F2F2', strokeWidth: '24', d: 'M210.736,248.922 c33.649-58.348,73.281-107.724,110.92-140.48c45.35-39.466,88.507-54.923,111.775-41.505 c24.248,13.983,33.042,61.814,20.067,124.796c-9.81,47.618-33.234,104.212-65.176,159.601 c-32.749,56.788-70.25,106.819-107.377,139.272c-46.981,41.068-92.4,55.929-116.185,42.213 c-23.079-13.31-31.906-56.921-20.834-115.233C153.281,368.316,176.758,307.841,210.736,248.922z' }),
+	        React.createElement('path', { className: 'bg-stroke', fill: 'none', stroke: '#F2F2F2', strokeWidth: '24', d: 'M210.821,351.482 c-33.746-58.292-56.731-117.287-66.312-166.255c-11.544-58.999-3.382-104.109,19.864-117.566 c24.224-14.024,70.055,2.244,118.14,44.94c36.356,32.28,73.688,80.837,105.723,136.173c32.844,56.733,57.461,114.209,67.036,162.582 c12.117,61.213,2.309,107.984-21.453,121.74c-23.057,13.348-65.249-0.784-110.239-39.499 C285.567,460.886,244.898,410.344,210.821,351.482z' })
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = ReactLogo;
+
+/***/ },
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var pen = React.createClass({
+	  displayName: 'pen',
+	
+	  getDefaultProps: function () {
+	    return {
+	      size: '100px'
+	    };
+	  },
+	
+	  render: function () {
+	    return React.createElement(
+	      'svg',
+	      { version: '1.1', width: this.props.size, height: this.props.size, x: '0px', y: '0px', viewBox: '0 0 490 490', 'enable-background': 'new 0 0 490 490;' },
+	      React.createElement('path', { className: 'bg-fill', fill: '#F2F2F2', d: 'M253.768,291.142c0,0-2.534-5.192-8.768-5.192c-6.233,0-8.739,5.175-8.749,5.192l-65.413,118.16 c-2.645,4.777-0.929,10.815,3.807,13.535c1.319,0.758,32.309,18.992,32.309,57.163c0,5.522,4.478,10,10,10h56.093 c5.522,0,10-4.478,10-10c0-38.171,30.99-56.405,32.273-57.143c4.787-2.695,6.504-8.749,3.843-13.556 C319.162,409.302,253.781,291.166,253.768,291.142z M263.603,470h-37.206c-3.484-30.833-22.496-50.071-33.697-58.897L235,334.67 v41.057c0,5.522,4.477,10,10,10c5.522,0,10-4.478,10-10V334.67l42.301,76.434C286.1,419.929,267.087,439.167,263.603,470z' }),
+	      React.createElement('path', { className: 'bg-fill', d: 'M447.486,0h-41.857c-5.522,0-10,4.477-10,10v41.857c0,5.523,4.478,10,10,10h8.15 c-12.705,70.071-67.543,125.091-137.85,137.846v-8.146c0-5.522-4.478-10-10-10H224.07c-5.522,0-10,4.478-10,10v8.146 C143.753,186.947,88.928,131.956,76.22,61.857h8.152c5.522,0,10-4.477,10-10V10c0-5.523-4.478-10-10-10H42.514 c-5.522,0-10,4.477-10,10v41.857c0,5.523,4.478,10,10,10h13.428c6.332,38.735,24.727,75.129,52.386,103.289 c15.011,15.284,32.497,27.884,51.519,37.339H90.983c-3.091-4.229-8.073-6.988-13.712-6.988c-9.385,0-16.99,7.605-16.99,16.988 c0,9.384,7.605,16.99,16.99,16.99c5.639,0,10.623-2.76,13.713-6.99H214.07v10.93c0,5.523,4.478,10,10,10h41.859 c5.522,0,10-4.477,10-10v-10.93h123.086c3.091,4.23,8.074,6.99,13.715,6.99c9.383,0,16.988-7.607,16.988-16.99 c0-9.383-7.605-16.988-16.988-16.988c-5.641,0-10.623,2.759-13.714,6.988h-68.865c19.063-9.477,36.585-22.108,51.617-37.435 c27.604-28.145,45.965-64.506,52.289-103.193h13.429c5.522,0,10-4.477,10-10V10C457.486,4.477,453.009,0,447.486,0z M52.514,20 h21.858v21.857H52.514V20z M255.93,223.415H234.07v-21.858h21.859V223.415z M437.486,41.857h-21.857V20h21.857V41.857z' })
+	    );
+	  }
+	});
+	
+	module.exports = pen;
+
+/***/ },
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -20112,79 +20266,6 @@
 	});
 	
 	module.exports = statPanel;
-
-/***/ },
-/* 164 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var React = __webpack_require__(1);
-	var ReactLogo = __webpack_require__(165);
-	
-	var header = React.createClass({
-		displayName: 'header',
-	
-		render: function () {
-			return React.createElement(
-				'div',
-				{ id: 'ingredients' },
-				React.createElement(
-					'div',
-					{ className: 'ingredient react-logo' },
-					React.createElement(ReactLogo, null)
-				),
-				React.createElement(
-					'div',
-					{ className: 'ingredient velocity-logo' },
-					'Velocity',
-					React.createElement(
-						'span',
-						{ className: 'period' },
-						'.'
-					),
-					'js'
-				),
-				React.createElement(
-					'div',
-					{ className: 'ingredient illustrator-logo' },
-					'...'
-				)
-			);
-		}
-	});
-	
-	module.exports = header;
-
-/***/ },
-/* 165 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var React = __webpack_require__(1);
-	
-	var ReactLogo = React.createClass({
-	  displayName: "ReactLogo",
-	
-	  render: function () {
-	    return React.createElement(
-	      "div",
-	      { id: "react-logo" },
-	      React.createElement(
-	        "svg",
-	        { version: "1.1", id: "Layer_2", x: "0px", y: "0px",
-	          width: "150px", height: "150px", viewBox: "0 0 600 600", "enable-background": "new 0 0 600 600" },
-	        React.createElement("circle", { fill: "#F2F2F2", cx: "299.529", cy: "299.628", r: "50.167" }),
-	        React.createElement("path", { fill: "none", stroke: "#F2F2F2", strokeWidth: "24", d: "M299.529,197.628 c67.356,0,129.928,9.665,177.107,25.907c56.844,19.569,91.794,49.233,91.794,76.093c0,27.991-37.041,59.503-98.083,79.728 c-46.151,15.291-106.879,23.272-170.818,23.272c-65.554,0-127.63-7.492-174.29-23.441c-59.046-20.182-94.611-52.103-94.611-79.559 c0-26.642,33.37-56.076,89.415-75.616C167.398,207.503,231.515,197.628,299.529,197.628z" }),
-	        React.createElement("path", { fill: "none", stroke: "#F2F2F2", strokeWidth: "24", d: "M210.736,248.922 c33.649-58.348,73.281-107.724,110.92-140.48c45.35-39.466,88.507-54.923,111.775-41.505 c24.248,13.983,33.042,61.814,20.067,124.796c-9.81,47.618-33.234,104.212-65.176,159.601 c-32.749,56.788-70.25,106.819-107.377,139.272c-46.981,41.068-92.4,55.929-116.185,42.213 c-23.079-13.31-31.906-56.921-20.834-115.233C153.281,368.316,176.758,307.841,210.736,248.922z" }),
-	        React.createElement("path", { fill: "none", stroke: "#F2F2F2", strokeWidth: "24", d: "M210.821,351.482 c-33.746-58.292-56.731-117.287-66.312-166.255c-11.544-58.999-3.382-104.109,19.864-117.566 c24.224-14.024,70.055,2.244,118.14,44.94c36.356,32.28,73.688,80.837,105.723,136.173c32.844,56.733,57.461,114.209,67.036,162.582 c12.117,61.213,2.309,107.984-21.453,121.74c-23.057,13.348-65.249-0.784-110.239-39.499 C285.567,460.886,244.898,410.344,210.821,351.482z" })
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = ReactLogo;
 
 /***/ }
 /******/ ]);

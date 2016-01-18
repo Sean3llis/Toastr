@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var sass = require('gulp-sass');
 var webpack = require('webpack');
 var webserver = require('gulp-webserver');
 var webpackDevConfig = require('./dev.config.js');
@@ -10,12 +11,17 @@ gulp.task('default', ['watch']);
 
 gulp.task('pack', function(callback){
     compiler.run(function(err, stats) {
-        if(err) throw new gutil.PluginError("webpack", err);
         gutil.log("[webpack]", stats.toString({
         	colors: true
         }));
         callback();
     });
+});
+
+gulp.task('sass', function () {
+  gulp.src('./src/sass/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(__dirname + '/final/css'));
 });
 
 gulp.task('serve', function() {
@@ -27,6 +33,7 @@ gulp.task('serve', function() {
     }));
 });
 
-gulp.task('watch', ['pack'], function(){
-	gulp.watch('src/**/*.js', ['pack']);
+gulp.task('watch', ['pack', 'sass'], function(){
+	gulp.watch(['src/**/*'], ['pack']);
+	gulp.watch(['src/sass/**/*.scss'], ['sass']);
 });

@@ -18,8 +18,10 @@
   "homepage": "https://github.com/Seane235/Toastr#readme",
   "dependencies": {
     "gulp": "^3.9.0",
+    "gulp-sass": "^2.1.1",
     "gulp-util": "^3.0.7",
     "gulp-webserver": "^0.9.1",
+    "normalize.css": "^3.0.3",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "webpack": "^1.12.6"

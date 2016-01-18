@@ -1,0 +1,51 @@
+nav {
+  background-color: #F2F2F2;
+  border-bottom: 1px solid #b3b3b3;
+  padding: 40px 0px; }
+  nav h1 {
+    margin: 0px; }
+
+#table-wrapper {
+  padding: 100px 0px;
+  background-color: #F2F2F2;
+  border-bottom: 1px solid #b3b3b3; }
+
+.title {
+  font-size: 14px;
+  font-weight: bold; }
+
+#ingredients {
+  width: 100%;
+  max-width: 500px;
+  margin: auto; }
+  #ingredients .velocity-logo {
+    font-size: 32px;
+    color: #333333;
+    font-family: 'Open-Sans', sans-serif;
+    font-weight: 300; }
+
+#ingredients .bg-fill {
+  fill: #333333; }
+
+#ingredients .bg-stroke {
+  stroke: #333333; }
+
+body {
+  background-color: #F2F2F2; }
+
+* {
+  box-sizing: border-box;
+  text-align: center;
+  font-family: 'Open Sans', 'Helvetica', 'Arial', 'Tahoma', sans-serif; }
+
+.toast:hover {
+  cursor: s-resize; }
+
+.handle:hover {
+  cursor: pointer; }
+
+#handleRight {
+  tranform: translateX(100px); }
+
+#toast-outlines {
+  opacity: 0; }

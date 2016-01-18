@@ -1,7 +1,7 @@
 module.exports = {
   entry: __dirname + '/src/app.js',
   output: {
-    path: __dirname + '/js',
+    path: __dirname + '/final/js',
     filename: 'toastr.js'
   },
   module: {
@@ -18,5 +18,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
-  }
+  },
+  devtool: 'source-map',
+  debug: true
 };

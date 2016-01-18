@@ -1,0 +1,53 @@
+nav {
+  background-color: $light;
+  border-bottom: 1px solid $gray;
+  padding: 40px 0px;
+  h1 {
+    margin: 0px;
+  }
+}
+
+#table-wrapper {
+  padding: 100px 0px;
+  background-color: $light;
+  border-bottom: 1px solid $gray;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#ingredients {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  .velocity-logo {
+    font-size: 32px;
+    color: #333333;
+    font-family: 'Open-Sans', sans-serif;
+    font-weight: 300;
+  }
+}
+
+#ingredients {
+  .bg-fill {
+    fill: #333333;
+  }
+  .bg-stroke {
+    stroke: #333333;
+  }
+}
+
+.velocity-logo, .illustrator-logo {
+  // position: relative;
+  // &:before {
+  //   content: '+';
+  //   position: absolute;
+  //   font-size: 36px;
+  //   font-weight: bold;
+  //   left: 0px;
+  //   top: 50%;
+  //   transform: translateY(-50%);
+  // }
+}

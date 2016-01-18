@@ -1,0 +1,27 @@
+@import 'variables';
+@import 'nav';
+
+body {
+  background-color: $light;
+}
+
+* {
+  box-sizing: border-box;
+  text-align: center;
+  font-family: 'Open Sans', 'Helvetica', 'Arial', 'Tahoma', sans-serif;
+}
+
+.toast:hover {
+  cursor: s-resize;
+}
+
+.handle:hover {
+  cursor: pointer;
+}
+
+#handleRight {
+  tranform: translateX(100px);
+}
+#toast-outlines {
+  opacity: 0;
+}
