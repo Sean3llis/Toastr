@@ -1,6 +1,6 @@
 nav {
   background-color: #F2F2F2;
-  border-bottom: 1px solid #b3b3b3;
+  border-bottom: 1px solid #686868;
   padding: 40px 0px; }
   nav h1 {
     margin: 0px; }
@@ -8,34 +8,68 @@ nav {
 #table-wrapper {
   padding: 100px 0px;
   background-color: #F2F2F2;
-  border-bottom: 1px solid #b3b3b3; }
+  border-bottom: 1px solid #686868; }
 
 .title {
-  font-size: 14px;
-  font-weight: bold; }
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #686868; }
 
 #ingredients {
   width: 100%;
   max-width: 500px;
   margin: auto; }
+  #ingredients td {
+    text-align: center; }
   #ingredients .velocity-logo {
     font-size: 32px;
-    color: #333333;
+    color: #686868;
     font-family: 'Open-Sans', sans-serif;
     font-weight: 300; }
 
 #ingredients .bg-fill {
-  fill: #333333; }
+  fill: #686868; }
 
 #ingredients .bg-stroke {
-  stroke: #333333; }
+  stroke: #686868; }
+
+.stat-column {
+  padding-top: 100px; }
+  @media screen and (max-width: 767px) {
+    .stat-column {
+      padding-top: 0px; } }
+  .stat-column #stat-wrapper {
+    padding: 1em;
+    background-color: #ffffff;
+    border-radius: 5px; }
+    .stat-column #stat-wrapper * {
+      color: #686868; }
+    .stat-column #stat-wrapper .pointer {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 15px 10px 0;
+      border-color: transparent #ffffff transparent transparent;
+      position: absolute;
+      left: 1px;
+      bottom: 24px; }
+      @media screen and (max-width: 767px) {
+        .stat-column #stat-wrapper .pointer {
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 0 10px 15px 10px;
+          border-color: transparent transparent #ffffff transparent;
+          position: absolute;
+          top: -10px;
+          left: 50%; } }
 
 body {
   background-color: #F2F2F2; }
 
 * {
   box-sizing: border-box;
-  text-align: center;
   font-family: 'Open Sans', 'Helvetica', 'Arial', 'Tahoma', sans-serif; }
 
 .toast:hover {

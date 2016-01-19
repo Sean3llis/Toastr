@@ -1,35 +1,33 @@
 var React = require('react');
 
 var statPanel = React.createClass({
+	componentDidMount: function(){
+		console.log(this.props);
+	},
 
 	render: function() {
-		var data = this.props.stats;
 		return (
-			<div>
-				<hr />
-				<h1>Stat Panel </h1>
-				<table style={{width: '100%'}}>
+			<div id="stat-wrapper">
+				<h4 style={{textAlign: 'center'}}>Stat Panel </h4>
+				<table className="table table-hover">
 					<thead>
 						<tr>
-							<td>Left Toast</td>
-							<td>Right Toast</td>
+							<th>Left Toast</th>
+							<th>Right Toast</th>
 						</tr>
 					</thead>
+
 					<tbody>
 						<tr>
-							<td>Status: {data.toastLeft}</td>
-							<td>Status: {data.toastRight}</td>
+							<td>{this.props.stats.toastLeft}</td>
+							<td>{this.props.stats.toastRight}</td>
 						</tr>
-						<tr>
-							<td>Lever is Down: {data.leftHandleDown + '!'}</td>
-							<td>Lever is Down: {data.rightHandleDown + '!'}</td>
-						</tr>
-
 					</tbody>
 				</table>
+				<div className="pointer"></div>
 			</div>
 		);
-	} 
+	}
 
 });
 

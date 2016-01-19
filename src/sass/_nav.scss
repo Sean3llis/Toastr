@@ -14,17 +14,22 @@ nav {
 }
 
 .title {
-  font-size: 14px;
+  font-size: 24px;
   font-weight: bold;
+  text-align: center;
+  color: $gray;
 }
 
 #ingredients {
   width: 100%;
   max-width: 500px;
   margin: auto;
+  td {
+    text-align: center;
+  }
   .velocity-logo {
     font-size: 32px;
-    color: #333333;
+    color: $gray;
     font-family: 'Open-Sans', sans-serif;
     font-weight: 300;
   }
@@ -32,10 +37,10 @@ nav {
 
 #ingredients {
   .bg-fill {
-    fill: #333333;
+    fill: $gray;;
   }
   .bg-stroke {
-    stroke: #333333;
+    stroke: $gray;
   }
 }
 
