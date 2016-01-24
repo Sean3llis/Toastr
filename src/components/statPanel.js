@@ -1,9 +1,19 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 
 var statPanel = React.createClass({
 	componentDidMount: function(){
-		console.log(this.props);
+		var panel = ReactDOM.findDOMNode(this);
+		Velocity(panel, {
+			opacity: 1,
+			translateX: '+=120px'
+		}, {
+			duration: 1200,
+			easing: 'easeOut',
+			delay: 4000
+		});
 	},
+
 
 	render: function() {
 		return (

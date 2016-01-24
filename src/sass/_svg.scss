@@ -1,0 +1,25 @@
+#toastr-wrapper {
+  position: relative;
+  text-align: center;
+  width: 500px;
+  margin: 0 auto;
+}
+
+
+.toast:hover {
+  cursor: s-resize;
+}
+
+.handle:hover {
+  cursor: pointer;
+}
+
+#handleRight {
+  tranform: translateX(100px);
+}
+#toast-outlines {
+  opacity: 0;
+}
+#toastr-canvas {
+  background-color: $bg_color;
+}

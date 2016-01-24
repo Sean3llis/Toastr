@@ -1,6 +1,8 @@
 @import 'variables';
 @import 'nav';
 @import 'stats';
+@import 'svg';
+@import 'footer';
 
 body {
   background-color: $light;
@@ -9,19 +11,4 @@ body {
 * {
   box-sizing: border-box;
   font-family: 'Open Sans', 'Helvetica', 'Arial', 'Tahoma', sans-serif;
-}
-
-.toast:hover {
-  cursor: s-resize;
-}
-
-.handle:hover {
-  cursor: pointer;
-}
-
-#handleRight {
-  tranform: translateX(100px);
-}
-#toast-outlines {
-  opacity: 0;
 }

@@ -16,7 +16,7 @@ var App = React.createClass({
 			}
 		}
 	},
-	
+
 	extractStats: function(stats){
 		this.setState({
 			stats: stats
@@ -27,7 +27,7 @@ var App = React.createClass({
 		return (
 			<div id="app-wrapper">
 				<Header />
-				<div className="container">
+				<div id="toastr-canvas">
 					<Toastr extractStats={this.extractStats} />
 				</div>
 			</div>
