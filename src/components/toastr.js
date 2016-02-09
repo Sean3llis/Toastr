@@ -33,7 +33,7 @@ var toastr = React.createClass({
 
 	flashOutlines: function(){
 		var outlines = document.getElementById('toast-outlines');
-		Velocity(outlines, 'callout.flash', {delay: 1500});
+		Velocity(outlines, 'callout.flash', {delay: 4000});
 		Velocity(outlines, {opacity: 0});
 	},
 

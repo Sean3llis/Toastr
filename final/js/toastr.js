@@ -19722,7 +19722,7 @@
 	
 		flashOutlines: function () {
 			var outlines = document.getElementById('toast-outlines');
-			Velocity(outlines, 'callout.flash', { delay: 1500 });
+			Velocity(outlines, 'callout.flash', { delay: 4000 });
 			Velocity(outlines, { opacity: 0 });
 		},
 	
@@ -20162,7 +20162,7 @@
 		componentDidMount: function () {
 			var ingredients = document.querySelectorAll('.ingredient');
 			Velocity(ingredients, 'transition.slideDownIn', {
-				duration: 2000,
+				duration: 2400,
 				stagger: 200
 			});
 		},

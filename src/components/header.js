@@ -8,7 +8,7 @@ var header = React.createClass({
 	componentDidMount: function(){
 		var ingredients = document.querySelectorAll('.ingredient');
 		Velocity(ingredients, 'transition.slideDownIn', {
-			duration: 2000,
+			duration: 2400,
 			stagger: 200
 		});
 	},
