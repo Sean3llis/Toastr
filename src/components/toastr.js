@@ -28,13 +28,29 @@ var toastr = React.createClass({
 	},
 
 	componentDidMount: function(){
-		this.flashOutlines();
+		setTimeout(this.flashCTA, 3000);
 	},
 
-	flashOutlines: function(){
-		var outlines = document.getElementById('toast-outlines');
-		Velocity(outlines, 'callout.flash', {delay: 4000});
-		Velocity(outlines, {opacity: 0});
+	flashCTA: function(){
+		var cta = document.getElementById('cta');
+		Velocity(cta, {
+			opacity: 1,
+			duration: 3000
+		}, {
+			loop: true,
+			delay: 1000
+		});
+	},
+
+	flashLever: function(){
+		var levelCTA = document.getElementById('lever-cta');
+		levelCTA.style.opacity = 1;
+		Velocity(levelCTA, {
+			opacity: 0
+		}, {
+			loop: true,
+			delay: 1000
+		});
 	},
 
 	onHandleClick: function(side, data){
@@ -54,6 +70,10 @@ var toastr = React.createClass({
 			});
 		}
 		this.props.extractStats(this.state);
+		var levelCTA = document.getElementById('lever-cta');
+		Velocity(levelCTA, 'stop');
+		Velocity(levelCTA, { opacity: 0 });
+
 	},
 
 	leftToasted: function(){
@@ -79,6 +99,10 @@ var toastr = React.createClass({
 			this.setState({toastRight: 'ready'});
 		}
 		this.props.extractStats(this.state);
+		var cta = document.getElementById('cta');
+		Velocity(cta, 'stop');
+		Velocity(cta, 'transition.fadeOut');
+		this.flashLever();
 	},
 
 	isToasting: function(){
@@ -88,6 +112,8 @@ var toastr = React.createClass({
 	render: function() {
 		return (
 			<div id="toastr-wrapper">
+					<div id="cta">CLICK TOAST TO TOAST!</div>
+					<div id="lever-cta">PRESS LEVER!</div>
 					<svg width={this.props.width + 'px'} height={this.props.height + 'px'} viewBox={this.props.viewBox} >
 						{/*<Smoke
 							toastTime={this.props.toastTime}

@@ -24,7 +24,7 @@ var header = React.createClass({
 						Velocity<span className="period">.</span>js
 					</div>
 					<div className="col-sm-4 ingredient illustrator-logo">
-						<PenLogo size="60px" />
+						<PenLogo size="80px" />
 					</div>
 					<div className="clearfix"></div>
 	      </div>
