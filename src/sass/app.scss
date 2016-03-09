@@ -1,8 +1,16 @@
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
 @import 'variables';
 @import 'nav';
-@import 'stats';
 @import 'svg';
 @import 'footer';
+
 
 body {
   background-color: $light;

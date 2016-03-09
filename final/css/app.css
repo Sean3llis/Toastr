@@ -36,62 +36,16 @@ nav {
 #ingredients .bg-stroke {
   stroke: #686868; }
 
-#stat-wrapper {
-  padding: 1em;
-  background-color: #ffffff;
-  border-radius: 5px;
-  width: 200px;
-  position: absolute;
-  top: 150px;
-  right: 0px;
-  opacity: 0; }
-  #stat-wrapper * {
-    color: #686868; }
-  #stat-wrapper .pointer {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 10px 15px 10px 0;
-    border-color: transparent #ffffff transparent transparent;
-    position: absolute;
-    left: -12px;
-    bottom: 24px; }
-
-#toastr-wrapper {
-  position: relative;
+#toastr {
   text-align: center;
-  width: 500px;
-  margin: 0 auto; }
-
-#cta {
-  position: absolute;
-  color: #fff;
-  left: 0px;
-  right: 0px;
-  opacity: 0;
-  transform: translateY(20px); }
-
-#lever-cta {
-  color: #fff;
-  position: absolute;
-  opacity: 0;
-  left: -20px;
-  top: 50%; }
-
-.toast:hover {
-  cursor: s-resize; }
-
-.handle:hover {
-  cursor: pointer; }
-
-#handleRight {
-  tranform: translateX(100px); }
-
-#toast-outlines {
-  opacity: 0; }
-
-#toastr-canvas {
-  background-color: #80C2CE; }
+  padding: 140px 0px; }
+  #toastr #react-logo {
+    transform-origin: center;
+    -webkit-transition: transform 0.3s ease;
+    -moz-transition: transform 0.3s ease;
+    -ms-transition: transform 0.3s ease;
+    -o-transition: transform 0.3s ease;
+    transition: transform 0.3s ease; }
 
 footer {
   height: 140px;

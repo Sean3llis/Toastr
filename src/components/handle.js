@@ -1,38 +1,32 @@
-"use strict";
+'use strict';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
 
-var handle = React.createClass({
+const Handle = ({side}) => {
+  var leftHandle = (
+    <g id="HandleLeft">
+      <polygon fill="#333333" points="136.975,739.122 105.544,739.122 44.032,730.596 106.477,725.661 		"/>
+      <polygon fill="#686868" points="73.076,731.501 43.827,731.501 43.827,706.729 110.835,706.729 		"/>
+      <polygon fill="#E0E0E0" points="139.104,739.497 72.41,730.782 72.41,706.729 139.104,706.729 		"/>
+    </g>
+  );
 
+  var rightHandle = (
+  	<g id="HandleRight">
+			<polygon fill="#333333" points="212.488,739.122 181.059,739.122 119.546,730.573 181.993,725.653 		"/>
+			<polygon fill="#686868" points="148.59,731.501 120.048,731.501 120.048,706.729 186.349,706.729 		"/>
+			<polygon fill="#E0E0E0" points="215.324,739.454 148.631,730.739 148.631,706.729 215.324,706.729 		"/>
+  	</g>
+  );
 
-	handleClick: function(e){
-		this.props.handleClick(this.props.side, e);
-	},
-
-	componentDidUpdate: function(){
-		var handle = document.getElementById('handle-' + this.props.side);
-		if(this.props.isDown){
-			Velocity(handle, {
-				translateY: "100px"
-			}, {
-				easing: [250, 15]
-			});
-		} else {
-			Velocity(handle, {
-				translateY: "0px"
-			}, {
-				easing: [250, 15]
-			});
-		}
-	},
+  var handle = ( side === 'left' ) ? leftHandle : rightHandle;
 
 
-	render: function() {
-		var leftHandle = (<g><path fill="#333" d="M223 662.323c-1.263 0-2-1.024-2-2.286v-144.8c0-1.265.737-2.288 2-2.288s2 1.022 2 2.286v144.8c0 1.263-.737 2.287-2 2.287zM220.52 677.818l3.552.017 2.053 6.274-6.594-4.327z"/><path fill="#333" d="M223.963 713.687c3.525-.07 6.382-8.082 6.382-17.932 0-9.893-2.925-17.937-6.504-17.937-.573 0-1.13.21-1.66.597-.53-.388-1.086-.597-1.66-.597-3.58 0-6.48 8.02-6.48 17.913 0 9.78 2.796 17.772 6.317 17.952l3.606.005z"/><path fill="#686868" d="M226.484 695.73c0-8.443-2.484-15.3-5.484-15.478v-.016l-.205.013c-.032-.002-.153-.014-.185-.014-.792 0-1.59.458-2.27 1.276l-9.16 4.977.355 18.484 8.708 4.9c.697.863 1.466 1.353 2.28 1.353.03 0 .24-.012.273-.013l.202.013v-.017c3.002-.177 5.486-7.033 5.486-15.48z"/><ellipse fill="#E0E0E0" cx="209.186" cy="695.731" rx="2.595" ry="9.243"/><g onClick={this.handleClick} id="handle-left" className="handle"><path fill="#333" d="M235.883 544h-16.495l-32.28-4.475 32.77-2.59z"/><path fill="#686868" d="M202.35 540H187v-13h35.165z"/><path fill="#E0E0E0" d="M237 544.196l-35-4.573V527h35z"/></g></g>)
-		var rightHandle = (<g><path fill="#333" d="M262.5 662.323c-1.263 0-2.5-1.024-2.5-2.286v-144.8c0-1.265 1.237-2.288 2.5-2.288s2.5 1.022 2.5 2.286v144.8c0 1.263-1.237 2.287-2.5 2.287zM263.2 677.818l3.55.017 2.053 6.274-6.594-4.327z"/><path fill="#333" d="M266.642 713.687c3.525-.07 6.382-8.082 6.382-17.932 0-9.893-2.925-17.937-6.504-17.937-.574 0-1.13.21-1.66.597-.53-.388-1.087-.597-1.66-.597-3.58 0-6.48 8.02-6.48 17.913 0 9.78 2.795 17.772 6.316 17.952l3.606.005z"/><path fill="#686868" d="M268.484 695.73c0-8.443-2.484-15.3-5.484-15.478v-.016l.135.013c-.032-.002.017-.014-.016-.014-.793 0-1.506.458-2.188 1.276l-9.118 4.977.378 18.484 8.72 4.9c.696.863 1.47 1.353 2.283 1.353.032 0-.094-.012-.062-.013l-.133.014v-.017c3-.177 5.484-7.033 5.484-15.48z"/><ellipse fill="#E0E0E0" cx="251.864" cy="695.731" rx="2.595" ry="9.243"/><g onClick={this.handleClick} id="handle-right" className="handle"><path fill="#333" d="M275.512 544h-16.494l-32.28-4.486 32.77-2.582z"/><path fill="#686868" d="M241.98 540H227v-13h34.794z"/><path fill="#E0E0E0" d="M277 544.174l-35-4.573V527h35z"/></g></g>)
-		return (this.props.side === "left") ? leftHandle : rightHandle;
-	}
-});
+  return (
+    <g>{handle}</g>
+  );
+}
 
-module.exports = handle;
+
+
+export default Handle;

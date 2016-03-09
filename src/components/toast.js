@@ -1,96 +1,42 @@
-"use strict";
+'use strict';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
 
-var toast = React.createClass({
-	getInitialState: function(){
-		return {
-			popped: false
-		}
-	},
+const Toast = ({side, onClick}) => {
+  const handleClick = function(){
+    onClick(side);
+  }
+  var leftToast = (
+    <g id="ToastLeft" className="toast" onClick={handleClick}>
+      <path fill="#5B4736" d="M600.299,289.379c0,0-3.177-176.819-23.745-176.167c21.64-13.191,23.94-69.069-2.719-93.73
+        C543.626-8.468,492.822-0.704,433.133,18.63l-36.423,1.158C335.914,4.287,286.596,2.829,256.193,29.585
+        c-27.122,23.864-19.213,83.757,3.223,95.545c-20.572,0.653-6.9,193.571-6.9,193.571c0.445,4.689,19.091,14.791,39.078,11.776
+        C380.21,342.606,600.478,321.87,600.299,289.379z"/>
+      <path fill="#EFEDD8" d="M634.354,305.738c0,0,1.432-194.41-19.141-193.756c21.64-13.19,23.939-69.068-2.719-93.731
+        c-30.209-27.95-81.013-20.186-140.7-0.852l-36.423,1.159C374.576,3.056,325.257,1.6,294.854,28.354
+        c-27.123,23.866-19.214,83.757,3.221,95.545c-20.57,0.654-6.478,206.741-6.478,206.741
+        C300.152,338.667,634.581,346.385,634.354,305.738z"/>
+    </g>
+  );
 
-	componentDidMount: function(){
-		Velocity.RegisterEffect('toast:popup', {
-			defaultDuration: 500,
-			calls: [
-				[ { translateY: "-120px" }, 0.5, { easing: 'easeOutCirc'}],
-				[ { translateY: '80px' }, 0.5, { easing: 'easeInCirc' }]
-			]
-		});
-	},
+  var rightToast = (
+    <g id="ToastRight" className="toast" onClick={handleClick}>
+      <path fill="#5B4736" d="M832.388,341.377c0,0,9.567-176.589-10.997-177.418c22.536-11.599,28.855-67.164,4.039-93.686
+        c-28.121-30.054-79.351-25.966-140.273-10.981l-36.413-1.47c-59.522-19.839-108.608-24.843-140.859-0.348
+        c-28.771,21.85-25.194,82.154-3.664,95.527c-20.566-0.829-20.821,192.575-20.821,192.575c0.106,4.711,17.974,16.126,38.127,14.559
+        C609.039,378.616,830.229,373.796,832.388,341.377z"/>
+      <path fill="#EFEDD8" d="M865.178,360.146c0,0,15.431-193.802-5.136-194.631c22.537-11.597,28.854-67.164,4.042-93.683
+        c-28.119-30.053-79.351-25.967-140.278-10.982l-36.409-1.469c-59.523-19.84-108.609-24.846-140.858-0.351
+        c-28.771,21.851-25.196,82.156-3.667,95.527c-20.564-0.831-21.352,205.737-21.352,205.737
+        C529.474,368.923,862.479,400.706,865.178,360.146z"/>
+    </g>
+  );
 
-	componentDidUpdate: function(){
-		var node = ReactDOM.findDOMNode(this);
-		switch (this.props.status){
-			case 'ready': this.toastReady(node); break;
-			case 'toasting': this.toastToasting(node); break;
-			case 'toasted': if(!this.state.popped) this.toastToasted(node); break;
-		}
-	},
+  var toast = (side === 'left') ? leftToast : rightToast;
 
-	toastReady: function(ele){
-		Velocity(ele, {
-			translateY: "80px"
-		}, {
-			easing: 'easeOut'
-		});
-	},
+  return (
+    <g>{toast}</g>
+  );
+}
 
-	toastToasting: function(ele){
-		var toastFront = ele.childNodes[1];
-		Velocity(ele, {
-			translateY: "180px",
-		}, {
-			easing: [200, 20]
-		});
-		Velocity(toastFront, {
-			fill: '#D1AF8C'
-		}, {
-			easing: 'linear',
-			duration: this.props.toastTime
-		});
-	},
-
-	toastToasted: function(ele){
-		Velocity(ele, 'toast:popup'); this.setState({popped: true});
-	},
-
-	handleClick: function(e){
-		this.props.handleClick(this.props.side, e)
-	},
-
-
-	render: function() {
-		var leftToast = (
-			<g onClick={this.handleClick} id="ToastLeft" className="toast">
-				<path fill="#5B4736" d="M479.03,286.988c0,0-1.667-92.793-12.461-92.45c11.357-6.923,12.564-36.247-1.426-49.189
-				c-15.854-14.668-42.515-10.593-73.839-0.447l-19.115,0.608c-31.905-8.135-57.787-8.9-73.742,5.141
-				c-14.233,12.524-10.083,43.955,1.691,50.141c-10.795,0.343-3.62,101.584-3.62,101.584c0.233,2.461,10.018,7.762,20.507,6.18
-				C363.53,314.921,479.124,304.039,479.03,286.988z"/>
-				<path className="toast-front" fill="#EFEDD8" d="M496.902,295.573c0,0,0.751-102.024-10.045-101.681c11.357-6.922,12.564-36.246-1.426-49.189
-				c-15.854-14.668-42.515-10.593-73.838-0.447l-19.115,0.608c-31.905-8.135-57.787-8.899-73.742,5.141
-				c-14.233,12.524-10.083,43.955,1.691,50.141c-10.795,0.343-3.4,108.495-3.4,108.495
-				C321.517,312.854,497.021,316.904,496.902,295.573z"/>
-
-			</g>
-		);
-
-		var rightToast = (
-			<g onClick={this.handleClick} id="ToastRight" className="toast">
-			<path fill="#5B4736" d="M600.828,314.276c0,0,5.021-92.672-5.771-93.107c11.827-6.087,15.143-35.247,2.12-49.165
-				c-14.758-15.772-41.643-13.627-73.615-5.763l-19.109-0.771c-31.236-10.412-56.996-13.038-73.921-0.183
-				c-15.098,11.467-13.222,43.114-1.923,50.132c-10.793-0.435-10.926,101.061-10.926,101.061c0.055,2.472,9.432,8.463,20.008,7.64
-				C483.617,333.819,599.695,331.289,600.828,314.276z"/>
-			<path className="toast-front" fill="#EFEDD8" d="M618.036,324.126c0,0,8.098-101.705-2.695-102.14c11.827-6.086,15.142-35.247,2.121-49.164
-				c-14.757-15.771-41.643-13.627-73.616-5.763l-19.108-0.771c-31.237-10.412-56.997-13.039-73.921-0.184
-				c-15.098,11.467-13.222,43.115-1.924,50.132c-10.792-0.436-11.205,107.968-11.205,107.968
-				C441.862,328.732,616.619,345.411,618.036,324.126z"/>
-			</g>
-		);
-		return (this.props.side === "left") ? leftToast : rightToast;
-	}
-
-});
-
-module.exports = toast;
+export default Toast;

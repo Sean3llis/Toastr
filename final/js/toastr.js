@@ -44,48 +44,121 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(158);
-	var Toastr = __webpack_require__(159);
-	var Header = __webpack_require__(164);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var App = React.createClass({
-		displayName: 'App',
+	var _react = __webpack_require__(1);
 	
-		getInitialState: function () {
-			return {
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(158);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _toast = __webpack_require__(159);
+	
+	var _toast2 = _interopRequireDefault(_toast);
+	
+	var _base = __webpack_require__(160);
+	
+	var _base2 = _interopRequireDefault(_base);
+	
+	var _dial = __webpack_require__(161);
+	
+	var _dial2 = _interopRequireDefault(_dial);
+	
+	var _handle = __webpack_require__(162);
+	
+	var _handle2 = _interopRequireDefault(_handle);
+	
+	var _reactLogo = __webpack_require__(163);
+	
+	var _reactLogo2 = _interopRequireDefault(_reactLogo);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// Component
+	
+	
+	var Toastr = function (_Component) {
+		_inherits(Toastr, _Component);
+	
+		function Toastr(props) {
+			_classCallCheck(this, Toastr);
+	
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Toastr).call(this, props));
+	
+			_this.state = {
+				left: {
+					status: 'bread',
+					leverDown: false,
+					cookTime: 5000
+				},
+				right: {
+					status: 'bread',
+					leverDown: false,
+					cookTime: 5000
+				},
 				stats: {
-					toastLeft: 'bread',
-					toastRight: 'bread',
-					leftHandleDown: false,
-					rightHandleDown: false
+					eaten: 0
 				}
 			};
-		},
-	
-		extractStats: function (stats) {
-			this.setState({
-				stats: stats
-			});
-		},
-	
-		render: function () {
-			return React.createElement(
-				'div',
-				{ id: 'app-wrapper' },
-				React.createElement(Header, null),
-				React.createElement(
-					'div',
-					{ id: 'toastr-canvas' },
-					React.createElement(Toastr, { extractStats: this.extractStats })
-				)
-			);
+			_this.toastClick = _this.toastClick.bind(_this);
+			return _this;
 		}
-	});
 	
-	ReactDOM.render(React.createElement(App, null), document.getElementById('app'));
+		_createClass(Toastr, [{
+			key: 'toastClick',
+			value: function toastClick(side) {
+				if (side === 'left') {
+					this.setState({
+						left: {
+							status: 'ready'
+						}
+					});
+				}
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var size = 400;
+				return _react2.default.createElement(
+					'div',
+					{ id: 'toastr' },
+					_react2.default.createElement(
+						'svg',
+						{ x: '0px', y: '0px',
+							width: size, height: size, viewBox: '0 0 1261.459 1312.035', 'enable-background': 'new 0 0 1261.459 1312.035' },
+						_react2.default.createElement(_base2.default, null),
+						_react2.default.createElement(_toast2.default, { side: 'left', onClick: this.toastClick }),
+						_react2.default.createElement(_toast2.default, { side: 'right', onClick: this.toastClick }),
+						_react2.default.createElement(
+							'g',
+							{ id: 'Tracks' },
+							_react2.default.createElement('path', { fill: '#333333', d: 'M112.426,964.591c-2.408,0-3.811-1.952-3.811-4.356V684.312c0-2.41,1.403-4.358,3.811-4.358 c2.408,0,3.812,1.948,3.812,4.358v275.922C116.237,962.639,114.834,964.591,112.426,964.591z' }),
+							_react2.default.createElement('path', { fill: '#333333', d: 'M187.694,964.591c-2.408,0-4.764-1.952-4.764-4.356V684.312c0-2.41,2.355-4.358,4.764-4.358 s4.764,1.948,4.764,4.358v275.922C192.458,962.639,190.103,964.591,187.694,964.591z' })
+						),
+						_react2.default.createElement(_dial2.default, { side: 'left' }),
+						_react2.default.createElement(_dial2.default, { side: 'right' }),
+						_react2.default.createElement(_handle2.default, { side: 'left' }),
+						_react2.default.createElement(_handle2.default, { side: 'right' }),
+						_react2.default.createElement(_reactLogo2.default, null)
+					)
+				);
+			}
+		}]);
+	
+		return Toastr;
+	}(_react.Component);
+	
+	_reactDom2.default.render(_react2.default.createElement(Toastr, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -9344,6 +9417,7 @@
 	 */
 	var EventInterface = {
 	  type: null,
+	  target: null,
 	  // currentTarget is set when dispatching; no use in copying it here
 	  currentTarget: emptyFunction.thatReturnsNull,
 	  eventPhase: null,
@@ -9377,8 +9451,6 @@
 	  this.dispatchConfig = dispatchConfig;
 	  this.dispatchMarker = dispatchMarker;
 	  this.nativeEvent = nativeEvent;
-	  this.target = nativeEventTarget;
-	  this.currentTarget = nativeEventTarget;
 	
 	  var Interface = this.constructor.Interface;
 	  for (var propName in Interface) {
@@ -9389,7 +9461,11 @@
 	    if (normalize) {
 	      this[propName] = normalize(nativeEvent);
 	    } else {
-	      this[propName] = nativeEvent[propName];
+	      if (propName === 'target') {
+	        this.target = nativeEventTarget;
+	      } else {
+	        this[propName] = nativeEvent[propName];
+	      }
 	    }
 	  }
 	
@@ -13238,7 +13314,10 @@
 	      }
 	    });
 	
-	    nativeProps.children = content;
+	    if (content) {
+	      nativeProps.children = content;
+	    }
+	
 	    return nativeProps;
 	  }
 	
@@ -18711,7 +18790,7 @@
 	
 	'use strict';
 	
-	module.exports = '0.14.6';
+	module.exports = '0.14.7';
 
 /***/ },
 /* 147 */
@@ -19686,618 +19765,235 @@
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(1);
-	var Toast = __webpack_require__(160);
-	var Handle = __webpack_require__(161);
-	var Smoke = __webpack_require__(162);
-	var StatPanel = __webpack_require__(163);
-	
-	var toastr = React.createClass({
-		displayName: 'toastr',
-	
-		getDefaultProps: function () {
-			var ratio = 500;
-			return {
-				height: ratio,
-				width: ratio,
-				viewBox: [0, 0, 1000, 1000].join(' '),
-				toastTime: 5000
-			};
-		},
-	
-		getInitialState: function () {
-			return {
-				toastLeft: 'bread',
-				toastRight: 'bread',
-				leftHandleDown: false,
-				rightHandleDown: false
-			};
-		},
-	
-		componentDidMount: function () {
-			setTimeout(this.flashCTA, 3000);
-		},
-	
-		flashCTA: function () {
-			var cta = document.getElementById('cta');
-			Velocity(cta, {
-				opacity: 1,
-				duration: 3000
-			}, {
-				loop: true,
-				delay: 1000
-			});
-		},
-	
-		flashLever: function () {
-			var levelCTA = document.getElementById('lever-cta');
-			levelCTA.style.opacity = 1;
-			Velocity(levelCTA, {
-				opacity: 0
-			}, {
-				loop: true,
-				delay: 1000
-			});
-		},
-	
-		onHandleClick: function (side, data) {
-			if (side === 'left' && this.state.toastLeft === 'ready') {
-				this.setState({
-					leftHandleDown: true,
-					toastLeft: 'toasting'
-				}, function () {
-					setTimeout(this.leftToasted, this.props.toastTime);
-				});
-			} else if (side === 'right' && this.state.toastRight === 'ready') {
-				this.setState({
-					rightHandleDown: true,
-					toastRight: 'toasting'
-				}, function () {
-					setTimeout(this.rightToasted, this.props.toastTime);
-				});
-			}
-			this.props.extractStats(this.state);
-			var levelCTA = document.getElementById('lever-cta');
-			Velocity(levelCTA, 'stop');
-			Velocity(levelCTA, { opacity: 0 });
-		},
-	
-		leftToasted: function () {
-			this.setState({
-				toastLeft: 'toasted',
-				leftHandleDown: false
-			});
-			this.props.extractStats(this.state);
-		},
-	
-		rightToasted: function () {
-			this.setState({
-				toastRight: 'toasted',
-				rightHandleDown: false
-			});
-			this.props.extractStats(this.state);
-		},
-	
-		onToastClick: function (side) {
-			if (side === 'left' && this.state.toastLeft === 'bread') {
-				this.setState({ toastLeft: 'ready' });
-			} else if (side === 'right' && this.state.toastRight === 'bread') {
-				this.setState({ toastRight: 'ready' });
-			}
-			this.props.extractStats(this.state);
-			var cta = document.getElementById('cta');
-			Velocity(cta, 'stop');
-			Velocity(cta, 'transition.fadeOut');
-			this.flashLever();
-		},
-	
-		isToasting: function () {
-			return this.state.toastLeft === 'toasting' || this.state.toastRight === 'toasting';
-		},
-	
-		render: function () {
-			return React.createElement(
-				'div',
-				{ id: 'toastr-wrapper' },
-				React.createElement(
-					'div',
-					{ id: 'cta' },
-					'CLICK TOAST TO TOAST!'
-				),
-				React.createElement(
-					'div',
-					{ id: 'lever-cta' },
-					'PRESS LEVER!'
-				),
-				React.createElement(
-					'svg',
-					{ width: this.props.width + 'px', height: this.props.height + 'px', viewBox: this.props.viewBox },
-					React.createElement(Toast, {
-						side: 'left',
-						status: this.state.toastLeft,
-						toastTime: this.props.toastTime,
-						handleClick: this.onToastClick }),
-					React.createElement(Toast, {
-						side: 'right',
-						status: this.state.toastRight,
-						toastTime: this.props.toastTime,
-						handleClick: this.onToastClick }),
-					React.createElement('path', { fill: '#686868', d: 'M184 805.238V805h.407H184v.238l-11.014-.03s2.126 6.598 3.315 12.874c1.173 6.195 4.797 6.113 8.07 6.11 3.276.003 6.894.057 8.065-6.137 1.188-6.277 2.997-12.846 2.997-12.846l-11.432.028z' }),
-					React.createElement('path', { fill: '#333', d: 'M173.125 805.133s1.326 6.637 2.514 12.912c.697 3.69 2.36 5.16 3.36 5.743v-9.09c0-6.787 9.444-9.25 15.84-9.25l.792-2.896-22.507 2.58z' }),
-					React.createElement('path', { fill: '#686868', d: 'M277 805.238V805h.385H277v.238l-11.025-.03s2.12 6.598 3.31 12.874c1.172 6.195 4.793 6.113 8.068 6.11 3.275.003 6.89.057 8.062-6.137 1.188-6.277 3.007-12.846 3.007-12.846l-11.422.028z' }),
-					React.createElement('path', { fill: '#333', d: 'M266.102 805.133s1.337 6.637 2.525 12.912c.697 3.69 2.373 5.16 3.373 5.743v-9.09c0-6.787 9.433-9.25 15.83-9.25l.785-2.896-22.513 2.58z' }),
-					React.createElement('path', { fill: '#686868', d: 'M690 805.238V805h.448H690v.238l-10.993-.03s2.138 6.598 3.325 12.874c1.174 6.195 4.8 6.113 8.075 6.11 3.275.003 6.896.057 8.067-6.137 1.188-6.277 2.978-12.846 2.978-12.846l-11.452.028z' }),
-					React.createElement('path', { fill: '#333', d: 'M679.166 805.133s1.805 6.637 2.992 12.912c.698 3.69 1.842 5.16 3.842 5.743v-9.09c0-6.787 8.966-9.25 15.36-9.25l.552-2.896-22.746 2.58z' }),
-					React.createElement('path', { fill: '#686868', d: 'M783 805.238V805h.426H783v.238l-11.004-.03s2.13 6.598 3.318 12.874c1.174 6.195 4.8 6.113 8.073 6.11 3.274.003 6.894.057 8.065-6.137 1.188-6.277 2.988-12.846 2.988-12.846l-11.44.028z' }),
-					React.createElement('path', { fill: '#333', d: 'M772.143 805.133s1.816 6.637 3.004 12.912c.7 3.69 1.854 5.16 3.854 5.743v-9.09c0-6.787 8.956-9.25 15.35-9.25l.547-2.896-22.754 2.58z' }),
-					React.createElement('path', { fill: '#C6C6C6', d: 'M181 514.587C181 398.887 204.636 360 335.832 360h195.075C616.412 360 686 429.08 686 514.587V729H181V514.587z' }),
-					React.createElement(
-						'g',
-						null,
-						React.createElement('path', { fill: '#E0E0E0', d: 'M300 514.587C300 388.727 324.268 360 409.773 360H649.05C734.556 360 804 429.08 804 514.587V729H300V514.587z' })
-					),
-					React.createElement(
-						'g',
-						null,
-						React.createElement('path', { fill: '#686868', d: 'M804.926 729c13.718 0 21.074 7.248 21.074 19.44V806H300v-77h504.926z' })
-					),
-					React.createElement(
-						'g',
-						null,
-						React.createElement('path', { fill: '#333', d: 'M164 806v-57.56c0-12.192 7.61-19.44 21.33-19.44h-.255H300v77H164z' })
-					),
-					React.createElement(
-						'g',
-						null,
-						React.createElement('path', { fill: '#686868', d: 'M598.246 524H516.22c-2.438 0-4.2 1.945-4.2 4.386v13.304c0 2.44 1.762 4.31 4.2 4.31H538.352c2.438 0 3.624 2.122 3.624 4.56v53.22c0 2.438 2.807 4.222 5.246 4.222H567.163c2.44 0 3.797-1.783 3.797-4.223v-53.22c0-2.438 2.633-4.56 5.072-4.56H598.168c2.44 0 4.754-1.87 4.754-4.31v-13.305c.076-2.44-2.237-4.385-4.678-4.385z' }),
-						React.createElement('path', { fill: '#F2F2F2', d: 'M603 528.386c0-2.44-2.313-4.386-4.754-4.386h-75.393c-2.44 0-4.854 1.945-4.854 4.386v13.304c0 2.44 2.413 4.31 4.853 4.31h22.175c2.438 0 4.972 2.122 4.972 4.56v53.22c0 2.438 1.46 4.222 3.898 4.222h13.304c2.44 0 3.798-1.783 3.798-4.223v-53.22c0-2.438 2.633-4.56 5.072-4.56h22.174c2.44 0 4.754-1.87 4.754-4.31v-13.304z' })
-					),
-					React.createElement(
-						'g',
-						{ id: 'toast-outlines' },
-						React.createElement('path', { className: 'toast-outline', strokeDasharray: '5px', id: 'outline-right', fill: 'none', stroke: '#F2F2F2', strokeWidth: '5', d: 'M427.512,161.306 c-9.803,8.255-13.288,22.23-12.773,33.195c0.407,8.685,2.827,16.096,6.685,20.995c-1.864,3.506-3.077,8.653-4.128,14.881 c-1.444,8.554-2.608,20.417-3.539,35.26c-1.574,25.107-1.756,50.542-1.756,50.795v0.159c0,6.48,10.806,12.644,22.025,12.644 c0.323,0,0.567,0.033,0.892,0.023c3.962,1.477,14.348,3.589,44.558,6.391c28.786,2.669,58.575,4.352,81.73,4.352 c0.005,0,0.007,0,0.012,0c42.501,0,60.179-4.551,60.961-15.333c0.103-1.188,2.054-23.956,2.989-47.412 c1.486-37.29-0.581-49.704-2.622-54.622c3.666-3.949,6.326-9.831,7.56-16.946c2.37-13.668-0.78-28.28-8.991-36.281 c-24.554-23.928-79.446-17.072-96.751-8.502C505.334,151.333,451.691,140.945,427.512,161.306z' }),
-						React.createElement('path', { className: 'toast-outline', strokeDasharray: '5px', id: 'outline-left', fill: 'none', stroke: '#F2F2F2', strokeWidth: '5', d: 'M412,316.599 c-10.69,0.307-20.728,0.401-29.063,0.401c-0.006,0-0.011,0-0.016,0c-16.471,0-32.631-0.372-45.504-1.052 c-13.329-0.703-18.762-1.456-21.309-2.247c-0.991,0.094-1.995,0.142-3.002,0.142c-9.689,0-20.97-4.703-21.566-10.998l-0.01-0.117 c-0.017-0.229-1.632-23.213-2.172-47.065c-0.798-35.227,1.121-48.485,3.615-54.262c-4.208-4.608-7.152-11.835-8.185-20.478 c-1.302-10.899,0.274-26.115,10.355-34.028c21.524-16.896,65.291-24.856,96.574-7.376c43.383-18.146,92.95-4.52,105.136,12.846' })
-					),
-					React.createElement(Handle, { side: 'left', isDown: this.state.leftHandleDown, handleClick: this.onHandleClick }),
-					React.createElement(Handle, { side: 'right', isDown: this.state.rightHandleDown, handleClick: this.onHandleClick })
-				),
-				React.createElement(StatPanel, { stats: this.state }),
-				React.createElement('div', { className: 'clearfix' })
-			);
-		}
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
 	});
 	
-	module.exports = toastr;
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Toast = function Toast(_ref) {
+	  var side = _ref.side;
+	  var onClick = _ref.onClick;
+	
+	  var handleClick = function handleClick() {
+	    onClick(side);
+	  };
+	  var leftToast = _react2.default.createElement(
+	    'g',
+	    { id: 'ToastLeft', className: 'toast', onClick: handleClick },
+	    _react2.default.createElement('path', { fill: '#5B4736', d: 'M600.299,289.379c0,0-3.177-176.819-23.745-176.167c21.64-13.191,23.94-69.069-2.719-93.73 C543.626-8.468,492.822-0.704,433.133,18.63l-36.423,1.158C335.914,4.287,286.596,2.829,256.193,29.585 c-27.122,23.864-19.213,83.757,3.223,95.545c-20.572,0.653-6.9,193.571-6.9,193.571c0.445,4.689,19.091,14.791,39.078,11.776 C380.21,342.606,600.478,321.87,600.299,289.379z' }),
+	    _react2.default.createElement('path', { fill: '#EFEDD8', d: 'M634.354,305.738c0,0,1.432-194.41-19.141-193.756c21.64-13.19,23.939-69.068-2.719-93.731 c-30.209-27.95-81.013-20.186-140.7-0.852l-36.423,1.159C374.576,3.056,325.257,1.6,294.854,28.354 c-27.123,23.866-19.214,83.757,3.221,95.545c-20.57,0.654-6.478,206.741-6.478,206.741 C300.152,338.667,634.581,346.385,634.354,305.738z' })
+	  );
+	
+	  var rightToast = _react2.default.createElement(
+	    'g',
+	    { id: 'ToastRight', className: 'toast', onClick: handleClick },
+	    _react2.default.createElement('path', { fill: '#5B4736', d: 'M832.388,341.377c0,0,9.567-176.589-10.997-177.418c22.536-11.599,28.855-67.164,4.039-93.686 c-28.121-30.054-79.351-25.966-140.273-10.981l-36.413-1.47c-59.522-19.839-108.608-24.843-140.859-0.348 c-28.771,21.85-25.194,82.154-3.664,95.527c-20.566-0.829-20.821,192.575-20.821,192.575c0.106,4.711,17.974,16.126,38.127,14.559 C609.039,378.616,830.229,373.796,832.388,341.377z' }),
+	    _react2.default.createElement('path', { fill: '#EFEDD8', d: 'M865.178,360.146c0,0,15.431-193.802-5.136-194.631c22.537-11.597,28.854-67.164,4.042-93.683 c-28.119-30.053-79.351-25.967-140.278-10.982l-36.409-1.469c-59.523-19.84-108.609-24.846-140.858-0.351 c-28.771,21.851-25.196,82.156-3.667,95.527c-20.564-0.831-21.352,205.737-21.352,205.737 C529.474,368.923,862.479,400.706,865.178,360.146z' })
+	  );
+	
+	  var toast = side === 'left' ? leftToast : rightToast;
+	
+	  return _react2.default.createElement(
+	    'g',
+	    null,
+	    toast
+	  );
+	};
+	
+	exports.default = Toast;
 
 /***/ },
 /* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(158);
-	
-	var toast = React.createClass({
-		displayName: 'toast',
-	
-		getInitialState: function () {
-			return {
-				popped: false
-			};
-		},
-	
-		componentDidMount: function () {
-			Velocity.RegisterEffect('toast:popup', {
-				defaultDuration: 500,
-				calls: [[{ translateY: "-120px" }, 0.5, { easing: 'easeOutCirc' }], [{ translateY: '80px' }, 0.5, { easing: 'easeInCirc' }]]
-			});
-		},
-	
-		componentDidUpdate: function () {
-			var node = ReactDOM.findDOMNode(this);
-			switch (this.props.status) {
-				case 'ready':
-					this.toastReady(node);break;
-				case 'toasting':
-					this.toastToasting(node);break;
-				case 'toasted':
-					if (!this.state.popped) this.toastToasted(node);break;
-			}
-		},
-	
-		toastReady: function (ele) {
-			Velocity(ele, {
-				translateY: "80px"
-			}, {
-				easing: 'easeOut'
-			});
-		},
-	
-		toastToasting: function (ele) {
-			var toastFront = ele.childNodes[1];
-			Velocity(ele, {
-				translateY: "180px"
-			}, {
-				easing: [200, 20]
-			});
-			Velocity(toastFront, {
-				fill: '#D1AF8C'
-			}, {
-				easing: 'linear',
-				duration: this.props.toastTime
-			});
-		},
-	
-		toastToasted: function (ele) {
-			Velocity(ele, 'toast:popup');this.setState({ popped: true });
-		},
-	
-		handleClick: function (e) {
-			this.props.handleClick(this.props.side, e);
-		},
-	
-		render: function () {
-			var leftToast = React.createElement(
-				'g',
-				{ onClick: this.handleClick, id: 'ToastLeft', className: 'toast' },
-				React.createElement('path', { fill: '#5B4736', d: 'M479.03,286.988c0,0-1.667-92.793-12.461-92.45c11.357-6.923,12.564-36.247-1.426-49.189 c-15.854-14.668-42.515-10.593-73.839-0.447l-19.115,0.608c-31.905-8.135-57.787-8.9-73.742,5.141 c-14.233,12.524-10.083,43.955,1.691,50.141c-10.795,0.343-3.62,101.584-3.62,101.584c0.233,2.461,10.018,7.762,20.507,6.18 C363.53,314.921,479.124,304.039,479.03,286.988z' }),
-				React.createElement('path', { className: 'toast-front', fill: '#EFEDD8', d: 'M496.902,295.573c0,0,0.751-102.024-10.045-101.681c11.357-6.922,12.564-36.246-1.426-49.189 c-15.854-14.668-42.515-10.593-73.838-0.447l-19.115,0.608c-31.905-8.135-57.787-8.899-73.742,5.141 c-14.233,12.524-10.083,43.955,1.691,50.141c-10.795,0.343-3.4,108.495-3.4,108.495 C321.517,312.854,497.021,316.904,496.902,295.573z' })
-			);
-	
-			var rightToast = React.createElement(
-				'g',
-				{ onClick: this.handleClick, id: 'ToastRight', className: 'toast' },
-				React.createElement('path', { fill: '#5B4736', d: 'M600.828,314.276c0,0,5.021-92.672-5.771-93.107c11.827-6.087,15.143-35.247,2.12-49.165 c-14.758-15.772-41.643-13.627-73.615-5.763l-19.109-0.771c-31.236-10.412-56.996-13.038-73.921-0.183 c-15.098,11.467-13.222,43.114-1.923,50.132c-10.793-0.435-10.926,101.061-10.926,101.061c0.055,2.472,9.432,8.463,20.008,7.64 C483.617,333.819,599.695,331.289,600.828,314.276z' }),
-				React.createElement('path', { className: 'toast-front', fill: '#EFEDD8', d: 'M618.036,324.126c0,0,8.098-101.705-2.695-102.14c11.827-6.086,15.142-35.247,2.121-49.164 c-14.757-15.771-41.643-13.627-73.616-5.763l-19.108-0.771c-31.237-10.412-56.997-13.039-73.921-0.184 c-15.098,11.467-13.222,43.115-1.924,50.132c-10.792-0.436-11.205,107.968-11.205,107.968 C441.862,328.732,616.619,345.411,618.036,324.126z' })
-			);
-			return this.props.side === "left" ? leftToast : rightToast;
-		}
-	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
 	});
 	
-	module.exports = toast;
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Base = function Base() {
+	  return _react2.default.createElement(
+	    'g',
+	    { id: 'base' },
+	    _react2.default.createElement(
+	      'g',
+	      { id: 'Feet' },
+	      _react2.default.createElement('path', { fill: '#333333', d: 'M1183.715,1275.919v-0.454h0.854h-0.854V1275.919l-20.948-0.06c0,0,4.073,12.574,6.336,24.534 c2.237,11.805,9.148,11.648,15.388,11.641c6.24,0.008,13.14,0.11,15.373-11.693c2.263-11.959,5.674-24.478,5.674-24.478 L1183.715,1275.919z' }),
+	      _react2.default.createElement('path', { fill: '#686868', d: 'M1193.715,1275.919v-0.454h0.854h-0.854V1275.919l-20.948-0.06c0,0,4.073,12.574,6.336,24.534 c2.237,11.805,9.148,11.648,15.388,11.641c6.24,0.008,13.14,0.11,15.373-11.693c2.263-11.959,5.674-24.478,5.674-24.478 L1193.715,1275.919z' }),
+	      _react2.default.createElement('path', { fill: '#333333', d: 'M1021.715,1275.919v-0.454h0.854h-0.854V1275.919l-20.948-0.06c0,0,4.073,12.574,6.336,24.534 c2.237,11.805,9.148,11.648,15.388,11.641c6.24,0.008,13.14,0.11,15.373-11.693c2.263-11.959,5.674-24.478,5.674-24.478 L1021.715,1275.919z' }),
+	      _react2.default.createElement('path', { fill: '#686868', d: 'M1031.715,1275.919v-0.454h0.854h-0.854V1275.919l-20.948-0.06c0,0,4.073,12.574,6.336,24.534 c2.237,11.805,9.148,11.648,15.388,11.641c6.24,0.008,13.14,0.11,15.373-11.693c2.263-11.959,5.674-24.478,5.674-24.478 L1031.715,1275.919z' }),
+	      _react2.default.createElement('path', { fill: '#333333', d: 'M280.1,1275.919v-0.454h0.854H280.1V1275.919l-20.948-0.06c0,0,4.073,12.574,6.336,24.534 c2.237,11.805,9.148,11.648,15.388,11.641c6.24,0.008,13.14,0.11,15.373-11.693c2.263-11.959,5.674-24.478,5.674-24.478 L280.1,1275.919z' }),
+	      _react2.default.createElement('path', { fill: '#686868', d: 'M290.1,1275.919v-0.454h0.854H290.1V1275.919l-20.948-0.06c0,0,4.073,12.574,6.336,24.534 c2.237,11.805,9.148,11.648,15.388,11.641c6.24,0.008,13.14,0.11,15.373-11.693c2.263-11.959,5.674-24.478,5.674-24.478 L290.1,1275.919z' }),
+	      _react2.default.createElement('path', { fill: '#333333', d: 'M58.681,1275.919v-0.454h0.854h-0.854V1275.919l-20.948-0.06c0,0,4.073,12.574,6.336,24.534 c2.237,11.805,9.148,11.648,15.388,11.641c6.24,0.008,13.14,0.11,15.373-11.693c2.263-11.959,5.674-24.478,5.674-24.478 L58.681,1275.919z' }),
+	      _react2.default.createElement('path', { fill: '#686868', d: 'M68.681,1275.919v-0.454h0.854h-0.854V1275.919l-20.948-0.06c0,0,4.073,12.574,6.336,24.534 c2.237,11.805,9.148,11.648,15.388,11.641c6.24,0.008,13.14,0.11,15.373-11.693c2.263-11.959,5.674-24.478,5.674-24.478 L68.681,1275.919z' })
+	    ),
+	    _react2.default.createElement(
+	      'g',
+	      { id: 'Hull' },
+	      _react2.default.createElement('path', { fill: '#C6C6C6', d: 'M32.394,723.074c0-220.469,45.039-294.569,295.037-294.569h371.721 c162.933,0,295.534,131.636,295.534,294.569v408.571H32.394V723.074z' }),
+	      _react2.default.createElement('path', { fill: '#686868', d: 'M1221.302,1131.646L1221.302,1131.646c26.142,0,40.157,13.811,40.157,37.046c0,23.234,0,109.679,0,109.679 H259.151v-146.725H1221.302z' }),
+	      _react2.default.createElement('path', { fill: '#333333', d: 'M0,1278.37c0,0,0-86.442,0-109.679c0-23.235,14.503-37.046,40.643-37.046h-0.484h218.992v146.725H0z' }),
+	      _react2.default.createElement('path', { fill: '#E0E0E0', d: 'M259.151,723.074c0-239.831,46.243-294.569,209.177-294.569h455.947 c162.934,0,295.262,131.636,295.262,294.569v408.571H259.151V723.074z' })
+	    )
+	  );
+	};
+	
+	exports.default = Base;
 
 /***/ },
 /* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(158);
-	
-	var handle = React.createClass({
-		displayName: 'handle',
-	
-		handleClick: function (e) {
-			this.props.handleClick(this.props.side, e);
-		},
-	
-		componentDidUpdate: function () {
-			var handle = document.getElementById('handle-' + this.props.side);
-			if (this.props.isDown) {
-				Velocity(handle, {
-					translateY: "100px"
-				}, {
-					easing: [250, 15]
-				});
-			} else {
-				Velocity(handle, {
-					translateY: "0px"
-				}, {
-					easing: [250, 15]
-				});
-			}
-		},
-	
-		render: function () {
-			var leftHandle = React.createElement(
-				'g',
-				null,
-				React.createElement('path', { fill: '#333', d: 'M223 662.323c-1.263 0-2-1.024-2-2.286v-144.8c0-1.265.737-2.288 2-2.288s2 1.022 2 2.286v144.8c0 1.263-.737 2.287-2 2.287zM220.52 677.818l3.552.017 2.053 6.274-6.594-4.327z' }),
-				React.createElement('path', { fill: '#333', d: 'M223.963 713.687c3.525-.07 6.382-8.082 6.382-17.932 0-9.893-2.925-17.937-6.504-17.937-.573 0-1.13.21-1.66.597-.53-.388-1.086-.597-1.66-.597-3.58 0-6.48 8.02-6.48 17.913 0 9.78 2.796 17.772 6.317 17.952l3.606.005z' }),
-				React.createElement('path', { fill: '#686868', d: 'M226.484 695.73c0-8.443-2.484-15.3-5.484-15.478v-.016l-.205.013c-.032-.002-.153-.014-.185-.014-.792 0-1.59.458-2.27 1.276l-9.16 4.977.355 18.484 8.708 4.9c.697.863 1.466 1.353 2.28 1.353.03 0 .24-.012.273-.013l.202.013v-.017c3.002-.177 5.486-7.033 5.486-15.48z' }),
-				React.createElement('ellipse', { fill: '#E0E0E0', cx: '209.186', cy: '695.731', rx: '2.595', ry: '9.243' }),
-				React.createElement(
-					'g',
-					{ onClick: this.handleClick, id: 'handle-left', className: 'handle' },
-					React.createElement('path', { fill: '#333', d: 'M235.883 544h-16.495l-32.28-4.475 32.77-2.59z' }),
-					React.createElement('path', { fill: '#686868', d: 'M202.35 540H187v-13h35.165z' }),
-					React.createElement('path', { fill: '#E0E0E0', d: 'M237 544.196l-35-4.573V527h35z' })
-				)
-			);
-			var rightHandle = React.createElement(
-				'g',
-				null,
-				React.createElement('path', { fill: '#333', d: 'M262.5 662.323c-1.263 0-2.5-1.024-2.5-2.286v-144.8c0-1.265 1.237-2.288 2.5-2.288s2.5 1.022 2.5 2.286v144.8c0 1.263-1.237 2.287-2.5 2.287zM263.2 677.818l3.55.017 2.053 6.274-6.594-4.327z' }),
-				React.createElement('path', { fill: '#333', d: 'M266.642 713.687c3.525-.07 6.382-8.082 6.382-17.932 0-9.893-2.925-17.937-6.504-17.937-.574 0-1.13.21-1.66.597-.53-.388-1.087-.597-1.66-.597-3.58 0-6.48 8.02-6.48 17.913 0 9.78 2.795 17.772 6.316 17.952l3.606.005z' }),
-				React.createElement('path', { fill: '#686868', d: 'M268.484 695.73c0-8.443-2.484-15.3-5.484-15.478v-.016l.135.013c-.032-.002.017-.014-.016-.014-.793 0-1.506.458-2.188 1.276l-9.118 4.977.378 18.484 8.72 4.9c.696.863 1.47 1.353 2.283 1.353.032 0-.094-.012-.062-.013l-.133.014v-.017c3-.177 5.484-7.033 5.484-15.48z' }),
-				React.createElement('ellipse', { fill: '#E0E0E0', cx: '251.864', cy: '695.731', rx: '2.595', ry: '9.243' }),
-				React.createElement(
-					'g',
-					{ onClick: this.handleClick, id: 'handle-right', className: 'handle' },
-					React.createElement('path', { fill: '#333', d: 'M275.512 544h-16.494l-32.28-4.486 32.77-2.582z' }),
-					React.createElement('path', { fill: '#686868', d: 'M241.98 540H227v-13h34.794z' }),
-					React.createElement('path', { fill: '#E0E0E0', d: 'M277 544.174l-35-4.573V527h35z' })
-				)
-			);
-			return this.props.side === "left" ? leftHandle : rightHandle;
-		}
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
 	});
 	
-	module.exports = handle;
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Dial = function Dial(_ref) {
+	  var side = _ref.side;
+	
+	  var rightDial = _react2.default.createElement(
+	    'g',
+	    { id: 'DialRight' },
+	    _react2.default.createElement('polygon', { fill: '#333333', points: '189.027,1017.117 195.793,1017.148 199.704,1029.104 187.14,1020.861 \t\t' }),
+	    _react2.default.createElement('path', { fill: '#333333', d: 'M195.588,1085.467c6.716-0.136,12.159-15.401,12.159-34.171c0-18.852-5.571-34.179-12.394-34.179 c-1.094,0-2.151,0.397-3.163,1.137c-1.011-0.739-2.069-1.137-3.164-1.137c-6.82,0-12.347,15.283-12.347,34.134 c0,18.635,5.328,33.862,12.036,34.204L195.588,1085.467z' }),
+	    _react2.default.createElement('path', { fill: '#333333', d: 'M188.871,1085.562' }),
+	    _react2.default.createElement('path', { fill: '#686868', d: 'M199.098,1051.251c0-16.091-4.734-29.158-10.451-29.497v-0.029l0.257,0.024 c-0.06-0.002,0.034-0.024-0.03-0.024c-1.509,0-2.867,0.872-4.168,2.431l-17.373,9.484l0.718,35.223l16.616,9.34 c1.327,1.643,2.802,2.575,4.353,2.575c0.06,0-0.179-0.022-0.119-0.024l-0.253,0.028v-0.034 C194.364,1080.409,199.098,1067.344,199.098,1051.251z' }),
+	    _react2.default.createElement('ellipse', { fill: '#E0E0E0', cx: '167.428', cy: '1051.25', rx: '4.944', ry: '17.612' }),
+	    _react2.default.createElement('path', { fill: '#333333', d: 'M195.307,1085.383' }),
+	    _react2.default.createElement('path', { fill: '#333333', d: 'M194.68,1085.804' })
+	  );
+	
+	  var leftDial = _react2.default.createElement(
+	    'g',
+	    { id: 'DialLeft' },
+	    _react2.default.createElement('polygon', { fill: '#333333', points: '107.703,1017.117 114.469,1017.148 118.381,1029.104 105.816,1020.861 \t\t' }),
+	    _react2.default.createElement('path', { fill: '#333333', d: 'M114.261,1085.467c6.718-0.136,12.161-15.401,12.161-34.171c0-18.852-5.574-34.179-12.394-34.179 c-1.092,0-2.153,0.397-3.166,1.137c-1.008-0.739-2.069-1.137-3.164-1.137c-6.818,0-12.345,15.283-12.345,34.134 c0,18.635,5.326,33.862,12.036,34.204L114.261,1085.467z' }),
+	    _react2.default.createElement('path', { fill: '#333333', d: 'M107.543,1085.562' }),
+	    _react2.default.createElement('path', { fill: '#686868', d: 'M119.065,1051.251c0-16.091-4.734-29.158-10.45-29.497v-0.029l-0.391,0.024 c-0.06-0.002-0.291-0.024-0.354-0.024c-1.507,0-3.026,0.872-4.327,2.431l-17.453,9.484l0.678,35.223l16.593,9.34 c1.327,1.643,2.793,2.575,4.341,2.575c0.063,0,0.461-0.022,0.523-0.024l0.385,0.024v-0.032 C114.332,1080.409,119.065,1067.344,119.065,1051.251z' }),
+	    _react2.default.createElement('ellipse', { fill: '#E0E0E0', cx: '86.102', cy: '1051.25', rx: '4.946', ry: '17.612' }),
+	    _react2.default.createElement('path', { fill: '#333333', d: 'M113.981,1085.383' }),
+	    _react2.default.createElement('path', { fill: '#333333', d: 'M113.356,1085.804' })
+	  );
+	
+	  var dial = side === 'left' ? leftDial : rightDial;
+	
+	  return _react2.default.createElement(
+	    'g',
+	    null,
+	    dial
+	  );
+	};
+	
+	exports.default = Dial;
 
 /***/ },
 /* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(158);
-	
-	var smoke = React.createClass({
-	  displayName: 'smoke',
-	
-	  getDefaultProps: function () {
-	    return {
-	      dashArray: 220,
-	      dashOffset: 199
-	    };
-	  },
-	
-	  getInitialState: function () {
-	    return {
-	      smoking: false
-	    };
-	  },
-	
-	  componentWillMount: function () {
-	    Velocity.RegisterEffect('smoke:float', {
-	      defaultDuration: 2200,
-	      calls: [[{ strokeDashoffset: "0", opacity: 1 }, 0.5, { easing: 'swing' }], [{ strokeDashoffset: "-199", opacity: 0 }, 0.5, { easing: 'swing' }]],
-	      reset: {
-	        strokeDasharray: this.props.dashArray,
-	        strokeDashoffset: this.props.dashOffset,
-	        opacity: 0
-	      }
-	    });
-	  },
-	
-	  componentDidUpdate: function () {
-	    var smoke = ReactDOM.findDOMNode(this);
-	    var wisps = smoke.childNodes;
-	    if (this.props.isToasting && !this.state.smoking) {
-	      Velocity(wisps, 'smoke:float', {
-	        duration: this.props.toastTime - 500,
-	        complete: function () {
-	          smoke.setState({ smoking: false });
-	        }
-	      });
-	      this.setState({ smoking: true });
-	    } else {
-	      Velocity(wisps, 'stop', true);
-	      for (var i = 0; i < wisps.length; i++) {
-	        wisps[i].style.strokeDashoffset = this.props.dashArray;
-	        wisps[i].style.opacity = 0;
-	      }
-	    }
-	  },
-	
-	  render: function () {
-	    return React.createElement(
-	      'g',
-	      { id: 'Smoke' },
-	      React.createElement('path', { className: 'smoke-wisp', fill: 'none', strokeDasharray: this.props.dashArray, style: { strokeDashoffset: this.props.dashOffset, opacity: 0 }, stroke: '#F5F5F5', strokeWidth: '8', strokeLinecap: 'round', 'stroke-linejoin': 'round', d: ' M442.211,312c0-31.665,17.051-31.665,17.051-63.331c0-31.668-17.051-31.668-17.051-63.335s17.051-31.667,17.051-63.334' }),
-	      React.createElement('path', { className: 'smoke-wisp', fill: 'none', strokeDasharray: this.props.dashArray, style: { strokeDashoffset: this.props.dashOffset, opacity: 0 }, stroke: '#F5F5F5', strokeWidth: '8', strokeLinecap: 'round', 'stroke-linejoin': 'round', d: ' M483.711,312c0-31.665,17.052-31.665,17.052-63.331c0-31.668-17.052-31.668-17.052-63.335s17.052-31.667,17.052-63.334' }),
-	      React.createElement('path', { className: 'smoke-wisp', fill: 'none', strokeDasharray: this.props.dashArray, style: { strokeDashoffset: this.props.dashOffset, opacity: 0 }, stroke: '#F5F5F5', strokeWidth: '8', strokeLinecap: 'round', 'stroke-linejoin': 'round', d: ' M525.211,312c0-31.665,17.052-31.665,17.052-63.331c0-31.668-17.052-31.668-17.052-63.335s17.052-31.667,17.052-63.334' })
-	    );
-	  }
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
 	});
 	
-	module.exports = smoke;
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Handle = function Handle(_ref) {
+	  var side = _ref.side;
+	
+	  var leftHandle = _react2.default.createElement(
+	    'g',
+	    { id: 'HandleLeft' },
+	    _react2.default.createElement('polygon', { fill: '#333333', points: '136.975,739.122 105.544,739.122 44.032,730.596 106.477,725.661 \t\t' }),
+	    _react2.default.createElement('polygon', { fill: '#686868', points: '73.076,731.501 43.827,731.501 43.827,706.729 110.835,706.729 \t\t' }),
+	    _react2.default.createElement('polygon', { fill: '#E0E0E0', points: '139.104,739.497 72.41,730.782 72.41,706.729 139.104,706.729 \t\t' })
+	  );
+	
+	  var rightHandle = _react2.default.createElement(
+	    'g',
+	    { id: 'HandleRight' },
+	    _react2.default.createElement('polygon', { fill: '#333333', points: '212.488,739.122 181.059,739.122 119.546,730.573 181.993,725.653 \t\t' }),
+	    _react2.default.createElement('polygon', { fill: '#686868', points: '148.59,731.501 120.048,731.501 120.048,706.729 186.349,706.729 \t\t' }),
+	    _react2.default.createElement('polygon', { fill: '#E0E0E0', points: '215.324,739.454 148.631,730.739 148.631,706.729 215.324,706.729 \t\t' })
+	  );
+	
+	  var handle = side === 'left' ? leftHandle : rightHandle;
+	
+	  return _react2.default.createElement(
+	    'g',
+	    null,
+	    handle
+	  );
+	};
+	
+	exports.default = Handle;
 
 /***/ },
 /* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(158);
+	'use strict';
 	
-	var statPanel = React.createClass({
-		displayName: 'statPanel',
-	
-		componentDidMount: function () {
-			var panel = ReactDOM.findDOMNode(this);
-			Velocity(panel, {
-				opacity: 1,
-				translateX: '+=120px'
-			}, {
-				duration: 1200,
-				easing: 'easeOut',
-				delay: 4000
-			});
-		},
-	
-		render: function () {
-			return React.createElement(
-				'div',
-				{ id: 'stat-wrapper' },
-				React.createElement(
-					'h4',
-					{ style: { textAlign: 'center' } },
-					'Stat Panel '
-				),
-				React.createElement(
-					'table',
-					{ className: 'table table-hover' },
-					React.createElement(
-						'thead',
-						null,
-						React.createElement(
-							'tr',
-							null,
-							React.createElement(
-								'th',
-								null,
-								'Left Toast'
-							),
-							React.createElement(
-								'th',
-								null,
-								'Right Toast'
-							)
-						)
-					),
-					React.createElement(
-						'tbody',
-						null,
-						React.createElement(
-							'tr',
-							null,
-							React.createElement(
-								'td',
-								null,
-								this.props.stats.toastLeft
-							),
-							React.createElement(
-								'td',
-								null,
-								this.props.stats.toastRight
-							)
-						)
-					)
-				),
-				React.createElement('div', { className: 'pointer' })
-			);
-		}
-	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
 	});
 	
-	module.exports = statPanel;
-
-/***/ },
-/* 164 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
+	var _react = __webpack_require__(1);
 	
-	var React = __webpack_require__(1);
-	var ReactLogo = __webpack_require__(165);
-	var PenLogo = __webpack_require__(166);
+	var _react2 = _interopRequireDefault(_react);
 	
-	var header = React.createClass({
-		displayName: 'header',
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-		componentDidMount: function () {
-			var ingredients = document.querySelectorAll('.ingredient');
-			Velocity(ingredients, 'transition.slideDownIn', {
-				duration: 2400,
-				stagger: 200
-			});
-		},
+	var Base = function Base() {
+	  return _react2.default.createElement(
+	    'g',
+	    { id: 'react-logo' },
+	    _react2.default.createElement(
+	      'g',
+	      null,
+	      _react2.default.createElement('circle', { fill: '#333333', cx: '721.774', cy: '806.825', r: '31.646' }),
+	      _react2.default.createElement('path', { fill: 'none', stroke: '#333333', strokeWidth: '16', strokeMiterlimit: '10', d: 'M721.774,742.48 c42.489,0,81.962,6.098,111.724,16.344c35.859,12.344,57.906,31.057,57.906,48c0,17.658-23.366,37.537-61.874,50.295 c-29.112,9.646-67.422,14.681-107.756,14.681c-41.354,0-80.514-4.726-109.947-14.786c-37.248-12.732-59.684-32.868-59.684-50.189 c0-16.806,21.051-35.374,56.405-47.7C638.422,748.709,678.869,742.48,721.774,742.48z' }),
+	      _react2.default.createElement('path', { fill: 'none', stroke: '#333333', strokeWidth: '16', strokeMiterlimit: '10', d: 'M665.761,774.838 c21.227-36.807,46.229-67.955,69.972-88.619c28.608-24.896,55.833-34.646,70.511-26.182c15.297,8.82,20.844,38.994,12.659,78.725 c-6.188,30.039-20.966,65.74-41.115,100.682c-20.659,35.822-44.315,67.384-67.736,87.855 c-29.637,25.908-58.288,35.283-73.293,26.63c-14.559-8.396-20.127-35.907-13.143-72.692 C629.517,850.156,644.326,812.006,665.761,774.838z' }),
+	      _react2.default.createElement('path', { fill: 'none', stroke: '#333333', strokeWidth: '16', strokeMiterlimit: '10', d: 'M665.814,839.536 c-21.288-36.772-35.788-73.988-41.832-104.879c-7.282-37.218-2.133-65.675,12.531-74.163c15.281-8.848,44.192,1.415,74.526,28.349 c22.935,20.363,46.484,50.994,66.693,85.901c20.719,35.789,36.248,72.047,42.287,102.562c7.645,38.614,1.457,68.119-13.532,76.797 c-14.546,8.42-41.161-0.494-69.542-24.918C712.966,908.551,687.312,876.668,665.814,839.536z' })
+	    ),
+	    _react2.default.createElement(
+	      'g',
+	      null,
+	      _react2.default.createElement('circle', { fill: '#686868', cx: '731.774', cy: '806.825', r: '31.646' }),
+	      _react2.default.createElement('path', { fill: 'none', stroke: '#686868', strokeWidth: '16', strokeMiterlimit: '10', d: 'M731.774,742.48 c42.489,0,81.962,6.098,111.724,16.344c35.859,12.344,57.906,31.057,57.906,48c0,17.658-23.366,37.537-61.874,50.295 c-29.112,9.646-67.422,14.681-107.756,14.681c-41.354,0-80.514-4.726-109.947-14.786c-37.248-12.732-59.684-32.868-59.684-50.189 c0-16.806,21.051-35.374,56.405-47.7C648.422,748.709,688.869,742.48,731.774,742.48z' }),
+	      _react2.default.createElement('path', { fill: 'none', stroke: '#686868', strokeWidth: '16', strokeMiterlimit: '10', d: 'M675.761,774.838 c21.227-36.807,46.229-67.955,69.972-88.619c28.608-24.896,55.833-34.646,70.511-26.182c15.297,8.82,20.844,38.994,12.659,78.725 c-6.188,30.039-20.966,65.74-41.115,100.682c-20.659,35.822-44.315,67.384-67.736,87.855 c-29.637,25.908-58.288,35.283-73.293,26.63c-14.559-8.396-20.127-35.907-13.143-72.692 C639.517,850.156,654.326,812.006,675.761,774.838z' }),
+	      _react2.default.createElement('path', { fill: 'none', stroke: '#686868', strokeWidth: '16', strokeMiterlimit: '10', d: 'M675.814,839.536 c-21.288-36.772-35.788-73.988-41.831-104.879c-7.283-37.218-2.134-65.675,12.53-74.163c15.281-8.848,44.192,1.415,74.526,28.349 c22.935,20.363,46.484,50.994,66.693,85.901c20.719,35.789,36.248,72.047,42.287,102.562c7.645,38.614,1.457,68.119-13.532,76.797 c-14.546,8.42-41.161-0.494-69.542-24.918C722.966,908.551,697.312,876.668,675.814,839.536z' })
+	    )
+	  );
+	};
 	
-		render: function () {
-			return React.createElement(
-				'div',
-				{ id: 'table-wrapper' },
-				React.createElement(
-					'div',
-					{ id: 'ingredients', className: 'container' },
-					React.createElement(
-						'div',
-						{ className: 'col-sm-4 ingredient react-logo' },
-						React.createElement(ReactLogo, { size: '80px' })
-					),
-					React.createElement(
-						'div',
-						{ className: 'col-sm-4 ingredient velocity-logo' },
-						'Velocity',
-						React.createElement(
-							'span',
-							{ className: 'period' },
-							'.'
-						),
-						'js'
-					),
-					React.createElement(
-						'div',
-						{ className: 'col-sm-4 ingredient illustrator-logo' },
-						React.createElement(PenLogo, { size: '80px' })
-					),
-					React.createElement('div', { className: 'clearfix' })
-				)
-			);
-		}
-	});
-	
-	module.exports = header;
-
-/***/ },
-/* 165 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var React = __webpack_require__(1);
-	
-	var ReactLogo = React.createClass({
-	  displayName: 'ReactLogo',
-	
-	  getDefaultProps: function () {
-	    return {
-	      size: '100px'
-	    };
-	  },
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { id: 'react-logo' },
-	      React.createElement(
-	        'svg',
-	        { version: '1.1', id: 'Layer_2', x: '0px', y: '0px',
-	          width: this.props.size, height: this.props.size, viewBox: '0 0 600 600', 'enable-background': 'new 0 0 600 600' },
-	        React.createElement('circle', { className: 'bg-fill', cx: '299.529', cy: '299.628', r: '50.167' }),
-	        React.createElement('path', { className: 'bg-stroke', fill: 'none', stroke: '#F2F2F2', strokeWidth: '24', d: 'M299.529,197.628 c67.356,0,129.928,9.665,177.107,25.907c56.844,19.569,91.794,49.233,91.794,76.093c0,27.991-37.041,59.503-98.083,79.728 c-46.151,15.291-106.879,23.272-170.818,23.272c-65.554,0-127.63-7.492-174.29-23.441c-59.046-20.182-94.611-52.103-94.611-79.559 c0-26.642,33.37-56.076,89.415-75.616C167.398,207.503,231.515,197.628,299.529,197.628z' }),
-	        React.createElement('path', { className: 'bg-stroke', fill: 'none', stroke: '#F2F2F2', strokeWidth: '24', d: 'M210.736,248.922 c33.649-58.348,73.281-107.724,110.92-140.48c45.35-39.466,88.507-54.923,111.775-41.505 c24.248,13.983,33.042,61.814,20.067,124.796c-9.81,47.618-33.234,104.212-65.176,159.601 c-32.749,56.788-70.25,106.819-107.377,139.272c-46.981,41.068-92.4,55.929-116.185,42.213 c-23.079-13.31-31.906-56.921-20.834-115.233C153.281,368.316,176.758,307.841,210.736,248.922z' }),
-	        React.createElement('path', { className: 'bg-stroke', fill: 'none', stroke: '#F2F2F2', strokeWidth: '24', d: 'M210.821,351.482 c-33.746-58.292-56.731-117.287-66.312-166.255c-11.544-58.999-3.382-104.109,19.864-117.566 c24.224-14.024,70.055,2.244,118.14,44.94c36.356,32.28,73.688,80.837,105.723,136.173c32.844,56.733,57.461,114.209,67.036,162.582 c12.117,61.213,2.309,107.984-21.453,121.74c-23.057,13.348-65.249-0.784-110.239-39.499 C285.567,460.886,244.898,410.344,210.821,351.482z' })
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = ReactLogo;
-
-/***/ },
-/* 166 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	
-	var pen = React.createClass({
-	  displayName: 'pen',
-	
-	  getDefaultProps: function () {
-	    return {
-	      size: '100px'
-	    };
-	  },
-	
-	  render: function () {
-	    return React.createElement(
-	      'svg',
-	      { version: '1.1', width: this.props.size, height: this.props.size, x: '0px', y: '0px', viewBox: '0 0 490 490', 'enable-background': 'new 0 0 490 490;' },
-	      React.createElement('path', { className: 'bg-fill', fill: '#F2F2F2', d: 'M253.768,291.142c0,0-2.534-5.192-8.768-5.192c-6.233,0-8.739,5.175-8.749,5.192l-65.413,118.16 c-2.645,4.777-0.929,10.815,3.807,13.535c1.319,0.758,32.309,18.992,32.309,57.163c0,5.522,4.478,10,10,10h56.093 c5.522,0,10-4.478,10-10c0-38.171,30.99-56.405,32.273-57.143c4.787-2.695,6.504-8.749,3.843-13.556 C319.162,409.302,253.781,291.166,253.768,291.142z M263.603,470h-37.206c-3.484-30.833-22.496-50.071-33.697-58.897L235,334.67 v41.057c0,5.522,4.477,10,10,10c5.522,0,10-4.478,10-10V334.67l42.301,76.434C286.1,419.929,267.087,439.167,263.603,470z' }),
-	      React.createElement('path', { className: 'bg-fill', d: 'M447.486,0h-41.857c-5.522,0-10,4.477-10,10v41.857c0,5.523,4.478,10,10,10h8.15 c-12.705,70.071-67.543,125.091-137.85,137.846v-8.146c0-5.522-4.478-10-10-10H224.07c-5.522,0-10,4.478-10,10v8.146 C143.753,186.947,88.928,131.956,76.22,61.857h8.152c5.522,0,10-4.477,10-10V10c0-5.523-4.478-10-10-10H42.514 c-5.522,0-10,4.477-10,10v41.857c0,5.523,4.478,10,10,10h13.428c6.332,38.735,24.727,75.129,52.386,103.289 c15.011,15.284,32.497,27.884,51.519,37.339H90.983c-3.091-4.229-8.073-6.988-13.712-6.988c-9.385,0-16.99,7.605-16.99,16.988 c0,9.384,7.605,16.99,16.99,16.99c5.639,0,10.623-2.76,13.713-6.99H214.07v10.93c0,5.523,4.478,10,10,10h41.859 c5.522,0,10-4.477,10-10v-10.93h123.086c3.091,4.23,8.074,6.99,13.715,6.99c9.383,0,16.988-7.607,16.988-16.99 c0-9.383-7.605-16.988-16.988-16.988c-5.641,0-10.623,2.759-13.714,6.988h-68.865c19.063-9.477,36.585-22.108,51.617-37.435 c27.604-28.145,45.965-64.506,52.289-103.193h13.429c5.522,0,10-4.477,10-10V10C457.486,4.477,453.009,0,447.486,0z M52.514,20 h21.858v21.857H52.514V20z M255.93,223.415H234.07v-21.858h21.859V223.415z M437.486,41.857h-21.857V20h21.857V41.857z' })
-	    );
-	  }
-	});
-	
-	module.exports = pen;
+	exports.default = Base;
 
 /***/ }
 /******/ ]);

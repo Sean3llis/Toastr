@@ -1,41 +1,8 @@
-#toastr-wrapper {
-  position: relative;
+#toastr {
   text-align: center;
-  width: 500px;
-  margin: 0 auto;
-}
-
-#cta {
-  position: absolute;
-  color: #fff;
-  left: 0px;
-  right: 0px;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-#lever-cta {
-  color: #fff;
-  position: absolute;
-  opacity: 0;
-  left: -20px;
-  top: 50%;
-}
-
-.toast:hover {
-  cursor: s-resize;
-}
-
-.handle:hover {
-  cursor: pointer;
-}
-
-#handleRight {
-  tranform: translateX(100px);
-}
-#toast-outlines {
-  opacity: 0;
-}
-#toastr-canvas {
-  background-color: $bg_color;
+  padding: 140px 0px;
+  #react-logo {
+    transform-origin: center;
+    @include transition(transform .3s ease);
+  }
 }
