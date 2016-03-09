@@ -3,6 +3,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+// Component
+import Toastr from './components/toastr';
+
 
 
 
@@ -15,6 +18,10 @@ class App extends Component {
 				{
 					status: 'bread',
 					leverDown: false,
+				},
+				{
+					status: 'bread',
+					leverDown: false
 				}
 			],
 			stats: {
@@ -25,7 +32,7 @@ class App extends Component {
 	render() {
 		return(
 			<div id="toastr">
-				TOAST!
+				<Toastr />
 			</div>
 		)
 	}
