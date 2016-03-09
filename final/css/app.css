@@ -63,6 +63,10 @@ nav {
   width: 500px;
   margin: 0 auto; }
 
+#toastr {
+  text-align: center;
+  padding: 140px 0px; }
+
 #cta {
   position: absolute;
   color: #fff;
