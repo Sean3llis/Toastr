@@ -1,38 +1,34 @@
 "use strict"
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Toastr = require('./components/toastr.js');
-var Header = require('./components/header.js');
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
-var App = React.createClass({
-	getInitialState: function(){
-		return {
+
+
+
+
+class App extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			toast: [
+				{
+					status: 'bread',
+					leverDown: false,
+				}
+			],
 			stats: {
-				toastLeft: 'bread',
-				toastRight: 'bread',
-				leftHandleDown: false,
-				rightHandleDown: false
+				eaten: 0
 			}
 		}
-	},
-
-	extractStats: function(stats){
-		this.setState({
-			stats: stats
-		});
-	},
-
-	render: function() {
-		return (
-			<div id="app-wrapper">
-				<Header />
-				<div id="toastr-canvas">
-					<Toastr extractStats={this.extractStats} />
-				</div>
-			</div>
-		);
 	}
-});
+	render() {
+		return(
+			<div id="toastr">
+				TOAST!
+			</div>
+		)
+	}
+}
 
 ReactDOM.render(<App />, document.getElementById('app'));
