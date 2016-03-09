@@ -68,6 +68,10 @@
 	
 	var _dial2 = _interopRequireDefault(_dial);
 	
+	var _handle = __webpack_require__(162);
+	
+	var _handle2 = _interopRequireDefault(_handle);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -111,68 +115,24 @@
 					{ id: 'toastr' },
 					_react2.default.createElement(
 						'svg',
-						{ version: '1.1', id: 'Layer_1', x: '0px', y: '0px',
+						{ version: '1.1', x: '0px', y: '0px',
 							width: size, height: size, viewBox: '0 0 1261.459 1312.035', 'enable-background': 'new 0 0 1261.459 1312.035' },
 						_react2.default.createElement(_base2.default, null),
 						_react2.default.createElement(_toast2.default, { side: 'left' }),
 						_react2.default.createElement(_toast2.default, { side: 'right' }),
-						_react2.default.createElement(_dial2.default, { side: 'left' }),
-						_react2.default.createElement(_dial2.default, { side: 'right' }),
 						_react2.default.createElement(
 							'g',
 							{ id: 'Tracks' },
-							_react2.default.createElement(
-								'g',
-								null,
-								_react2.default.createElement('path', { fill: '#333333', d: 'M112.426,964.591c-2.408,0-3.811-1.952-3.811-4.356V684.312c0-2.41,1.403-4.358,3.811-4.358 c2.408,0,3.812,1.948,3.812,4.358v275.922C116.237,962.639,114.834,964.591,112.426,964.591z' })
-							),
-							_react2.default.createElement(
-								'g',
-								null,
-								_react2.default.createElement('path', { fill: '#333333', d: 'M187.694,964.591c-2.408,0-4.764-1.952-4.764-4.356V684.312c0-2.41,2.355-4.358,4.764-4.358 s4.764,1.948,4.764,4.358v275.922C192.458,962.639,190.103,964.591,187.694,964.591z' })
-							)
+							_react2.default.createElement('path', { fill: '#333333', d: 'M112.426,964.591c-2.408,0-3.811-1.952-3.811-4.356V684.312c0-2.41,1.403-4.358,3.811-4.358 c2.408,0,3.812,1.948,3.812,4.358v275.922C116.237,962.639,114.834,964.591,112.426,964.591z' }),
+							_react2.default.createElement('path', { fill: '#333333', d: 'M187.694,964.591c-2.408,0-4.764-1.952-4.764-4.356V684.312c0-2.41,2.355-4.358,4.764-4.358 s4.764,1.948,4.764,4.358v275.922C192.458,962.639,190.103,964.591,187.694,964.591z' })
 						),
+						_react2.default.createElement(_dial2.default, { side: 'left' }),
+						_react2.default.createElement(_dial2.default, { side: 'right' }),
+						_react2.default.createElement(_handle2.default, { side: 'left' }),
+						_react2.default.createElement(_handle2.default, { side: 'right' }),
 						_react2.default.createElement(
 							'g',
-							{ id: 'HandleLeft' },
-							_react2.default.createElement(
-								'g',
-								null,
-								_react2.default.createElement('polygon', { fill: '#333333', points: '136.975,739.122 105.544,739.122 44.032,730.596 106.477,725.661 \t\t' })
-							),
-							_react2.default.createElement(
-								'g',
-								null,
-								_react2.default.createElement('polygon', { fill: '#686868', points: '73.076,731.501 43.827,731.501 43.827,706.729 110.835,706.729 \t\t' })
-							),
-							_react2.default.createElement(
-								'g',
-								null,
-								_react2.default.createElement('polygon', { fill: '#E0E0E0', points: '139.104,739.497 72.41,730.782 72.41,706.729 139.104,706.729 \t\t' })
-							)
-						),
-						_react2.default.createElement(
-							'g',
-							{ id: 'HandleRight' },
-							_react2.default.createElement(
-								'g',
-								null,
-								_react2.default.createElement('polygon', { fill: '#333333', points: '212.488,739.122 181.059,739.122 119.546,730.573 181.993,725.653 \t\t' })
-							),
-							_react2.default.createElement(
-								'g',
-								null,
-								_react2.default.createElement('polygon', { fill: '#686868', points: '148.59,731.501 120.048,731.501 120.048,706.729 186.349,706.729 \t\t' })
-							),
-							_react2.default.createElement(
-								'g',
-								null,
-								_react2.default.createElement('polygon', { fill: '#E0E0E0', points: '215.324,739.454 148.631,730.739 148.631,706.729 215.324,706.729 \t\t' })
-							)
-						),
-						_react2.default.createElement(
-							'g',
-							null,
+							{ id: 'react-logo' },
 							_react2.default.createElement('circle', { fill: '#333333', cx: '721.774', cy: '806.825', r: '31.646' }),
 							_react2.default.createElement('path', { fill: 'none', stroke: '#333333', strokeWidth: '16', strokeMiterlimit: '10', d: 'M721.774,742.48 c42.489,0,81.962,6.098,111.724,16.344c35.859,12.344,57.906,31.057,57.906,48c0,17.658-23.366,37.537-61.874,50.295 c-29.112,9.646-67.422,14.681-107.756,14.681c-41.354,0-80.514-4.726-109.947-14.786c-37.248-12.732-59.684-32.868-59.684-50.189 c0-16.806,21.051-35.374,56.405-47.7C638.422,748.709,678.869,742.48,721.774,742.48z' }),
 							_react2.default.createElement('path', { fill: 'none', stroke: '#333333', strokeWidth: '16', strokeMiterlimit: '10', d: 'M665.761,774.838 c21.227-36.807,46.229-67.955,69.972-88.619c28.608-24.896,55.833-34.646,70.511-26.182c15.297,8.82,20.844,38.994,12.659,78.725 c-6.188,30.039-20.966,65.74-41.115,100.682c-20.659,35.822-44.315,67.384-67.736,87.855 c-29.637,25.908-58.288,35.283-73.293,26.63c-14.559-8.396-20.127-35.907-13.143-72.692 C629.517,850.156,644.326,812.006,665.761,774.838z' }),
@@ -19939,6 +19899,52 @@
 	};
 	
 	exports.default = Dial;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Handle = function Handle(_ref) {
+	  var side = _ref.side;
+	
+	  var rightHandle = _react2.default.createElement(
+	    'g',
+	    { id: 'HandleLeft' },
+	    _react2.default.createElement('polygon', { fill: '#333333', points: '136.975,739.122 105.544,739.122 44.032,730.596 106.477,725.661 \t\t' }),
+	    _react2.default.createElement('polygon', { fill: '#686868', points: '73.076,731.501 43.827,731.501 43.827,706.729 110.835,706.729 \t\t' }),
+	    _react2.default.createElement('polygon', { fill: '#E0E0E0', points: '139.104,739.497 72.41,730.782 72.41,706.729 139.104,706.729 \t\t' })
+	  );
+	
+	  var leftHandle = _react2.default.createElement(
+	    'g',
+	    { id: 'HandleRight' },
+	    _react2.default.createElement('polygon', { fill: '#333333', points: '212.488,739.122 181.059,739.122 119.546,730.573 181.993,725.653 \t\t' }),
+	    _react2.default.createElement('polygon', { fill: '#686868', points: '148.59,731.501 120.048,731.501 120.048,706.729 186.349,706.729 \t\t' }),
+	    _react2.default.createElement('polygon', { fill: '#E0E0E0', points: '215.324,739.454 148.631,730.739 148.631,706.729 215.324,706.729 \t\t' })
+	  );
+	
+	  var handle = side === 'left' ? leftHandle : rightHandle;
+	
+	  return _react2.default.createElement(
+	    'g',
+	    null,
+	    handle
+	  );
+	};
+	
+	exports.default = Handle;
 
 /***/ }
 /******/ ]);
