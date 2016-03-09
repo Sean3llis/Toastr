@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -72,6 +72,10 @@
 	
 	var _handle2 = _interopRequireDefault(_handle);
 	
+	var _reactLogo = __webpack_require__(163);
+	
+	var _reactLogo2 = _interopRequireDefault(_reactLogo);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -92,21 +96,36 @@
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Toastr).call(this, props));
 	
 			_this.state = {
-				toast: [{
+				left: {
 					status: 'bread',
-					leverDown: false
-				}, {
+					leverDown: false,
+					cookTime: 5000
+				},
+				right: {
 					status: 'bread',
-					leverDown: false
-				}],
+					leverDown: false,
+					cookTime: 5000
+				},
 				stats: {
 					eaten: 0
 				}
 			};
+			_this.toastClick = _this.toastClick.bind(_this);
 			return _this;
 		}
 	
 		_createClass(Toastr, [{
+			key: 'toastClick',
+			value: function toastClick(side) {
+				if (side === 'left') {
+					this.setState({
+						left: {
+							status: 'ready'
+						}
+					});
+				}
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				var size = 400;
@@ -115,11 +134,11 @@
 					{ id: 'toastr' },
 					_react2.default.createElement(
 						'svg',
-						{ version: '1.1', x: '0px', y: '0px',
+						{ x: '0px', y: '0px',
 							width: size, height: size, viewBox: '0 0 1261.459 1312.035', 'enable-background': 'new 0 0 1261.459 1312.035' },
 						_react2.default.createElement(_base2.default, null),
-						_react2.default.createElement(_toast2.default, { side: 'left' }),
-						_react2.default.createElement(_toast2.default, { side: 'right' }),
+						_react2.default.createElement(_toast2.default, { side: 'left', onClick: this.toastClick }),
+						_react2.default.createElement(_toast2.default, { side: 'right', onClick: this.toastClick }),
 						_react2.default.createElement(
 							'g',
 							{ id: 'Tracks' },
@@ -130,22 +149,7 @@
 						_react2.default.createElement(_dial2.default, { side: 'right' }),
 						_react2.default.createElement(_handle2.default, { side: 'left' }),
 						_react2.default.createElement(_handle2.default, { side: 'right' }),
-						_react2.default.createElement(
-							'g',
-							{ id: 'react-logo' },
-							_react2.default.createElement('circle', { fill: '#333333', cx: '721.774', cy: '806.825', r: '31.646' }),
-							_react2.default.createElement('path', { fill: 'none', stroke: '#333333', strokeWidth: '16', strokeMiterlimit: '10', d: 'M721.774,742.48 c42.489,0,81.962,6.098,111.724,16.344c35.859,12.344,57.906,31.057,57.906,48c0,17.658-23.366,37.537-61.874,50.295 c-29.112,9.646-67.422,14.681-107.756,14.681c-41.354,0-80.514-4.726-109.947-14.786c-37.248-12.732-59.684-32.868-59.684-50.189 c0-16.806,21.051-35.374,56.405-47.7C638.422,748.709,678.869,742.48,721.774,742.48z' }),
-							_react2.default.createElement('path', { fill: 'none', stroke: '#333333', strokeWidth: '16', strokeMiterlimit: '10', d: 'M665.761,774.838 c21.227-36.807,46.229-67.955,69.972-88.619c28.608-24.896,55.833-34.646,70.511-26.182c15.297,8.82,20.844,38.994,12.659,78.725 c-6.188,30.039-20.966,65.74-41.115,100.682c-20.659,35.822-44.315,67.384-67.736,87.855 c-29.637,25.908-58.288,35.283-73.293,26.63c-14.559-8.396-20.127-35.907-13.143-72.692 C629.517,850.156,644.326,812.006,665.761,774.838z' }),
-							_react2.default.createElement('path', { fill: 'none', stroke: '#333333', strokeWidth: '16', strokeMiterlimit: '10', d: 'M665.814,839.536 c-21.288-36.772-35.788-73.988-41.832-104.879c-7.282-37.218-2.133-65.675,12.531-74.163c15.281-8.848,44.192,1.415,74.526,28.349 c22.935,20.363,46.484,50.994,66.693,85.901c20.719,35.789,36.248,72.047,42.287,102.562c7.645,38.614,1.457,68.119-13.532,76.797 c-14.546,8.42-41.161-0.494-69.542-24.918C712.966,908.551,687.312,876.668,665.814,839.536z' })
-						),
-						_react2.default.createElement(
-							'g',
-							null,
-							_react2.default.createElement('circle', { fill: '#686868', cx: '731.774', cy: '806.825', r: '31.646' }),
-							_react2.default.createElement('path', { fill: 'none', stroke: '#686868', strokeWidth: '16', strokeMiterlimit: '10', d: 'M731.774,742.48 c42.489,0,81.962,6.098,111.724,16.344c35.859,12.344,57.906,31.057,57.906,48c0,17.658-23.366,37.537-61.874,50.295 c-29.112,9.646-67.422,14.681-107.756,14.681c-41.354,0-80.514-4.726-109.947-14.786c-37.248-12.732-59.684-32.868-59.684-50.189 c0-16.806,21.051-35.374,56.405-47.7C648.422,748.709,688.869,742.48,731.774,742.48z' }),
-							_react2.default.createElement('path', { fill: 'none', stroke: '#686868', strokeWidth: '16', strokeMiterlimit: '10', d: 'M675.761,774.838 c21.227-36.807,46.229-67.955,69.972-88.619c28.608-24.896,55.833-34.646,70.511-26.182c15.297,8.82,20.844,38.994,12.659,78.725 c-6.188,30.039-20.966,65.74-41.115,100.682c-20.659,35.822-44.315,67.384-67.736,87.855 c-29.637,25.908-58.288,35.283-73.293,26.63c-14.559-8.396-20.127-35.907-13.143-72.692 C639.517,850.156,654.326,812.006,675.761,774.838z' }),
-							_react2.default.createElement('path', { fill: 'none', stroke: '#686868', strokeWidth: '16', strokeMiterlimit: '10', d: 'M675.814,839.536 c-21.288-36.772-35.788-73.988-41.831-104.879c-7.283-37.218-2.134-65.675,12.53-74.163c15.281-8.848,44.192,1.415,74.526,28.349 c22.935,20.363,46.484,50.994,66.693,85.901c20.719,35.789,36.248,72.047,42.287,102.562c7.645,38.614,1.457,68.119-13.532,76.797 c-14.546,8.42-41.161-0.494-69.542-24.918C722.966,908.551,697.312,876.668,675.814,839.536z' })
-						)
+						_react2.default.createElement(_reactLogo2.default, null)
 					)
 				);
 			}
@@ -19775,17 +19779,21 @@
 	
 	var Toast = function Toast(_ref) {
 	  var side = _ref.side;
+	  var onClick = _ref.onClick;
 	
+	  var handleClick = function handleClick() {
+	    onClick(side);
+	  };
 	  var leftToast = _react2.default.createElement(
 	    'g',
-	    { id: 'ToastLeft', className: 'toast' },
+	    { id: 'ToastLeft', className: 'toast', onClick: handleClick },
 	    _react2.default.createElement('path', { fill: '#5B4736', d: 'M600.299,289.379c0,0-3.177-176.819-23.745-176.167c21.64-13.191,23.94-69.069-2.719-93.73 C543.626-8.468,492.822-0.704,433.133,18.63l-36.423,1.158C335.914,4.287,286.596,2.829,256.193,29.585 c-27.122,23.864-19.213,83.757,3.223,95.545c-20.572,0.653-6.9,193.571-6.9,193.571c0.445,4.689,19.091,14.791,39.078,11.776 C380.21,342.606,600.478,321.87,600.299,289.379z' }),
 	    _react2.default.createElement('path', { fill: '#EFEDD8', d: 'M634.354,305.738c0,0,1.432-194.41-19.141-193.756c21.64-13.19,23.939-69.068-2.719-93.731 c-30.209-27.95-81.013-20.186-140.7-0.852l-36.423,1.159C374.576,3.056,325.257,1.6,294.854,28.354 c-27.123,23.866-19.214,83.757,3.221,95.545c-20.57,0.654-6.478,206.741-6.478,206.741 C300.152,338.667,634.581,346.385,634.354,305.738z' })
 	  );
 	
 	  var rightToast = _react2.default.createElement(
 	    'g',
-	    { id: 'ToastRight', className: 'toast' },
+	    { id: 'ToastRight', className: 'toast', onClick: handleClick },
 	    _react2.default.createElement('path', { fill: '#5B4736', d: 'M832.388,341.377c0,0,9.567-176.589-10.997-177.418c22.536-11.599,28.855-67.164,4.039-93.686 c-28.121-30.054-79.351-25.966-140.273-10.981l-36.413-1.47c-59.522-19.839-108.608-24.843-140.859-0.348 c-28.771,21.85-25.194,82.154-3.664,95.527c-20.566-0.829-20.821,192.575-20.821,192.575c0.106,4.711,17.974,16.126,38.127,14.559 C609.039,378.616,830.229,373.796,832.388,341.377z' }),
 	    _react2.default.createElement('path', { fill: '#EFEDD8', d: 'M865.178,360.146c0,0,15.431-193.802-5.136-194.631c22.537-11.597,28.854-67.164,4.042-93.683 c-28.119-30.053-79.351-25.967-140.278-10.982l-36.409-1.469c-59.523-19.84-108.609-24.846-140.858-0.351 c-28.771,21.851-25.196,82.156-3.667,95.527c-20.564-0.831-21.352,205.737-21.352,205.737 C529.474,368.923,862.479,400.706,865.178,360.146z' })
 	  );
@@ -19919,7 +19927,7 @@
 	var Handle = function Handle(_ref) {
 	  var side = _ref.side;
 	
-	  var rightHandle = _react2.default.createElement(
+	  var leftHandle = _react2.default.createElement(
 	    'g',
 	    { id: 'HandleLeft' },
 	    _react2.default.createElement('polygon', { fill: '#333333', points: '136.975,739.122 105.544,739.122 44.032,730.596 106.477,725.661 \t\t' }),
@@ -19927,7 +19935,7 @@
 	    _react2.default.createElement('polygon', { fill: '#E0E0E0', points: '139.104,739.497 72.41,730.782 72.41,706.729 139.104,706.729 \t\t' })
 	  );
 	
-	  var leftHandle = _react2.default.createElement(
+	  var rightHandle = _react2.default.createElement(
 	    'g',
 	    { id: 'HandleRight' },
 	    _react2.default.createElement('polygon', { fill: '#333333', points: '212.488,739.122 181.059,739.122 119.546,730.573 181.993,725.653 \t\t' }),
@@ -19945,6 +19953,47 @@
 	};
 	
 	exports.default = Handle;
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Base = function Base() {
+	  return _react2.default.createElement(
+	    'g',
+	    { id: 'react-logo' },
+	    _react2.default.createElement(
+	      'g',
+	      null,
+	      _react2.default.createElement('circle', { fill: '#333333', cx: '721.774', cy: '806.825', r: '31.646' }),
+	      _react2.default.createElement('path', { fill: 'none', stroke: '#333333', strokeWidth: '16', strokeMiterlimit: '10', d: 'M721.774,742.48 c42.489,0,81.962,6.098,111.724,16.344c35.859,12.344,57.906,31.057,57.906,48c0,17.658-23.366,37.537-61.874,50.295 c-29.112,9.646-67.422,14.681-107.756,14.681c-41.354,0-80.514-4.726-109.947-14.786c-37.248-12.732-59.684-32.868-59.684-50.189 c0-16.806,21.051-35.374,56.405-47.7C638.422,748.709,678.869,742.48,721.774,742.48z' }),
+	      _react2.default.createElement('path', { fill: 'none', stroke: '#333333', strokeWidth: '16', strokeMiterlimit: '10', d: 'M665.761,774.838 c21.227-36.807,46.229-67.955,69.972-88.619c28.608-24.896,55.833-34.646,70.511-26.182c15.297,8.82,20.844,38.994,12.659,78.725 c-6.188,30.039-20.966,65.74-41.115,100.682c-20.659,35.822-44.315,67.384-67.736,87.855 c-29.637,25.908-58.288,35.283-73.293,26.63c-14.559-8.396-20.127-35.907-13.143-72.692 C629.517,850.156,644.326,812.006,665.761,774.838z' }),
+	      _react2.default.createElement('path', { fill: 'none', stroke: '#333333', strokeWidth: '16', strokeMiterlimit: '10', d: 'M665.814,839.536 c-21.288-36.772-35.788-73.988-41.832-104.879c-7.282-37.218-2.133-65.675,12.531-74.163c15.281-8.848,44.192,1.415,74.526,28.349 c22.935,20.363,46.484,50.994,66.693,85.901c20.719,35.789,36.248,72.047,42.287,102.562c7.645,38.614,1.457,68.119-13.532,76.797 c-14.546,8.42-41.161-0.494-69.542-24.918C712.966,908.551,687.312,876.668,665.814,839.536z' })
+	    ),
+	    _react2.default.createElement(
+	      'g',
+	      null,
+	      _react2.default.createElement('circle', { fill: '#686868', cx: '731.774', cy: '806.825', r: '31.646' }),
+	      _react2.default.createElement('path', { fill: 'none', stroke: '#686868', strokeWidth: '16', strokeMiterlimit: '10', d: 'M731.774,742.48 c42.489,0,81.962,6.098,111.724,16.344c35.859,12.344,57.906,31.057,57.906,48c0,17.658-23.366,37.537-61.874,50.295 c-29.112,9.646-67.422,14.681-107.756,14.681c-41.354,0-80.514-4.726-109.947-14.786c-37.248-12.732-59.684-32.868-59.684-50.189 c0-16.806,21.051-35.374,56.405-47.7C648.422,748.709,688.869,742.48,731.774,742.48z' }),
+	      _react2.default.createElement('path', { fill: 'none', stroke: '#686868', strokeWidth: '16', strokeMiterlimit: '10', d: 'M675.761,774.838 c21.227-36.807,46.229-67.955,69.972-88.619c28.608-24.896,55.833-34.646,70.511-26.182c15.297,8.82,20.844,38.994,12.659,78.725 c-6.188,30.039-20.966,65.74-41.115,100.682c-20.659,35.822-44.315,67.384-67.736,87.855 c-29.637,25.908-58.288,35.283-73.293,26.63c-14.559-8.396-20.127-35.907-13.143-72.692 C639.517,850.156,654.326,812.006,675.761,774.838z' }),
+	      _react2.default.createElement('path', { fill: 'none', stroke: '#686868', strokeWidth: '16', strokeMiterlimit: '10', d: 'M675.814,839.536 c-21.288-36.772-35.788-73.988-41.831-104.879c-7.283-37.218-2.134-65.675,12.53-74.163c15.281-8.848,44.192,1.415,74.526,28.349 c22.935,20.363,46.484,50.994,66.693,85.901c20.719,35.789,36.248,72.047,42.287,102.562c7.645,38.614,1.457,68.119-13.532,76.797 c-14.546,8.42-41.161-0.494-69.542-24.918C722.966,908.551,697.312,876.668,675.814,839.536z' })
+	    )
+	  );
+	};
+	
+	exports.default = Base;
 
 /***/ }
 /******/ ]);

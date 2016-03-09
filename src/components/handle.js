@@ -3,7 +3,7 @@
 import React from 'react';
 
 const Handle = ({side}) => {
-  var rightHandle = (
+  var leftHandle = (
     <g id="HandleLeft">
       <polygon fill="#333333" points="136.975,739.122 105.544,739.122 44.032,730.596 106.477,725.661 		"/>
       <polygon fill="#686868" points="73.076,731.501 43.827,731.501 43.827,706.729 110.835,706.729 		"/>
@@ -11,7 +11,7 @@ const Handle = ({side}) => {
     </g>
   );
 
-  var leftHandle = (
+  var rightHandle = (
   	<g id="HandleRight">
 			<polygon fill="#333333" points="212.488,739.122 181.059,739.122 119.546,730.573 181.993,725.653 		"/>
 			<polygon fill="#686868" points="148.59,731.501 120.048,731.501 120.048,706.729 186.349,706.729 		"/>
