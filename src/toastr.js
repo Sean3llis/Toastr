@@ -37,12 +37,15 @@ class Toastr extends Component {
 
 	toastClick(side) {
 		if(side === 'left'){
-			this.setState({
-				left: {
-					status: 'ready'
-				}
-			})
+			var left = this.state.left;
+			left.status = 'ready';
+			this.setState({ left })
+		} else {
+			var right = this.state.right;
+			right.status = 'ready';
+			this.setState({ right });
 		}
+		console.log('Oh, great...');
 	}
 
 
@@ -53,8 +56,8 @@ class Toastr extends Component {
 			<svg x="0px" y="0px"
 				 width={size} height={size} viewBox="0 0 1261.459 1312.035" enable-background="new 0 0 1261.459 1312.035">
 			<Base />
-			<Toast side='left' onClick={this.toastClick}/>
-			<Toast side='right' onClick={this.toastClick}/>
+			<Toast side='left' data={this.state.left} onClick={this.toastClick}/>
+			<Toast side='right' data={this.state.right} onClick={this.toastClick}/>
 
 			<g id="Tracks">
 				<path fill="#333333" d="M112.426,964.591c-2.408,0-3.811-1.952-3.811-4.356V684.312c0-2.41,1.403-4.358,3.811-4.358
