@@ -19725,15 +19725,20 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _toast = __webpack_require__(160);
+	
+	var _toast2 = _interopRequireDefault(_toast);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Toastr = function Toastr() {
+		var height = 500;
 		return _react2.default.createElement(
 			'div',
 			null,
 			_react2.default.createElement(
 				'svg',
-				{ height: '1000', viewBox: '0 0 1000 1000' },
+				{ height: height, viewBox: '0 0 1000 1000' },
 				_react2.default.createElement('path', { fill: '#686868', d: 'M184 805.238V805h.407H184v.238l-11.014-.03s2.126 6.598 3.315 12.874c1.173 6.195 4.797 6.113 8.07 6.11 3.276.003 6.894.057 8.065-6.137 1.188-6.277 2.997-12.846 2.997-12.846l-11.432.028z' }),
 				_react2.default.createElement('path', { fill: '#333', d: 'M173.125 805.133s1.326 6.637 2.514 12.912c.697 3.69 2.36 5.16 3.36 5.743v-9.09c0-6.787 9.444-9.25 15.84-9.25l.792-2.896-22.507 2.58z' }),
 				_react2.default.createElement('path', { fill: '#686868', d: 'M277 805.238V805h.385H277v.238l-11.025-.03s2.12 6.598 3.31 12.874c1.172 6.195 4.793 6.113 8.068 6.11 3.275.003 6.89.057 8.062-6.137 1.188-6.277 3.007-12.846 3.007-12.846l-11.422.028z' }),
@@ -19743,16 +19748,7 @@
 				_react2.default.createElement('path', { fill: '#686868', d: 'M783 805.238V805h.426H783v.238l-11.004-.03s2.13 6.598 3.318 12.874c1.174 6.195 4.8 6.113 8.073 6.11 3.274.003 6.894.057 8.065-6.137 1.188-6.277 2.988-12.846 2.988-12.846l-11.44.028z' }),
 				_react2.default.createElement('path', { fill: '#333', d: 'M772.143 805.133s1.816 6.637 3.004 12.912c.7 3.69 1.854 5.16 3.854 5.743v-9.09c0-6.787 8.956-9.25 15.35-9.25l.547-2.896-22.754 2.58z' }),
 				_react2.default.createElement('path', { fill: '#C6C6C6', d: 'M181 514.587C181 398.887 204.636 360 335.832 360h195.075C616.412 360 686 429.08 686 514.587V729H181V514.587z' }),
-				_react2.default.createElement(
-					'g',
-					{ className: 'toast' },
-					_react2.default.createElement('path', {
-						fill: '#5B4736',
-						d: 'M479.03 286.988s-1.667-92.793-12.46-92.45c11.356-6.923 12.563-36.247-1.427-49.19-15.854-14.667-42.515-10.592-73.84-.446l-19.114.608c-31.906-8.135-57.788-8.9-73.743 5.14-14.233 12.525-10.083 43.956 1.69 50.142-10.794.343-3.62 101.584-3.62 101.584.234 2.46 10.02 7.762 20.508 6.18 46.505 6.365 162.1-4.517 162.005-21.568z' }),
-					_react2.default.createElement('path', {
-						fill: '#EFEDD8',
-						d: 'M496.902 295.573s.75-102.024-10.045-101.68c11.357-6.923 12.564-36.247-1.426-49.19-15.853-14.668-42.514-10.593-73.837-.447l-19.115.608c-31.905-8.135-57.787-8.9-73.742 5.14-14.233 12.525-10.083 43.956 1.69 50.142-10.794.343-3.4 108.495-3.4 108.495 4.49 4.214 179.995 8.264 179.876-13.067z' })
-				),
+				_react2.default.createElement(_toast2.default, null),
 				_react2.default.createElement(
 					'g',
 					{ className: 'toast' },
@@ -19827,6 +19823,37 @@
 	};
 	
 	exports.default = Toastr;
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Toast = function Toast() {
+	  return _react2.default.createElement(
+	    'g',
+	    { className: 'toast' },
+	    _react2.default.createElement('path', {
+	      fill: '#5B4736',
+	      d: 'M479.03 286.988s-1.667-92.793-12.46-92.45c11.356-6.923 12.563-36.247-1.427-49.19-15.854-14.667-42.515-10.592-73.84-.446l-19.114.608c-31.906-8.135-57.788-8.9-73.743 5.14-14.233 12.525-10.083 43.956 1.69 50.142-10.794.343-3.62 101.584-3.62 101.584.234 2.46 10.02 7.762 20.508 6.18 46.505 6.365 162.1-4.517 162.005-21.568z' }),
+	    _react2.default.createElement('path', {
+	      fill: '#EFEDD8',
+	      d: 'M496.902 295.573s.75-102.024-10.045-101.68c11.357-6.923 12.564-36.247-1.426-49.19-15.853-14.668-42.514-10.593-73.837-.447l-19.115.608c-31.905-8.135-57.787-8.9-73.742 5.14-14.233 12.525-10.083 43.956 1.69 50.142-10.794.343-3.4 108.495-3.4 108.495 4.49 4.214 179.995 8.264 179.876-13.067z' })
+	  );
+	};
+	
+	exports.default = Toast;
 
 /***/ }
 /******/ ]);
