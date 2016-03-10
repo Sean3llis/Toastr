@@ -33,6 +33,7 @@ class Toastr extends Component {
 			}
 		}
 		this.toastClick = this.toastClick.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 	}
 
 	toastClick(side) {
@@ -43,6 +44,23 @@ class Toastr extends Component {
 		} else {
 			var right = this.state.right;
 			right.status = 'ready';
+			this.setState({ right });
+		}
+	}
+
+	handleClick(side) {
+		// REFACTOR THIS DUPLICATION OUT
+		if(side === 'left'){
+			var left = this.state.left;
+			left.status = 'toasting';
+			left.leverDown = true;
+
+			this.setState({ left });
+		} else {
+			var right = this.state.right;
+			right.status = 'toasting';
+			right.leverDown = true;
+
 			this.setState({ right });
 		}
 	}
@@ -68,8 +86,8 @@ class Toastr extends Component {
 			<div id="toastr">
 			<svg x="0px" y="0px"
 				 width={size} height={size} viewBox="0 0 1261.459 1312.035" enable-background="new 0 0 1261.459 1312.035">
-			<Toast side='left' data={this.state.left} onClick={this.toastClick}/>
-			<Toast side='right' data={this.state.right} onClick={this.toastClick}/>
+			<Toast side='left' data={this.state.left} toastClick={this.toastClick}/>
+			<Toast side='right' data={this.state.right} toastClick={this.toastClick}/>
 			<Base />
 
 			<g id="Tracks">
@@ -82,8 +100,8 @@ class Toastr extends Component {
 			<Dial side='left' />
 			<Dial side='right' />
 
-			<Handle side='left' />
-			<Handle side='right' />
+			<Handle side='left' handleClick={this.handleClick} />
+			<Handle side='right' handleClick={this.handleClick} />
 			<ReactLogo />
 			</svg>
 			</div>

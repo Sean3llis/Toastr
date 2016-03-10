@@ -15,9 +15,9 @@ export default function(){
   });
 
   Velocity.RegisterEffect('toast:toasting', {
-      defaultDuration: 0,
+      defaultDuration: 4000,
       calls: [
-          [ { translateY: '0px' }, 1 ],
+          [ { fill: '#D1AF8C' }, 1 ],
       ]
   });
 }
