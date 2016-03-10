@@ -45,7 +45,20 @@ class Toastr extends Component {
 			right.status = 'ready';
 			this.setState({ right });
 		}
-		console.log('Oh, great...');
+	}
+
+	spinLogo(logo, duration) {
+		Velocity(logo, {
+			rotateZ: '1080deg'
+		}, {
+			easing: 'easeInOutCubic',
+			duration: duration
+		});
+	}
+
+	componentDidMount() {
+	  this.logo = document.getElementById('react-logo');
+		this.spinLogo(this.logo, 4000);
 	}
 
 
@@ -55,9 +68,9 @@ class Toastr extends Component {
 			<div id="toastr">
 			<svg x="0px" y="0px"
 				 width={size} height={size} viewBox="0 0 1261.459 1312.035" enable-background="new 0 0 1261.459 1312.035">
-			<Base />
 			<Toast side='left' data={this.state.left} onClick={this.toastClick}/>
 			<Toast side='right' data={this.state.right} onClick={this.toastClick}/>
+			<Base />
 
 			<g id="Tracks">
 				<path fill="#333333" d="M112.426,964.591c-2.408,0-3.811-1.952-3.811-4.356V684.312c0-2.41,1.403-4.358,3.811-4.358

@@ -40,12 +40,7 @@ nav {
   text-align: center;
   padding: 140px 0px; }
   #toastr #react-logo {
-    transform-origin: center;
-    -webkit-transition: transform 0.3s ease;
-    -moz-transition: transform 0.3s ease;
-    -ms-transition: transform 0.3s ease;
-    -o-transition: transform 0.3s ease;
-    transition: transform 0.3s ease; }
+    transform-origin: center; }
 
 footer {
   height: 140px;
