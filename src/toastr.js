@@ -10,10 +10,6 @@ import Dial from './components/dial';
 import Handle from './components/handle';
 import ReactLogo from './components/react-logo';
 
-
-
-
-
 class Toastr extends Component {
 	constructor(props){
 		super(props);
@@ -33,16 +29,51 @@ class Toastr extends Component {
 			}
 		}
 		this.toastClick = this.toastClick.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 	}
 
 	toastClick(side) {
 		if(side === 'left'){
-			this.setState({
-				left: {
-					status: 'ready'
-				}
-			})
+			var left = this.state.left;
+			left.status = 'ready';
+			this.setState({ left })
+		} else {
+			var right = this.state.right;
+			right.status = 'ready';
+			this.setState({ right });
 		}
+	}
+
+	handleClick(side) {
+		// REFACTOR THIS DUPLICATION OUT
+		if( this.state[side].status !== 'ready') return;
+		if(side === 'left'){
+			var left = this.state.left;
+			left.status = 'toasting';
+			left.leverDown = true;
+
+			this.setState({ left });
+		} else {
+			var right = this.state.right;
+			right.status = 'toasting';
+			right.leverDown = true;
+
+			this.setState({ right });
+		}
+	}
+
+	spinLogo(logo, duration) {
+		Velocity(logo, {
+			rotateZ: '1080deg'
+		}, {
+			easing: 'easeInOutCubic',
+			duration: duration
+		});
+	}
+
+	componentDidMount() {
+	  this.logo = document.getElementById('react-logo');
+		this.spinLogo(this.logo, 4000);
 	}
 
 
@@ -52,9 +83,9 @@ class Toastr extends Component {
 			<div id="toastr">
 			<svg x="0px" y="0px"
 				 width={size} height={size} viewBox="0 0 1261.459 1312.035" enable-background="new 0 0 1261.459 1312.035">
+			<Toast side='left' data={this.state.left} toastClick={this.toastClick}/>
+			<Toast side='right' data={this.state.right} toastClick={this.toastClick}/>
 			<Base />
-			<Toast side='left' onClick={this.toastClick}/>
-			<Toast side='right' onClick={this.toastClick}/>
 
 			<g id="Tracks">
 				<path fill="#333333" d="M112.426,964.591c-2.408,0-3.811-1.952-3.811-4.356V684.312c0-2.41,1.403-4.358,3.811-4.358
@@ -66,8 +97,8 @@ class Toastr extends Component {
 			<Dial side='left' />
 			<Dial side='right' />
 
-			<Handle side='left' />
-			<Handle side='right' />
+			<Handle side='left' isDown={this.state.left.leverDown} handleClick={this.handleClick} />
+			<Handle side='right' isDown={this.state.right.leverDown} handleClick={this.handleClick} />
 			<ReactLogo />
 			</svg>
 			</div>
