@@ -10,10 +10,6 @@ import Dial from './components/dial';
 import Handle from './components/handle';
 import ReactLogo from './components/react-logo';
 
-
-
-
-
 class Toastr extends Component {
 	constructor(props){
 		super(props);
@@ -49,8 +45,8 @@ class Toastr extends Component {
 	}
 
 	handleClick(side) {
-		console.log('parent handle click');
 		// REFACTOR THIS DUPLICATION OUT
+		if( this.state[side].status !== 'ready') return;
 		if(side === 'left'){
 			var left = this.state.left;
 			left.status = 'toasting';
@@ -101,8 +97,8 @@ class Toastr extends Component {
 			<Dial side='left' />
 			<Dial side='right' />
 
-			<Handle side='left' handleClick={this.handleClick} />
-			<Handle side='right' handleClick={this.handleClick} />
+			<Handle side='left' isDown={this.state.left.leverDown} handleClick={this.handleClick} />
+			<Handle side='right' isDown={this.state.right.leverDown} handleClick={this.handleClick} />
 			<ReactLogo />
 			</svg>
 			</div>

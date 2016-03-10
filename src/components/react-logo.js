@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const Base = () => {
+const ReactLogo = () => {
   var logoPaths = (
     <g id="react-logo">
       <g>
@@ -29,4 +29,4 @@ const Base = () => {
 
 
 
-export default Base;
+export default ReactLogo;
