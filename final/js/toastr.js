@@ -131,6 +131,7 @@
 		}, {
 			key: 'handleClick',
 			value: function handleClick(side) {
+				console.log('parent handle click');
 				// REFACTOR THIS DUPLICATION OUT
 				if (side === 'left') {
 					var left = this.state.left;
@@ -20029,43 +20030,75 @@
 	  value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Handle = function Handle(_ref) {
-	  var side = _ref.side;
-	  var handleClick = _ref.handleClick;
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	  function _onClick() {
-	    handleClick(side);
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Handle = function (_Component) {
+	  _inherits(Handle, _Component);
+	
+	  function Handle(props) {
+	    _classCallCheck(this, Handle);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Handle).call(this, props));
+	
+	    _this.side = props.side;
+	    _this.handleClick = props.handleClick;
+	    _this._onClick = _this._onClick.bind(_this);
+	    _this._getHandle = _this._getHandle.bind(_this);
+	    return _this;
 	  }
-	  var leftHandle = _react2.default.createElement(
-	    'g',
-	    { id: 'HandleLeft', onClick: _onClick },
-	    _react2.default.createElement('polygon', { fill: '#333333', points: '136.975,739.122 105.544,739.122 44.032,730.596 106.477,725.661 \t\t' }),
-	    _react2.default.createElement('polygon', { fill: '#686868', points: '73.076,731.501 43.827,731.501 43.827,706.729 110.835,706.729 \t\t' }),
-	    _react2.default.createElement('polygon', { fill: '#E0E0E0', points: '139.104,739.497 72.41,730.782 72.41,706.729 139.104,706.729 \t\t' })
-	  );
 	
-	  var rightHandle = _react2.default.createElement(
-	    'g',
-	    { id: 'HandleRight', onClick: _onClick },
-	    _react2.default.createElement('polygon', { fill: '#333333', points: '212.488,739.122 181.059,739.122 119.546,730.573 181.993,725.653 \t\t' }),
-	    _react2.default.createElement('polygon', { fill: '#686868', points: '148.59,731.501 120.048,731.501 120.048,706.729 186.349,706.729 \t\t' }),
-	    _react2.default.createElement('polygon', { fill: '#E0E0E0', points: '215.324,739.454 148.631,730.739 148.631,706.729 215.324,706.729 \t\t' })
-	  );
+	  _createClass(Handle, [{
+	    key: '_onClick',
+	    value: function _onClick() {
+	      console.log('Boop!');
+	      this.handleClick(this.side);
+	    }
+	  }, {
+	    key: '_getHandle',
+	    value: function _getHandle(side) {
+	      if (side === 'left') {
+	        return _react2.default.createElement(
+	          'g',
+	          { id: 'HandleLeft', onClick: this._onClick },
+	          _react2.default.createElement('polygon', { fill: '#333333', points: '136.975,739.122 105.544,739.122 44.032,730.596 106.477,725.661 \t\t' }),
+	          _react2.default.createElement('polygon', { fill: '#686868', points: '73.076,731.501 43.827,731.501 43.827,706.729 110.835,706.729 \t\t' }),
+	          _react2.default.createElement('polygon', { fill: '#E0E0E0', points: '139.104,739.497 72.41,730.782 72.41,706.729 139.104,706.729 \t\t' })
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'g',
+	          { id: 'HandleRight', onClick: this._onClick },
+	          _react2.default.createElement('polygon', { fill: '#333333', points: '212.488,739.122 181.059,739.122 119.546,730.573 181.993,725.653 \t\t' }),
+	          _react2.default.createElement('polygon', { fill: '#686868', points: '148.59,731.501 120.048,731.501 120.048,706.729 186.349,706.729 \t\t' }),
+	          _react2.default.createElement('polygon', { fill: '#E0E0E0', points: '215.324,739.454 148.631,730.739 148.631,706.729 215.324,706.729 \t\t' })
+	        );
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'g',
+	        null,
+	        this._getHandle(this.side)
+	      );
+	    }
+	  }]);
 	
-	  var handle = side === 'left' ? leftHandle : rightHandle;
-	
-	  return _react2.default.createElement(
-	    'g',
-	    null,
-	    handle
-	  );
-	};
+	  return Handle;
+	}(_react.Component);
 	
 	exports.default = Handle;
 

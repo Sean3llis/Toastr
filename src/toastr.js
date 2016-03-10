@@ -49,6 +49,7 @@ class Toastr extends Component {
 	}
 
 	handleClick(side) {
+		console.log('parent handle click');
 		// REFACTOR THIS DUPLICATION OUT
 		if(side === 'left'){
 			var left = this.state.left;
