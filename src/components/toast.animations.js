@@ -3,7 +3,7 @@ export default function(){
   Velocity.RegisterEffect('toast:bread', {
     defaultDuration: 0,
     calls: [
-      [ { translateY: '0px' }, 1 ],
+      [ { translateY: '0px', opacity: 1 }, 1 ],
     ]
   });
 
@@ -22,9 +22,17 @@ export default function(){
   });
 
   Velocity.RegisterEffect('toast:browning', {
-      defaultDuration: 4000,
+      defaultDuration: 500,
       calls: [
           [ { fill: '#D1AF8C' }, 1 ],
       ]
+  });
+
+  Velocity.RegisterEffect('toast:popup', {
+    defaultDuration: 500,
+    calls: [
+      [ { translateY: "-120px" }, 0.5, { easing: 'easeOutCirc'}],
+      [ { translateY: '200px' }, 0.5, { easing: 'easeInCirc' }]
+    ]
   });
 }
