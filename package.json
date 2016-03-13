@@ -2,7 +2,7 @@
   "name": "toastr",
   "version": "1.0.0",
   "description": "The JS library you never knew you needed. It toasts your toast.",
-  "main": "gulpfile.js",
+  "main": "src/toastr.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +21,7 @@
     "gulp-sass": "^2.1.1",
     "gulp-util": "^3.0.7",
     "gulp-webserver": "^0.9.1",
+    "lodash": "^4.6.1",
     "normalize.css": "^3.0.3",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",

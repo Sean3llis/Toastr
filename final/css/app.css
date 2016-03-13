@@ -45,7 +45,23 @@ nav {
 footer {
   height: 140px;
   line-height: 140px;
-  text-align: center; }
+  text-align: center;
+  background-color: #80C2CE;
+  color: #ffffff; }
+
+#notifier {
+  width: 300px;
+  max-height: 300px;
+  padding: 5px 15px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  overflow: scroll;
+  border-radius: 2px; }
+  #notifier .noti {
+    background-color: #80C2CE;
+    color: #F2F2F2;
+    margin: 10px 0px;
+    border-radius: 2px; }
 
 body {
   background-color: #F2F2F2; }

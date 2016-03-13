@@ -1,0 +1,15 @@
+#notifier {
+  width: 300px;
+  max-height: 300px;
+  padding: 5px 15px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  overflow: scroll;
+  border-radius: 2px;
+  .noti {
+    background-color: $primary;
+    color: $light;
+    margin: 10px 0px;
+    border-radius: 2px;
+  }
+}
