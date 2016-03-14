@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 
 // Lib
 import _ from 'lodash';
+import classnames from 'classnames';
 
 // Component
 import Toast from './components/toast';
@@ -21,12 +22,12 @@ class Toastr extends Component {
 			left: {
 				status: 'bread',
 				isDown: false,
-				toastTime: 1000
+				toastTime: 8000
 			},
 			right: {
 				status: 'bread',
 				isDown: false,
-				toastTime: 1000
+				toastTime: 8000
 			},
 			eaten: 0,
 			notis: [
@@ -86,7 +87,11 @@ class Toastr extends Component {
 	}
 
 	spinLogo(side) {
-		var duration = this._getToastTime(side)
+		var duration = this._getToastTime(side);
+		if(this.reactLogo.classList[0] === 'velocity-animating'){
+			console.log('already animating');
+			return false;
+		}
 		Velocity(this.reactLogo, {
 			rotateZ: '+=1080deg'
 		}, {

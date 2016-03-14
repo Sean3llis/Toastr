@@ -60,27 +60,31 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _toast = __webpack_require__(161);
+	var _classnames = __webpack_require__(161);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _toast = __webpack_require__(162);
 	
 	var _toast2 = _interopRequireDefault(_toast);
 	
-	var _base = __webpack_require__(163);
+	var _base = __webpack_require__(164);
 	
 	var _base2 = _interopRequireDefault(_base);
 	
-	var _dial = __webpack_require__(164);
+	var _dial = __webpack_require__(165);
 	
 	var _dial2 = _interopRequireDefault(_dial);
 	
-	var _handle = __webpack_require__(165);
+	var _handle = __webpack_require__(166);
 	
 	var _handle2 = _interopRequireDefault(_handle);
 	
-	var _reactLogo = __webpack_require__(167);
+	var _reactLogo = __webpack_require__(168);
 	
 	var _reactLogo2 = _interopRequireDefault(_reactLogo);
 	
-	var _notifier = __webpack_require__(168);
+	var _notifier = __webpack_require__(169);
 	
 	var _notifier2 = _interopRequireDefault(_notifier);
 	
@@ -110,12 +114,12 @@
 				left: {
 					status: 'bread',
 					isDown: false,
-					toastTime: 1000
+					toastTime: 8000
 				},
 				right: {
 					status: 'bread',
 					isDown: false,
-					toastTime: 1000
+					toastTime: 8000
 				},
 				eaten: 0,
 				notis: ['Toastr Online', 'Booting Up....', 'Let\' get toasty']
@@ -180,6 +184,10 @@
 			key: 'spinLogo',
 			value: function spinLogo(side) {
 				var duration = this._getToastTime(side);
+				if (this.reactLogo.classList[0] === 'velocity-animating') {
+					console.log('already animating');
+					return false;
+				}
 				Velocity(this.reactLogo, {
 					rotateZ: '+=1080deg'
 				}, {
@@ -34960,6 +34968,60 @@
 /* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+	
+	(function () {
+		'use strict';
+	
+		var hasOwn = {}.hasOwnProperty;
+	
+		function classNames () {
+			var classes = [];
+	
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+	
+				var argType = typeof arg;
+	
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+	
+			return classes.join(' ');
+		}
+	
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -34972,7 +35034,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _toast = __webpack_require__(162);
+	var _toast = __webpack_require__(163);
 	
 	var _toast2 = _interopRequireDefault(_toast);
 	
@@ -35086,7 +35148,7 @@
 	exports.default = Toast;
 
 /***/ },
-/* 162 */
+/* 163 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35124,7 +35186,7 @@
 	};
 
 /***/ },
-/* 163 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35169,7 +35231,7 @@
 	exports.default = Base;
 
 /***/ },
-/* 164 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35223,7 +35285,7 @@
 	exports.default = Dial;
 
 /***/ },
-/* 165 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35238,7 +35300,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _handle = __webpack_require__(166);
+	var _handle = __webpack_require__(167);
 	
 	var _handle2 = _interopRequireDefault(_handle);
 	
@@ -35329,7 +35391,7 @@
 	exports.default = Handle;
 
 /***/ },
-/* 166 */
+/* 167 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35351,7 +35413,7 @@
 	};
 
 /***/ },
-/* 167 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35407,7 +35469,7 @@
 	exports.default = ReactLogo;
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
