@@ -118,69 +118,36 @@
 					toastTime: 1000
 				},
 				eaten: 0,
-				notis: ['Toastr Online', 'Booting Up....', 'Booting Up....', 'Booting Up....', 'Booting Up....', 'Booting Up....', 'Booting Up....', 'Booting Up....', 'Booting Up....', 'Booting Up....', 'Booting Up....', 'Booting Up....', 'Booting Up....', 'Let\' get toasty']
+				notis: ['Toastr Online', 'Booting Up....', 'Let\' get toasty']
 			};
-			_this.toastClick = _this.toastClick.bind(_this);
-			_this.handleClick = _this.handleClick.bind(_this);
 			_this.toastToasted = _this.toastToasted.bind(_this);
+			_this.toastWasClicked = _this.toastWasClicked.bind(_this);
+			_this.handleWasClicked = _this.handleWasClicked.bind(_this);
 			_this._getToastTime = _this._getToastTime.bind(_this);
-			_this._setToastStatus = _this._setToastStatus.bind(_this);
+			_this._setToast = _this._setToast.bind(_this);
 			return _this;
 		}
 	
 		_createClass(Toastr, [{
-			key: 'toastClick',
-			value: function toastClick(side) {
-				var toastStatus = this.state[side].status;
-				switch (toastStatus) {
-					case 'bread':
-						this._setToastStatus(side, 'ready');
-						break;
-					case 'toast':
-						this.eatToast(side);
-						break;
-				}
-			}
-		}, {
-			key: 'handleClick',
-			value: function handleClick(side) {
-				// REFACTOR THIS DUPLICATION OUT
-				if (this._getToastStatus(side) !== 'ready') return;
-				if (side === 'left') {
-					this.spinLogo(side);
-					var left = this.state.left;
-					left.isDown = true;
-					left.status = 'toasting';
-					this.setState({ left: left });
-				} else {
-					this.spinLogo(side);
-					var right = this.state.right;
-					right.isDown = true;
-					right.status = 'toasting';
-					this.setState({ right: right });
-				}
-			}
-		}, {
 			key: 'toastToasted',
 			value: function toastToasted(side) {
-				var sideState = this.state[side];
-				sideState.isDown = false;
-				sideState.status = 'toast';
-				var newState = {};
-				newState[side] = sideState;
-				this.setState(newState);
+				this._setToast(side, {
+					status: 'toast',
+					isDown: false
+				});
 			}
 		}, {
-			key: 'eatToast',
-			value: function eatToast(side) {
+			key: 'toastEaten',
+			value: function toastEaten(side) {
 				var toast = document.getElementById('toast-' + side);
 				Velocity(toast, {
 					opacity: 0
 				}, {
 					complete: function () {
-						this._setToastStatus(side, 'bread');
+						this._setToast(side, {
+							status: 'bread'
+						});
 						this.setState(function (previousState, props) {
-							console.log(previousState, '=====');
 							return {
 								eaten: previousState.eaten + 1
 							};
@@ -194,18 +161,20 @@
 				return this.state[side].status;
 			}
 		}, {
-			key: '_setToastStatus',
-			value: function _setToastStatus(side, status) {
-				var newSideState = _lodash2.default.extend({}, this.state[side]);
-				newSideState.status = status;
-				var newState = {};
-				newState[side] = newSideState;
-				this.setState(newState);
-			}
-		}, {
 			key: '_getToastTime',
 			value: function _getToastTime(side) {
 				return this.state[side].toastTime;
+			}
+		}, {
+			key: '_setToast',
+			value: function _setToast(side, targetState) {
+				var sideState = this.state[side];
+				_lodash2.default.extend(sideState, targetState);
+	
+				var newState = {};
+				newState[side] = sideState;;
+	
+				this.setState(newState);
 			}
 		}, {
 			key: 'spinLogo',
@@ -224,8 +193,35 @@
 				this.reactLogo = _reactDom2.default.findDOMNode(this.refs.reactLogo);
 			}
 		}, {
+			key: 'toastWasClicked',
+			value: function toastWasClicked(side) {
+				var status = this._getToastStatus(side);
+				switch (status) {
+					case 'bread':
+						this._setToast(side, { status: 'ready' });
+						break;
+					case 'toast':
+						this.toastEaten(side);
+						break;
+					default:
+				}
+			}
+		}, {
+			key: 'handleWasClicked',
+			value: function handleWasClicked(side) {
+				var status = this._getToastStatus(side);
+				if (status !== 'ready') return false;
+				this._setToast(side, {
+					status: 'toasting',
+					isDown: true
+				});
+				this.spinLogo(side);
+			}
+		}, {
 			key: 'render',
 			value: function render() {
+				var _this2 = this;
+	
 				var size = 400;
 				return _react2.default.createElement(
 					'div',
@@ -234,8 +230,12 @@
 						'svg',
 						{ x: '0px', y: '0px',
 							width: size, height: size, viewBox: '0 0 1261.459 1312.035', 'enable-background': 'new 0 0 1261.459 1312.035' },
-						_react2.default.createElement(_toast2.default, { toastToasted: this.toastToasted, side: 'left', data: this.state.left, toastClick: this.toastClick }),
-						_react2.default.createElement(_toast2.default, { toastToasted: this.toastToasted, side: 'right', data: this.state.right, toastClick: this.toastClick }),
+						_react2.default.createElement(_toast2.default, { ref: function ref(toast) {
+								return _this2.toastLeft = toast;
+							}, toastToasted: this.toastToasted, side: 'left', data: this.state.left, onToastClick: this.toastWasClicked }),
+						_react2.default.createElement(_toast2.default, { ref: function ref(toast) {
+								return _this2.toastRight = toast;
+							}, toastToasted: this.toastToasted, side: 'right', data: this.state.right, onToastClick: this.toastWasClicked }),
 						_react2.default.createElement(_base2.default, null),
 						_react2.default.createElement(
 							'g',
@@ -245,8 +245,8 @@
 						),
 						_react2.default.createElement(_dial2.default, { side: 'left' }),
 						_react2.default.createElement(_dial2.default, { side: 'right' }),
-						_react2.default.createElement(_handle2.default, { side: 'left', isDown: this.state.left.isDown, handleClick: this.handleClick }),
-						_react2.default.createElement(_handle2.default, { side: 'right', isDown: this.state.right.isDown, handleClick: this.handleClick }),
+						_react2.default.createElement(_handle2.default, { side: 'left', isDown: this.state.left.isDown, handleClick: this.handleWasClicked }),
+						_react2.default.createElement(_handle2.default, { side: 'right', isDown: this.state.right.isDown, handleClick: this.handleWasClicked }),
 						_react2.default.createElement(_reactLogo2.default, { ref: 'reactLogo' })
 					),
 					_react2.default.createElement(_notifier2.default, { notis: this.state.notis })
@@ -34990,24 +34990,23 @@
 	  function Toast(props) {
 	    _classCallCheck(this, Toast);
 	
+	    // Shortcuts
+	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Toast).call(this, props));
 	
 	    _this.data = props.data;
-	    _this.status = _this.data.status;
+	    _this.status = _this.props.data.status;
 	    _this.side = props.side;
 	    _this.toastClick = props.toastClick;
 	    _this.toastToasted = props.toastToasted;
-	    _this._onClick = _this._onClick.bind(_this);
+	
+	    // Scoped functions
 	    _this._popUp = _this._popUp.bind(_this);
+	    _this.handleClick = _this.handleClick.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(Toast, [{
-	    key: '_onClick',
-	    value: function _onClick() {
-	      this.toastClick(this.side);
-	    }
-	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      (0, _toast2.default)();
@@ -35016,12 +35015,12 @@
 	  }, {
 	    key: '_popUp',
 	    value: function _popUp() {
-	      Velocity(this.toastNode, 'toast:popup');
-	      this.toastToasted(this.side);
+	      Velocity(this.toastNode, 'toast:popup', this.toastToasted(this.side));
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
+	      console.log('updating');
 	      var status = this.props.data.status;
 	      switch (status) {
 	        case 'bread':
@@ -35030,15 +35029,25 @@
 	          });
 	          Velocity(this.toastNode, 'toast:bread');break;
 	        case 'ready':
+	          console.log('animating ready');
 	          Velocity(this.toastNode, 'toast:ready');break;
 	        case 'toasting':
 	          Velocity(this.toastNode, 'toast:toasting');
 	          Velocity(this.toastFront, 'toast:browning', {
-	            duration: this.data.toastTime,
-	            complete: this._popUp
-	          });
+	            duration: this.data.toastTime
+	          }).then(function () {
+	            this._popUp();
+	          }.bind(this));
 	          break;
+	        default:
+	          Velocity(this.toastNode, 'stop');
+	          Velocity(this.toastFront, 'stop');
 	      }
+	    }
+	  }, {
+	    key: 'handleClick',
+	    value: function handleClick() {
+	      this.props.onToastClick(this.props.side);
 	    }
 	  }, {
 	    key: 'render',
@@ -35047,7 +35056,7 @@
 	
 	      var leftToast = _react2.default.createElement(
 	        'g',
-	        { id: 'toast-left', className: 'toast state-' + this.data.status, onClick: this._onClick },
+	        { id: 'toast-left', className: 'toast state-' + this.data.status, onClick: this.handleClick },
 	        _react2.default.createElement('path', { fill: '#5B4736', d: 'M600.299,289.379c0,0-3.177-176.819-23.745-176.167c21.64-13.191,23.94-69.069-2.719-93.73 C543.626-8.468,492.822-0.704,433.133,18.63l-36.423,1.158C335.914,4.287,286.596,2.829,256.193,29.585 c-27.122,23.864-19.213,83.757,3.223,95.545c-20.572,0.653-6.9,193.571-6.9,193.571c0.445,4.689,19.091,14.791,39.078,11.776 C380.21,342.606,600.478,321.87,600.299,289.379z' }),
 	        _react2.default.createElement('path', { fill: '#EFEDD8', ref: function ref(_ref) {
 	            return _this2.toastFront = _ref;
@@ -35056,7 +35065,7 @@
 	
 	      var rightToast = _react2.default.createElement(
 	        'g',
-	        { id: 'toast-right', className: 'toast state-' + this.data.status, onClick: this._onClick },
+	        { id: 'toast-right', className: 'toast state-' + this.data.status, onClick: this.handleClick },
 	        _react2.default.createElement('path', { fill: '#5B4736', d: 'M832.388,341.377c0,0,9.567-176.589-10.997-177.418c22.536-11.599,28.855-67.164,4.039-93.686 c-28.121-30.054-79.351-25.966-140.273-10.981l-36.413-1.47c-59.522-19.839-108.608-24.843-140.859-0.348 c-28.771,21.85-25.194,82.154-3.664,95.527c-20.566-0.829-20.821,192.575-20.821,192.575c0.106,4.711,17.974,16.126,38.127,14.559 C609.039,378.616,830.229,373.796,832.388,341.377z' }),
 	        _react2.default.createElement('path', { fill: '#EFEDD8', ref: function ref(_ref2) {
 	            return _this2.toastFront = _ref2;
@@ -35094,8 +35103,8 @@
 	    });
 	
 	    Velocity.RegisterEffect('toast:ready', {
-	        defaultDuration: 900,
-	        calls: [[{ translateY: '200px' }, 1]]
+	        defaultDuration: 500,
+	        calls: [[{ translateY: '200px' }, 1, { easing: 'easeOutCirc' }]]
 	    });
 	
 	    Velocity.RegisterEffect('toast:toasting', {

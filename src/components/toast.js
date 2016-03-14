@@ -7,17 +7,16 @@ import registerAnimations from './toast.animations';
 class Toast extends Component {
   constructor(props){
     super(props);
+    // Shortcuts
     this.data = props.data;
-    this.status = this.data.status;
+    this.status = this.props.data.status;
     this.side = props.side;
     this.toastClick = props.toastClick;
     this.toastToasted = props.toastToasted;
-    this._onClick = this._onClick.bind(this);
-    this._popUp = this._popUp.bind(this);
-  }
 
-  _onClick() {
-    this.toastClick(this.side);
+    // Scoped functions
+    this._popUp = this._popUp.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount(){
@@ -26,11 +25,11 @@ class Toast extends Component {
   }
 
   _popUp() {
-    Velocity(this.toastNode, 'toast:popup');
-    this.toastToasted(this.side);
+    Velocity(this.toastNode, 'toast:popup', this.toastToasted(this.side));
   }
 
   componentDidUpdate() {
+    console.log('updating');
     var status = this.props.data.status;
     switch (status) {
       case 'bread' :
@@ -39,21 +38,30 @@ class Toast extends Component {
         })
         Velocity(this.toastNode, 'toast:bread'); break;
       case 'ready' :
+        console.log('animating ready');
         Velocity(this.toastNode, 'toast:ready'); break;
       case 'toasting' :
         Velocity(this.toastNode, 'toast:toasting');
         Velocity(this.toastFront, 'toast:browning', {
           duration: this.data.toastTime,
-          complete: this._popUp
-        });
+        }).then(function(){
+          this._popUp();
+        }.bind(this));
         break;
+      default :
+        Velocity(this.toastNode, 'stop');
+        Velocity(this.toastFront, 'stop');
     }
 
   }
 
+  handleClick() {
+    this.props.onToastClick(this.props.side);
+  }
+
   render() {
     var leftToast = (
-      <g id="toast-left" className={`toast state-${this.data.status}`} onClick={this._onClick}>
+      <g id="toast-left" className={`toast state-${this.data.status}`} onClick={this.handleClick}>
         <path fill="#5B4736" d="M600.299,289.379c0,0-3.177-176.819-23.745-176.167c21.64-13.191,23.94-69.069-2.719-93.73
           C543.626-8.468,492.822-0.704,433.133,18.63l-36.423,1.158C335.914,4.287,286.596,2.829,256.193,29.585
           c-27.122,23.864-19.213,83.757,3.223,95.545c-20.572,0.653-6.9,193.571-6.9,193.571c0.445,4.689,19.091,14.791,39.078,11.776
@@ -66,7 +74,7 @@ class Toast extends Component {
     );
 
     var rightToast = (
-      <g id="toast-right" className={`toast state-${this.data.status}`} onClick={this._onClick}>
+      <g id="toast-right" className={`toast state-${this.data.status}`} onClick={this.handleClick}>
         <path fill="#5B4736" d="M832.388,341.377c0,0,9.567-176.589-10.997-177.418c22.536-11.599,28.855-67.164,4.039-93.686
           c-28.121-30.054-79.351-25.966-140.273-10.981l-36.413-1.47c-59.522-19.839-108.608-24.843-140.859-0.348
           c-28.771,21.85-25.194,82.154-3.664,95.527c-20.566-0.829-20.821,192.575-20.821,192.575c0.106,4.711,17.974,16.126,38.127,14.559

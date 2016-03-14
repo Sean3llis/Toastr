@@ -8,9 +8,9 @@ export default function(){
   });
 
   Velocity.RegisterEffect('toast:ready', {
-      defaultDuration: 900,
+      defaultDuration: 500,
       calls: [
-          [ { translateY: '200px' }, 1 ],
+          [ { translateY: '200px' }, 1, { easing: 'easeOutCirc' } ],
       ]
   });
 

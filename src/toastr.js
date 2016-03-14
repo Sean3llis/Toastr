@@ -32,76 +32,33 @@ class Toastr extends Component {
 			notis: [
 				'Toastr Online',
 			 'Booting Up....',
-			 'Booting Up....',
-			 'Booting Up....',
-			 'Booting Up....',
-			 'Booting Up....',
-			 'Booting Up....',
-			 'Booting Up....',
-			 'Booting Up....',
-			 'Booting Up....',
-			 'Booting Up....',
-			 'Booting Up....',
-			 'Booting Up....',
 			 'Let\' get toasty'
 		 ]
 		}
-		this.toastClick = this.toastClick.bind(this);
-		this.handleClick = this.handleClick.bind(this);
 		this.toastToasted = this.toastToasted.bind(this);
+		this.toastWasClicked = this.toastWasClicked.bind(this);
+		this.handleWasClicked = this.handleWasClicked.bind(this);
 		this._getToastTime = this._getToastTime.bind(this);
-		this._setToastStatus = this._setToastStatus.bind(this);
+		this._setToast = this._setToast.bind(this);
 	}
-
-	toastClick(side) {
-		var toastStatus = this.state[side].status;
-		switch (toastStatus) {
-			case 'bread' :
-			this._setToastStatus(side, 'ready');
-			break;
-			case 'toast' :
-			this.eatToast(side);
-			break;
-		}
-	}
-
-	handleClick(side) {
-		// REFACTOR THIS DUPLICATION OUT
-		if( this._getToastStatus(side) !== 'ready') return;
-		if(side === 'left'){
-			this.spinLogo(side);
-			var left = this.state.left;
-			left.isDown = true;
-			left.status = 'toasting';
-			this.setState({ left });
-		} else {
-			this.spinLogo(side);
-			var right = this.state.right;
-			right.isDown = true;
-			right.status = 'toasting';
-			this.setState({ right });
-		}
-	}
-
 
 	toastToasted(side) {
-		var sideState = this.state[side];
-		sideState.isDown = false;
-		sideState.status = 'toast';
-		var newState = {};
-		newState[side] = sideState;
-		this.setState(newState);
+		this._setToast(side, {
+			status: 'toast',
+			isDown: false
+		})
 	}
 
-	eatToast(side) {
+	toastEaten(side) {
 		var toast = document.getElementById(`toast-${side}`);
 		Velocity(toast, {
 			opacity: 0
 		}, {
 			complete: function(){
-				this._setToastStatus(side, 'bread');
+				this._setToast(side, {
+					status: 'bread'
+				});
 				this.setState(function(previousState, props){
-					console.log(previousState, '=====');
 					return {
 						eaten: previousState.eaten + 1
 					}
@@ -114,16 +71,18 @@ class Toastr extends Component {
 		return this.state[side].status;
 	}
 
-	_setToastStatus(side, status) {
-		var newSideState = _.extend({}, this.state[side]);
-		newSideState.status = status;
-		var newState = {};
-		newState[side] = newSideState;
-		this.setState(newState);
-	}
-
 	_getToastTime(side) {
 		return this.state[side].toastTime;
+	}
+
+	_setToast(side, targetState) {
+		var sideState = this.state[side];
+		_.extend(sideState, targetState);
+
+		var newState = {};
+		newState[side] = sideState;;
+
+		this.setState(newState);
 	}
 
 	spinLogo(side) {
@@ -140,6 +99,29 @@ class Toastr extends Component {
 		this.reactLogo = ReactDOM.findDOMNode(this.refs.reactLogo);
 	}
 
+	toastWasClicked(side) {
+		var status = this._getToastStatus(side);
+		switch (status) {
+			case 'bread':
+				this._setToast(side, {status: 'ready'});
+				break;
+			case 'toast':
+				this.toastEaten(side);
+				break;
+			default:
+		}
+	}
+
+	handleWasClicked(side) {
+		var status = this._getToastStatus(side);
+		if( status !== 'ready') return false;
+		this._setToast(side, {
+			status: 'toasting',
+			isDown: true
+		});
+		this.spinLogo(side);
+	}
+
 
 	render() {
 		var size = 400;
@@ -147,8 +129,8 @@ class Toastr extends Component {
 			<div id="toastr">
 			<svg x="0px" y="0px"
 				 width={size} height={size} viewBox="0 0 1261.459 1312.035" enable-background="new 0 0 1261.459 1312.035">
-			<Toast toastToasted={this.toastToasted} side='left' data={this.state.left} toastClick={this.toastClick}/>
-			<Toast toastToasted={this.toastToasted} side='right' data={this.state.right} toastClick={this.toastClick}/>
+			<Toast ref={toast => this.toastLeft = toast} toastToasted={this.toastToasted} side='left' data={this.state.left} onToastClick={this.toastWasClicked}/>
+			<Toast ref={toast => this.toastRight = toast} toastToasted={this.toastToasted} side='right' data={this.state.right} onToastClick={this.toastWasClicked}/>
 			<Base />
 
 			<g id="Tracks">
@@ -161,8 +143,8 @@ class Toastr extends Component {
 			<Dial side='left' />
 			<Dial side='right' />
 
-			<Handle side='left' isDown={this.state.left.isDown} handleClick={this.handleClick} />
-			<Handle side='right' isDown={this.state.right.isDown} handleClick={this.handleClick} />
+			<Handle side='left' isDown={this.state.left.isDown} handleClick={this.handleWasClicked} />
+			<Handle side='right' isDown={this.state.right.isDown} handleClick={this.handleWasClicked} />
 			<ReactLogo ref="reactLogo"/>
 			</svg>
 			<Notifier notis={this.state.notis} />
