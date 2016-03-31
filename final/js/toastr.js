@@ -80,10 +80,6 @@
 	
 	var _reactLogo2 = _interopRequireDefault(_reactLogo);
 	
-	var _notifier = __webpack_require__(168);
-	
-	var _notifier2 = _interopRequireDefault(_notifier);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -180,21 +176,16 @@
 			key: 'spinLogo',
 			value: function spinLogo(side) {
 				var duration = this._getToastTime(side);
-				if (this.reactLogo.classList[0] === 'velocity-animating') {
-					console.log('already animating');
+				var logo = _reactDom2.default.findDOMNode(this.logo);
+				if (logo.classList[0] === 'velocity-animating') {
 					return false;
 				}
-				Velocity(this.reactLogo, {
+				Velocity(logo, {
 					rotateZ: '+=1080deg'
 				}, {
 					easing: 'easeInOutCubic',
 					duration: duration
 				});
-			}
-		}, {
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				this.reactLogo = _reactDom2.default.findDOMNode(this.refs.reactLogo);
 			}
 		}, {
 			key: 'toastWasClicked',
@@ -231,6 +222,30 @@
 					'div',
 					{ id: 'toastr' },
 					_react2.default.createElement(
+						'ul',
+						null,
+						_react2.default.createElement(
+							'li',
+							null,
+							'1: Click toast to load Toastr'
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							'2: Click lever to begin Toasting Process'
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							'3: Enjoy spinning logo until toast is toasted to satisfaction'
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							'4: Click toast to consume & repeat Toastr process'
+						)
+					),
+					_react2.default.createElement(
 						'svg',
 						{ x: '0px', y: '0px',
 							width: size, height: size, viewBox: '0 0 1261.459 1312.035', 'enable-background': 'new 0 0 1261.459 1312.035' },
@@ -251,9 +266,10 @@
 						_react2.default.createElement(_dial2.default, { side: 'right' }),
 						_react2.default.createElement(_handle2.default, { side: 'left', isDown: this.state.left.isDown, handleClick: this.handleWasClicked }),
 						_react2.default.createElement(_handle2.default, { side: 'right', isDown: this.state.right.isDown, handleClick: this.handleWasClicked }),
-						_react2.default.createElement(_reactLogo2.default, { ref: 'reactLogo' })
-					),
-					_react2.default.createElement(_notifier2.default, { notis: this.state.notis })
+						_react2.default.createElement(_reactLogo2.default, { ref: function ref(logo) {
+								return _this2.logo = logo;
+							} })
+					)
 				);
 			}
 		}]);
@@ -35024,7 +35040,6 @@
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
-	      console.log('updating');
 	      var status = this.props.data.status;
 	      switch (status) {
 	        case 'bread':
@@ -35033,7 +35048,6 @@
 	          });
 	          Velocity(this.toastNode, 'toast:bread');break;
 	        case 'ready':
-	          console.log('animating ready');
 	          Velocity(this.toastNode, 'toast:ready');break;
 	        case 'toasting':
 	          Velocity(this.toastNode, 'toast:toasting');
@@ -35283,7 +35297,6 @@
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
 	      if (this.props.isDown) {
-	        console.log('down!');
 	        Velocity(this.handleNode, 'handle:down');
 	      } else {
 	        Velocity(this.handleNode, 'handle:up');
@@ -35409,73 +35422,6 @@
 	}(_react.Component);
 	
 	exports.default = ReactLogo;
-
-/***/ },
-/* 168 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Notifier = function (_Component) {
-	  _inherits(Notifier, _Component);
-	
-	  function Notifier(props) {
-	    _classCallCheck(this, Notifier);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Notifier).call(this, props));
-	
-	    _this.buildNotis = _this.buildNotis.bind(_this);
-	    return _this;
-	  }
-	
-	  _createClass(Notifier, [{
-	    key: "buildNotis",
-	    value: function buildNotis() {
-	      return this.props.notis.map(function (noti, i) {
-	        return _react2.default.createElement(
-	          "div",
-	          { className: "noti", key: i },
-	          noti
-	        );
-	      });
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        { id: "notifier" },
-	        _react2.default.createElement(
-	          "div",
-	          { id: "inner" },
-	          this.buildNotis()
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return Notifier;
-	}(_react.Component);
-	
-	exports.default = Notifier;
 
 /***/ }
 /******/ ]);

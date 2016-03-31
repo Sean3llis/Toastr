@@ -38,7 +38,7 @@ nav {
 
 #toastr {
   text-align: center;
-  padding: 140px 0px; }
+  padding: 80px 0px 140px 0px; }
   #toastr #react-logo {
     transform-origin: center; }
 
@@ -69,3 +69,14 @@ body {
 * {
   box-sizing: border-box;
   font-family: 'Open Sans', 'Helvetica', 'Arial', 'Tahoma', sans-serif; }
+
+ul {
+  max-width: 380px;
+  padding-left: 0px;
+  margin: auto;
+  text-align: left;
+  list-style: none;
+  margin-bottom: 60px; }
+  ul li {
+    color: #686868;
+    line-height: 28px; }

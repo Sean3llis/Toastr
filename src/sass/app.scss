@@ -21,3 +21,16 @@ body {
   box-sizing: border-box;
   font-family: 'Open Sans', 'Helvetica', 'Arial', 'Tahoma', sans-serif;
 }
+
+ul {
+  max-width: 380px;
+  padding-left: 0px;
+  margin: auto;
+  text-align: left;
+  list-style: none;
+  margin-bottom: 60px;
+  li {
+    color: #686868;
+    line-height: 28px;
+  }
+}

@@ -23,7 +23,6 @@ class Handle extends Component {
 
   componentDidUpdate() {
     if(this.props.isDown) {
-      console.log('down!');
       Velocity(this.handleNode, 'handle:down');
     } else {
       Velocity(this.handleNode, 'handle:up');

@@ -29,7 +29,6 @@ class Toast extends Component {
   }
 
   componentDidUpdate() {
-    console.log('updating');
     var status = this.props.data.status;
     switch (status) {
       case 'bread' :
@@ -38,7 +37,6 @@ class Toast extends Component {
         })
         Velocity(this.toastNode, 'toast:bread'); break;
       case 'ready' :
-        console.log('animating ready');
         Velocity(this.toastNode, 'toast:ready'); break;
       case 'toasting' :
         Velocity(this.toastNode, 'toast:toasting');

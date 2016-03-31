@@ -12,7 +12,6 @@ import Base from './components/base';
 import Dial from './components/dial';
 import Handle from './components/handle';
 import ReactLogo from './components/react-logo';
-import Notifier from './components/notifier';
 
 class Toastr extends Component {
 	constructor(props){
@@ -87,10 +86,11 @@ class Toastr extends Component {
 
 	spinLogo(side) {
 		var duration = this._getToastTime(side);
-		if(this.reactLogo.classList[0] === 'velocity-animating'){
+		var logo = ReactDOM.findDOMNode(this.logo);
+		if(logo.classList[0] === 'velocity-animating'){
 			return false;
 		}
-		Velocity(this.reactLogo, {
+		Velocity(logo, {
 			rotateZ: '+=1080deg'
 		}, {
 			easing: 'easeInOutCubic',
@@ -126,6 +126,12 @@ class Toastr extends Component {
 		var size = 400;
 		return(
 			<div id="toastr">
+			<ul>
+				<li>1: Click toast to load Toastr</li>
+				<li>2: Click lever to begin Toasting Process</li>
+				<li>3: Enjoy spinning logo until toast is toasted to satisfaction</li>
+				<li>4: Click toast to consume & repeat Toastr process</li>
+			</ul>
 			<svg x="0px" y="0px"
 				 width={size} height={size} viewBox="0 0 1261.459 1312.035" enable-background="new 0 0 1261.459 1312.035">
 			<Toast ref={toast => this.toastLeft = toast} toastToasted={this.toastToasted} side='left' data={this.state.left} onToastClick={this.toastWasClicked}/>
@@ -144,9 +150,8 @@ class Toastr extends Component {
 
 			<Handle side='left' isDown={this.state.left.isDown} handleClick={this.handleWasClicked} />
 			<Handle side='right' isDown={this.state.right.isDown} handleClick={this.handleWasClicked} />
-			<ReactLogo ref="reactLogo"/>
+			<ReactLogo ref={ logo => this.logo = logo }/>
 			</svg>
-			<Notifier notis={this.state.notis} />
 			</div>
 		)
 	}
