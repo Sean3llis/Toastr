@@ -4,13 +4,24 @@ var sass = require('gulp-sass');
 var webpack = require('webpack');
 var webserver = require('gulp-webserver');
 var webpackDevConfig = require('./dev.config.js');
+var webpackProdConfig = require('./prod.config.js');
 
-var compiler = webpack(webpackDevConfig);
+var devCompiler = webpack(webpackDevConfig);
+var prodCompiler = webpack(webpackProdConfig);
 
 gulp.task('default', ['watch']);
 
 gulp.task('pack', function(callback){
-    compiler.run(function(err, stats) {
+    devCompiler.run(function(err, stats) {
+        gutil.log("[webpack]", stats.toString({
+        	colors: true
+        }));
+        callback();
+    });
+});
+
+gulp.task('prod', function(callback){
+    prodCompiler.run(function(err, stats) {
         gutil.log("[webpack]", stats.toString({
         	colors: true
         }));
